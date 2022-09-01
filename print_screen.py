@@ -124,7 +124,7 @@ def print_game_screen(team1_pokemon_name, team2_pokemon_name, team1_cur_hp, team
         for y in range(team1_sprite_width):
             xind = 27 - team1_sprite_height + x
             yind = 31 - team1_sprite_width // 2 + y
-            if 12 <= xind <= 27 and 5 <= yind <= 75:
+            if 12 <= xind <= 27 and 5 <= yind <= 75 and y < len(team1_lines[x]):
                 BATTLE_WINDOW[xind][yind] = (team1_color if y == 0 else "") + team1_lines[x][y] + (CLEAR if y == team1_sprite_width - 1 else "")
 
     team2_color = POKEMON_COLORS[team2_pokemon_name]
@@ -136,7 +136,7 @@ def print_game_screen(team1_pokemon_name, team2_pokemon_name, team1_cur_hp, team
         for y in range(team2_sprite_width):
             xind = 17 - team2_sprite_height + x
             yind = 101 - team2_sprite_width // 2 + y
-            if 1 <= xind <= 17 and 65 <= yind <= 136:
+            if 1 <= xind <= 17 and 65 <= yind <= 136 and y < len(team2_lines[x]):
                 BATTLE_WINDOW[xind][yind] = (team2_color if y == 0 else "") + team2_lines[x][y] + (CLEAR if y == team2_sprite_width - 1 else "")
     
     print("\n".join(map(lambda z: "".join(z), BATTLE_WINDOW)))
@@ -144,4 +144,4 @@ def print_game_screen(team1_pokemon_name, team2_pokemon_name, team1_cur_hp, team
 if __name__ == "__main__":
     POKEMON = ["Charmander", "Charizard", "Bulbasaur", "Venusaur", "Squirtle", "Blastoise", "Gastly", "Haunter", "Gengar", "Eevee"]
     for pokemon in POKEMON:
-        print_game_screen(pokemon, pokemon, 10, 20, 20, 60, 3, 5, 4, 3)
+        print_game_screen(pokemon, pokemon, 10, 20, 20, 60, 3, 5, "sleep", "burn", 1, 1)
