@@ -5,33 +5,33 @@ __author__ = "Scaffold by Jackson Goerner, Code by ______________"
 class Charizard(PokemonBase):
     pass
 
-class Charmander:
+class Charmander(PokemonBase):
     pass
 
 
-class Venusaur:
+class Venusaur(PokemonBase):
     pass
 
-class Bulbasaur:
-    pass
-
-
-class Blastoise:
-    pass
-
-class Squirtle:
+class Bulbasaur(PokemonBase):
     pass
 
 
-class Gengar:
+class Blastoise(PokemonBase):
     pass
 
-class Haunter:
-    pass
-
-class Gastly:
+class Squirtle(PokemonBase):
     pass
 
 
-class Eevee:
+class Gengar(PokemonBase):
+    pass
+
+class Haunter(PokemonBase):
+    pass
+
+class Gastly(PokemonBase):
+    pass
+
+
+class Eevee(PokemonBase):
     pass
