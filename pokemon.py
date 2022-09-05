@@ -2,7 +2,7 @@
 """
 __author__ = "Scaffold by Jackson Goerner, Code by ______________"
 
-class Charizard:
+class Charizard(PokemonBase):
     pass
 
 class Charmander:
