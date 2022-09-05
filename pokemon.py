@@ -1,9 +1,16 @@
 """
 """
-__author__ = "Scaffold by Jackson Goerner, Code by ______________"
+from pokemon_base import PokemonBase
 
-class Charizard:
-    pass
+__author__ = "Scaffold by Jackson Goerner, Code by Elysia Chang"
+
+class Charizard(PokemonBase):
+    charizard_dict = {}
+    charizard_dict['Name'] = "Charizard"
+    charizard_dict['Type'] = "Fire"
+    charizard_dict['Base Level'] = 3
+    charizard_dict['HP'] = 12 + 1 * charizard_dict['Base Level']
+    
 
 class Charmander:
     pass
@@ -21,7 +28,6 @@ class Blastoise:
 
 class Squirtle:
     pass
-
 
 class Gengar:
     pass
