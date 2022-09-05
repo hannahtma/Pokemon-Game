@@ -22,7 +22,6 @@ class Blastoise(PokemonBase):
 class Squirtle(PokemonBase):
     pass
 
-
 class Gengar(PokemonBase):
     pass
 
