@@ -37,9 +37,32 @@ class PokeTeam:
     @classmethod
     def random_team(cls, team_name: str, battle_mode: int, team_size=None, ai_mode=None, **kwargs):
         if team_size == None:
-            RandomGen.randint()
-        else:
-            pass
+            team_size = RandomGen.randint(3,6)
+        
+        team = []
+        for num in range (team_size):
+            if num == 0:
+                team.append(0)
+            elif num == team_size-1:
+                team.append(team_size)
+            else:
+                team.append(RandomGen.randint(0,team_size))
+
+        sorted_team = team.sort()
+
+        pokemon_team = []
+        pokemon_arranged = ["Charmander","Bulbasaur","Squirtle","Gastly","Eevee"]
+        for index in range(len(sorted_team)):
+            if index == 0:
+                number = 0
+                while number < range(sorted_team[index]):
+                    pokemon_team.append(pokemon_arranged[index])
+            else:
+                number = 0
+                while number < range(sorted_team[index]-sorted_team[index-1]):
+                    pokemon_team.append(pokemon_arranged[index])
+                
+
 
 
     def return_pokemon(self, poke: PokemonBase) -> None:

@@ -14,8 +14,11 @@ class PokemonBase:
         if self.hp <= 0:
             return True
 
+    def get_level(self):
+        pass
+
     def level_up(self) -> None:
-        raise NotImplementedError()
+        pass
 
     def get_speed(self) -> int:
         raise NotImplementedError()
@@ -27,7 +30,7 @@ class PokemonBase:
         raise NotImplementedError()
 
     def lose_hp(self, lost_hp: int) -> None:
-        raise NotImplementedError()
+        self.hp -= lost_hp
 
     def defend(self, damage: int) -> None:
         raise NotImplementedError()
