@@ -67,7 +67,7 @@ class PokemonBase:
                 self.hp -= damage
 
     def attack(self, other: PokemonBase):
-        raise NotImplementedError()
+        if other.get_defence() == 
         # Step 1: Status effects on attack damage / redirecting attacks
         # Step 2: Do the attack
         # Step 3: Losing hp to status effects
@@ -76,33 +76,49 @@ class PokemonBase:
     def get_poke_name(self) -> str:
         return self.poke_name
 
-    def __str__(self) -> str:
-        raise NotImplementedError()
-
     def should_evolve(self) -> bool:
-        raise NotImplementedError()
-
+        if self.is_fainted() == False:
+            return True
+        elif self.is_fainter() == True:
+            return False
+        
     def can_evolve(self) -> bool:
         if self.get_level() == something:
             return True
         else:
             return False
 
-    def heal()
+    def heal(self):
+        if self.get_poke_name == "Charmander":
+            self.hp = 8 + 1 * self.get_level()
+        elif self.get_poke_name == "Squirtle":
+            self.hp = 9 + 2 * self.get_level()
+        elif self.get_poke_name == "Bulbasaur" or self.get_poke_name == "Charizard":
+            self.hp = 12 + 1 * self.get_level()
+        elif self.get_poke_name == "Gastly":
+            self.hp = 6 + (self.get_level() // 2)
+        elif self.get_poke_name == "Eevee":
+            self.hp = 10
+        elif self.get_poke_name == "Blastoise":
+            self.hp = 15 + 2 * self.get_level()
+        elif self.get_poke_name == "Venusaur":
+            self.hp = 20 + (self.get_level() // 2)
+        elif self.get_poke_name == "Haunter":
+            self.hp = 9 + (self.get_level() // 2)
+        elif self.get_poke_name == "Gengar":
+            self.hp = 12 + (self.get_level() // 2)
 
     def get_evolved_version(self) -> PokemonBase:
         if PokeType == FIRE:
 
-class PokeType(Enum):
-    attack_multiplier = [
-        [1, 2, 0.5, 1, 1],
-        [0.5, 1, 2, 1, 1],
-        [2, 0.5, 1, 1, 1],
-        [1.25, 1.25, 1.25, 2, 0],
-        [1.25, 1.25, 1.25, 0, 1]
-        ]
-    FIRE = attack_multiplier[0]
-    GRASS = attack_multiplier[1]
-    WATER = attack_multiplier[2]
-    GHOST = attack_multiplier[3]
-    NORMAL = attack_multiplier[4]
+    def __str__(self) -> str:
+        raise NotImplementedError()
+
+class PokeType:
+    def __init__(self):
+        attack_multiplier = [[1, 2, 0.5, 1, 1],[0.5, 1, 2, 1, 1],[2, 0.5, 1, 1, 1],[1.25, 1.25, 1.25, 2, 0],[1.25, 1.25, 1.25, 0, 1]]
+        FIRE = attack_multiplier[0]
+        GRASS = attack_multiplier[1]
+        WATER = attack_multiplier[2]
+        GHOST = attack_multiplier[3]
+        NORMAL = attack_multiplier[4]
