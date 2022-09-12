@@ -14,11 +14,11 @@ class PokemonBase:
         if self.hp <= 0:
             return True
 
-    def get_level(self):
-        pass
+    def get_level(self) -> int:
+        return self.level
 
     def level_up(self) -> None:
-        pass
+        return (self.get_level() + 1)
 
     def get_speed(self) -> int:
         raise NotImplementedError()
