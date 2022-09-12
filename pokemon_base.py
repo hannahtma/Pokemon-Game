@@ -67,7 +67,8 @@ class PokemonBase:
                 self.hp -= damage
 
     def attack(self, other: PokemonBase):
-        if other.get_defence() == 
+        pass
+        #if other.get_defence() == 
         # Step 1: Status effects on attack damage / redirecting attacks
         # Step 2: Do the attack
         # Step 3: Losing hp to status effects
@@ -113,12 +114,20 @@ class PokemonBase:
             self.hp = 12 + (self.get_level() // 2)
 
     def get_evolved_version(self) -> PokemonBase:
-        if PokeType == FIRE:
-            pass
+        if self.poke_name == "Charmander":
+            return self.Charizard()
+        elif self.poke_name == "Squirtle":
+            return self.Blastoise()
+        elif self.poke_name == "Bulbasaur":
+            return self.Venusaur()
+        elif self.poke_name == "Gastly":
+            return self.Haunter()
+        elif self.poke_name == "Haunter":
+            return self.Gengar()
 
     def __str__(self) -> str:
-        pokemon_string = f"\nLV. {self.level}: {self.hp} HP"
-
+        pokemon_string = f"LV. {self.level}: {self.hp} HP"
+        return pokemon_string
 
 class PokeType:
     def __init__(self):
