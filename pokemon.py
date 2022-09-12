@@ -6,6 +6,8 @@ from pokemon_base import PokemonBase
 
 class Charmander(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Charmander"
+        self.poke_type = "Fire"
         self.level = 1
         self.hp = 8 + 1 * self.level
         self.attack = 6 + 1 * self.level
@@ -17,6 +19,8 @@ class Charmander(PokemonBase):
 
 class Squirtle(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Squirtle"
+        self.poke_type = "Water"
         self.level = 1
         self.hp = 9 + 2 * self.level
         self.attack = 4 + (self.level // 2)
@@ -28,6 +32,8 @@ class Squirtle(PokemonBase):
 
 class Bulbasaur(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Bulbasaur"
+        self.poke_type = "Grass"
         self.level = 1
         self.hp = 12 + 1 * self.level
         self.attack = 5
@@ -39,6 +45,8 @@ class Bulbasaur(PokemonBase):
 
 class Gastly(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Gastly"
+        self.poke_type = "Ghost"
         self.level = 1
         self.hp = 6 + (self.level // 2)
         self.attack = 4
@@ -50,6 +58,8 @@ class Gastly(PokemonBase):
 
 class Eevee(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Eevee"
+        self.poke_type = "Normal"
         self.level = 1
         self.hp = 10
         self.attack = 6 + self.level
@@ -61,6 +71,8 @@ class Eevee(PokemonBase):
 
 class Charizard(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Charizard"
+        self.poke_type = "Fire"
         self.level = 3
         self.hp = 12 + 1 * self.level
         self.attack = 10 + 2 * self.level
@@ -72,6 +84,8 @@ class Charizard(PokemonBase):
 
 class Blastoise(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Blastoise"
+        self.poke_type = "Water"
         self.level = 3
         self.hp = 15 + 2 * self.level
         self.attack = 8 + (self.level // 2)
@@ -83,6 +97,8 @@ class Blastoise(PokemonBase):
 
 class Venusaur(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Venusaur"
+        self.poke_type = "Grass"
         self.level = 2
         self.hp = 20 + (self.level // 2)
         self.attack = 5
@@ -94,6 +110,8 @@ class Venusaur(PokemonBase):
 
 class Haunter(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Haunter"
+        self.poke_type = "Ghost"
         self.level = 1
         self.hp = 9 + (self.level // 2)
         self.attack = 8
@@ -105,6 +123,8 @@ class Haunter(PokemonBase):
 
 class Gengar(PokemonBase):
     def __init__(self, hp, poke_type):
+        self.poke_name = "Gengar"
+        self.poke_type = "Ghost"
         self.level = 3
         self.hp = 12 + (self.level // 2)
         self.attack = 18
