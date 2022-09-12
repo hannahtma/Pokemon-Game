@@ -83,7 +83,11 @@ class PokemonBase:
             return False
         
     def can_evolve(self) -> bool:
-        if self.get_level() == something:
+        if self.get_level() == 1 and self.get_poke_name == "Gastly":
+            return True
+        elif self.get_level() == 3 and (self.get_poke_name == "Charmander" or self.get_poke_name == "Squirtle" or self.get_poke_name == "Haunter"):
+            return True
+        elif self.get_level() == 2 and self.get_poke_name == "Bulbasaur":
             return True
         else:
             return False
