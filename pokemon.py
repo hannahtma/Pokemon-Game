@@ -2,6 +2,8 @@
 """
 __author__ = "Scaffold by Jackson Goerner, Code by ______________"
 
+from pokemon_base import PokemonBase
+
 class Charmander(PokemonBase):
     def __init__(self, hp, poke_type):
         self.level = 1
@@ -111,3 +113,7 @@ class Gengar(PokemonBase):
         # defence calculation
 
         super().__init__(hp, poke_type)
+
+if __name__ == "__main__":
+    e = Charmander(50, "fire")
+    print(e.get_level())
