@@ -2,42 +2,138 @@
 """
 from pokemon_base import PokemonBase
 
-__author__ = "Scaffold by Jackson Goerner, Code by Elysia Chang"
+from pokemon_base import PokemonBase
+
+class Charmander(PokemonBase):
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Charmander"
+        self.poke_type = "Fire"
+        self.level = 1
+        self.hp = 8 + 1 * self.level
+        self.attack = 6 + 1 * self.level
+        self.speed = 7 + 1 * self.level
+        self.defence = 4
+        # defence calculation
+
+        super().__init__(hp, poke_type)
+
+class Squirtle(PokemonBase):
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Squirtle"
+        self.poke_type = "Water"
+        self.level = 1
+        self.hp = 9 + 2 * self.level
+        self.attack = 4 + (self.level // 2)
+        self.speed = 7
+        self.defence = 6 + self.level
+        # defence calculation
+
+        super().__init__(hp, poke_type)
+
+class Bulbasaur(PokemonBase):
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Bulbasaur"
+        self.poke_type = "Grass"
+        self.level = 1
+        self.hp = 12 + 1 * self.level
+        self.attack = 5
+        self.speed = 7 + (self.level // 2)
+        self.defence = 5
+        # defence calculation
+
+        super().__init__(hp, poke_type)
+
+class Gastly(PokemonBase):
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Gastly"
+        self.poke_type = "Ghost"
+        self.level = 1
+        self.hp = 6 + (self.level // 2)
+        self.attack = 4
+        self.speed = 2
+        self.defence = 8
+        # defence calculation
+
+        super().__init__(hp, poke_type)
+
+class Eevee(PokemonBase):
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Eevee"
+        self.poke_type = "Normal"
+        self.level = 1
+        self.hp = 10
+        self.attack = 6 + self.level
+        self.speed = 7 + self.level
+        self.defence = 4 + self.level
+        # defence calculation
+
+        super().__init__(hp, poke_type)
 
 class Charizard(PokemonBase):
-    charizard_dict = {}
-    charizard_dict['Name'] = "Charizard"
-    charizard_dict['Type'] = "Fire"
-    charizard_dict['Base Level'] = 3
-    charizard_dict['HP'] = 12 + 1 * charizard_dict['Base Level']
-    
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Charizard"
+        self.poke_type = "Fire"
+        self.level = 3
+        self.hp = 12 + 1 * self.level
+        self.attack = 10 + 2 * self.level
+        self.speed = 9 + 1 * self.level
+        self.defence = 4
+        # defence calculation
 
-class Charmander:
-    pass
+        super().__init__(hp, poke_type)
 
+class Blastoise(PokemonBase):
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Blastoise"
+        self.poke_type = "Squirtle"
+        self.level = 3
+        self.hp = 15 + 2 * self.level
+        self.attack = 8 + (self.level // 2)
+        self.speed = 10
+        self.defence = 8 + 1 * self.level
+        # defence calculation
 
-class Venusaur:
-    pass
+        super().__init__(hp, poke_type)
 
-class Bulbasaur:
-    pass
+class Venusaur(PokemonBase):
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Venusaur"
+        self.poke_type = "Grass"
+        self.level = 2
+        self.hp = 20 + (self.level // 2)
+        self.attack = 5
+        self.speed = 3 + (self.level // 2)
+        self.defence = 10
+        # defence calculation
 
+        super().__init__(hp, poke_type)
 
-class Blastoise:
-    pass
+class Haunter(PokemonBase):
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Haunter"
+        self.poke_type = "Ghost"
+        self.level = 1
+        self.hp = 9 + (self.level // 2)
+        self.attack = 8
+        self.speed = 6
+        self.defence = 6
+        # defence calculation
 
-class Squirtle:
-    pass
+        super().__init__(hp, poke_type)
 
-class Gengar:
-    pass
+class Gengar(PokemonBase):
+    def __init__(self, hp, poke_type):
+        self.poke_name = "Gengar"
+        self.poke_type = "Ghost"
+        self.level = 3
+        self.hp = 12 + (self.level // 2)
+        self.attack = 18
+        self.speed = 12
+        self.defence = 3
+        # defence calculation
 
-class Haunter:
-    pass
+        super().__init__(hp, poke_type)
 
-class Gastly:
-    pass
-
-
-class Eevee:
-    pass
+if __name__ == "__main__":
+    e = Charmander(50, "fire")
+    print(e.get_speed())

@@ -49,6 +49,10 @@ class PokeTeam:
                 team.append(RandomGen.randint(0,team_size))
 
         sorted_team = team.sort()
+        team_count = []
+        for pokemon in range (len(sorted_team)):
+            number = sorted_team[pokemon+1] - sorted_team[pokemon]
+            team_count.append(number)
 
         pokemon_team = []
         pokemon_arranged = ["Charmander","Bulbasaur","Squirtle","Gastly","Eevee"]
