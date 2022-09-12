@@ -1,6 +1,6 @@
 """
 """
-__author__ = "Scaffold by Jackson Goerner, Code by ______________"
+from pokemon_base import PokemonBase
 
 from pokemon_base import PokemonBase
 

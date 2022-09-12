@@ -7,11 +7,12 @@ __author__ = "Scaffold by Jackson Goerner, Code by ______________"
 class PokemonBase:
 
     def __init__(self, hp: int, poke_type) -> None:
-        self.hp = hp
-        self.poke_type = poke_type
+       self.hp = hp
+       self.poke_type = poke_type
 
     def is_fainted(self) -> bool:
-        raise NotImplementedError()
+        if self.hp <= 0:
+            return True
 
     def get_level(self) -> int:
         return self.level
