@@ -14,6 +14,9 @@ class PokemonBase:
         if self.hp <= 0:
             return True
 
+    def get_level(self) -> int:
+        return self.level
+
     def level_up(self) -> None:
         raise NotImplementedError()
 
