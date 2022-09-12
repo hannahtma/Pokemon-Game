@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from .random_gen import RandomGen
+
 """
 """
 __author__ = "Scaffold by Jackson Goerner, Code by ______________"
@@ -28,11 +30,13 @@ class PokeTeam:
         USER_INPUT = auto()
 
     def __init__(self, team_name: str, team_numbers: list[int], battle_mode: int, ai_type: PokeTeam.AI, criterion=None, criterion_value=None) -> None:
-        raise NotImplementedError()
+        self.team_name = team_name
+        self.team_numbers = team_numbers
+        self.battle_mode = battle_mode
     
     @classmethod
     def random_team(cls, team_name: str, battle_mode: int, team_size=None, ai_mode=None, **kwargs):
-        raise NotImplementedError()
+        RandomGen.randint()
 
     def return_pokemon(self, poke: PokemonBase) -> None:
         raise NotImplementedError()
