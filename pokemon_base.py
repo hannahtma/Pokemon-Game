@@ -17,16 +17,16 @@ class PokemonBase:
         return self.level
 
     def level_up(self) -> None:
-        raise NotImplementedError()
+        self.level += 1
 
     def get_speed(self) -> int:
-        raise NotImplementedError()
+        return self.speed
 
     def get_attack_damage(self) -> int:
-        raise NotImplementedError()
+        return self.attack_damage
 
     def get_defence(self) -> int:
-        raise NotImplementedError()
+        return self.defence
 
     def lose_hp(self, lost_hp: int) -> None:
         raise NotImplementedError()
