@@ -114,9 +114,11 @@ class PokemonBase:
 
     def get_evolved_version(self) -> PokemonBase:
         if PokeType == FIRE:
+            pass
 
     def __str__(self) -> str:
-        raise NotImplementedError()
+        pokemon_string = f"\nLV. {self.level}: {self.hp} HP"
+
 
 class PokeType:
     def __init__(self):
