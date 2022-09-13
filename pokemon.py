@@ -1,7 +1,3 @@
-"""
-"""
-from pokemon_base import PokemonBase
-
 class Charmander(PokemonBase):
     def __init__(self):
         self.poke_name = "Charmander"
@@ -13,10 +9,10 @@ class Charmander(PokemonBase):
         self.defence = 4
         # defence calculation
 
-        super().__init__(hp, poke_type)
+        super().__init__(self.hp, self.poke_type)
 
 class Squirtle(PokemonBase):
-    def __init__(self, hp, poke_type):
+    def __init__(self):
         self.poke_name = "Squirtle"
         self.poke_type = "Water"
         self.level = 1
@@ -26,10 +22,10 @@ class Squirtle(PokemonBase):
         self.defence = 6 + self.level
         # defence calculation
 
-        super().__init__(hp, poke_type)
+        super().__init__(self.hp, self.poke_type)
 
 class Bulbasaur(PokemonBase):
-    def __init__(self, hp, poke_type):
+    def __init__(self):
         self.poke_name = "Bulbasaur"
         self.poke_type = "Grass"
         self.level = 1
@@ -39,10 +35,10 @@ class Bulbasaur(PokemonBase):
         self.defence = 5
         # defence calculation
 
-        super().__init__(hp, poke_type)
+        super().__init__(self.hp, self.poke_type)
 
 class Gastly(PokemonBase):
-    def __init__(self, hp, poke_type):
+    def __init__(self):
         self.poke_name = "Gastly"
         self.poke_type = "Ghost"
         self.level = 1
@@ -52,10 +48,10 @@ class Gastly(PokemonBase):
         self.defence = 8
         # defence calculation
 
-        super().__init__(hp, poke_type)
+        super().__init__(self.hp, self.poke_type)
 
 class Eevee(PokemonBase):
-    def __init__(self, hp, poke_type):
+    def __init__(self):
         self.poke_name = "Eevee"
         self.poke_type = "Normal"
         self.level = 1
@@ -65,10 +61,10 @@ class Eevee(PokemonBase):
         self.defence = 4 + self.level
         # defence calculation
 
-        super().__init__(hp, poke_type)
+        super().__init__(self.hp, self.poke_type)
 
 class Charizard(PokemonBase):
-    def __init__(self, hp, poke_type):
+    def __init__(self):
         self.poke_name = "Charizard"
         self.poke_type = "Fire"
         self.level = 3
@@ -78,12 +74,12 @@ class Charizard(PokemonBase):
         self.defence = 4
         # defence calculation
 
-        super().__init__(hp, poke_type)
+        super().__init__(self.hp, self.poke_type)
 
 class Blastoise(PokemonBase):
-    def __init__(self, hp, poke_type):
+    def __init__(self):
         self.poke_name = "Blastoise"
-        self.poke_type = "Water"
+        self.poke_type = "Squirtle"
         self.level = 3
         self.hp = 15 + 2 * self.level
         self.attack_damage = 8 + (self.level // 2)
@@ -91,14 +87,14 @@ class Blastoise(PokemonBase):
         self.defence = 8 + 1 * self.level
         # defence calculation
 
-        super().__init__(hp, poke_type)
+        super().__init__(self.hp, self.poke_type)
 
 class Venusaur(PokemonBase):
     def __init__(self):
         self.poke_name = "Venusaur"
         self.poke_type = "Grass"
         self.level = 2
-        self.hp = 20 + (self.get_level() // 2)
+        self.hp = 20 + (self.level // 2)
         self.attack_damage = 5
         self.speed = 3 + (self.level // 2)
         self.defence = 10
@@ -107,7 +103,7 @@ class Venusaur(PokemonBase):
         super().__init__(self.hp, self.poke_type)
 
 class Haunter(PokemonBase):
-    def __init__(self, hp, poke_type):
+    def __init__(self):
         self.poke_name = "Haunter"
         self.poke_type = "Ghost"
         self.level = 1
@@ -117,10 +113,10 @@ class Haunter(PokemonBase):
         self.defence = 6
         # defence calculation
 
-        super().__init__(hp, poke_type)
+        super().__init__(self.hp, self.poke_type)
 
 class Gengar(PokemonBase):
-    def __init__(self, hp, poke_type):
+    def __init__(self):
         self.poke_name = "Gengar"
         self.poke_type = "Ghost"
         self.level = 3
@@ -130,23 +126,11 @@ class Gengar(PokemonBase):
         self.defence = 3
         # defence calculation
 
-        super().__init__(hp, poke_type)
+        super().__init__(self.hp, self.poke_type)
 
 if __name__ == "__main__":
-    v = Venusaur()
-    print(v.get_hp()) # 21
-    print(v.get_level()) # 2
-    print(v.get_attack_damage()) # 5
-    print(v.get_speed()) # 4
-    print(v.get_defence()) # 10
-    v.level_up()
-    v.level_up()
-    v.level_up()
-    print(v.get_level())
-    print(v.get_hp()) # 22
-    print(v.get_level()) # 5
-    print(v.get_attack_damage()) # 5
-    print(v.get_speed()) # 5
-    print(v.get_defence()) # 10
-    v.lose_hp(5)
-    print(str(v)) # LV. 5 Venusaur: 17 HP
+    e = Venusaur()
+    e.level_up()
+    e.level_up()
+    e.level_up()
+    print(e.get_hp())
