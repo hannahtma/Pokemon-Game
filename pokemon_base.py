@@ -18,14 +18,61 @@ class PokemonBase:
         else:
             return False
 
+    def get_hp(self):
+        return self.hp
+    
+    def set_hp(self, new_level):
+        if self.poke_name == "Charmander":
+            self.hp = 8 + 1 * new_level
+        elif self.poke_name == "Squirtle":
+            self.hp = 9 + 2 * new_level
+        elif self.poke_name == "Bulbasaur" or self.poke_name == "Charizard":
+            self.hp = 12 + 1 * new_level
+        elif self.poke_name == "Gastly":
+            self.hp = 6 + (new_level // 2)
+        elif self.poke_name == "Eevee":
+            self.hp = 10
+        elif self.poke_name == "Blastoise":
+            self.hp = 15 + 2 * new_level
+        elif self.poke_name == "Venusaur":
+            self.hp = 20 + (new_level // 2)
+        elif self.poke_name == "Haunter":
+            self.hp = 9 + (new_level // 2)
+        elif self.poke_name == "Gengar":
+            self.hp = 12 + (new_level // 2)
+
     def get_level(self) -> int:
         return self.level
 
     def level_up(self) -> None:
         self.level = self.get_level() + 1
+        self.set_hp(self.level)
+        self.set_speed(self.level)
 
     def get_speed(self) -> int:
         return self.speed
+
+    def set_speed(self, new_level):
+        if self.poke_name == "Charmander":
+            self.speed = 7 + 1 * new_level
+        elif self.poke_name == "Squirtle":
+            self.speed = 7
+        elif self.poke_name == "Bulbasaur":
+            self.speed = 7 + (new_level // 2)
+        elif self.poke_name == "Gastly":
+            self.speed = 9 + 1 * new_level
+        elif self.poke_name == "Eevee":
+            self.speed = 7 + new_level
+        elif self.poke_name == "Charizard":
+            self.speed = 9 + 1 * new_level
+        elif self.poke_name == "Blastoise":
+            self.speed = 10
+        elif self.poke_name == "Venusaur":
+            self.speed = 3 + (new_level // 2)
+        elif self.poke_name == "Haunter":
+            self.speed = 6
+        elif self.poke_name == "Gengar":
+            self.speed = 12
 
     def get_attack_damage(self) -> int:
         return self.attack_damage
@@ -126,7 +173,7 @@ class PokemonBase:
             return self.Gengar()
 
     def __str__(self) -> str:
-        pokemon_string = f"LV. {self.level}: {self.hp} HP"
+        pokemon_string = f"LV. {self.level} {self.poke_name}: {self.hp} HP"
         return pokemon_string
 
 class PokeType:
