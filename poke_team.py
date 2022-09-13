@@ -40,10 +40,10 @@ class PokeTeam:
             team_size = RandomGen.randint(3,6)
         
         team = []
-        for num in range (team_size):
+        for num in range (team_size+2):
             if num == 0:
                 team.append(0)
-            elif num == team_size-1:
+            elif num == team_size+1:
                 team.append(team_size)
             else:
                 team.append(RandomGen.randint(0,team_size))
@@ -56,7 +56,7 @@ class PokeTeam:
 
         pokemon_team = []
         pokemon_arranged = ["Charmander","Bulbasaur","Squirtle","Gastly","Eevee"]
-        for index in range(len(sorted_team)):
+        for index in range(len(team_count)):
             if index == 0:
                 number = 0
                 while number < range(sorted_team[index]):
