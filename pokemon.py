@@ -2,8 +2,6 @@
 """
 from pokemon_base import PokemonBase
 
-from pokemon_base import PokemonBase
-
 class Charmander(PokemonBase):
     def __init__(self):
         self.poke_name = "Charmander"

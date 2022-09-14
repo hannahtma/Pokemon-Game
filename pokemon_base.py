@@ -80,6 +80,7 @@ class PokemonBase:
         # Step 2: Do the attack
         # Step 3: Losing hp to status effects
         # Step 4: Possibly applying status effects
+        pass
 
     def get_poke_name(self) -> str:
         return self.poke_name
