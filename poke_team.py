@@ -97,6 +97,7 @@ class PokeTeam:
             return retrieved_pokemon
 
     def special(self):
+        raise NotImplementedError()
 
     def regenerate_team(self):
         raise NotImplementedError()
