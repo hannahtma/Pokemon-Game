@@ -12,6 +12,9 @@ class PokemonBase:
        self.hp = hp
        self.poke_type = poke_type
 
+    def get_poke_name(self) -> str:
+        return self.poke_name
+
     def is_fainted(self) -> bool:
         if self.hp <= 0:
             return True
@@ -121,9 +124,6 @@ class PokemonBase:
         # Step 3: Losing hp to status effects
         # Step 4: Possibly applying status effects
 
-    def get_poke_name(self) -> str:
-        return self.poke_name
-
     def should_evolve(self) -> bool:
         if self.is_fainted() == False:
             return True
@@ -141,23 +141,23 @@ class PokemonBase:
             return False
 
     def heal(self):
-        if self.get_poke_name == "Charmander":
+        if self.get_poke_name() == "Charmander":
             self.hp = 8 + 1 * self.get_level()
-        elif self.get_poke_name == "Squirtle":
+        elif self.get_poke_name() == "Squirtle":
             self.hp = 9 + 2 * self.get_level()
-        elif self.get_poke_name == "Bulbasaur" or self.get_poke_name == "Charizard":
+        elif self.get_poke_name() == "Bulbasaur" or self.get_poke_name == "Charizard":
             self.hp = 12 + 1 * self.get_level()
-        elif self.get_poke_name == "Gastly":
+        elif self.get_poke_name() == "Gastly":
             self.hp = 6 + (self.get_level() // 2)
-        elif self.get_poke_name == "Eevee":
+        elif self.get_poke_name() == "Eevee":
             self.hp = 10
-        elif self.get_poke_name == "Blastoise":
+        elif self.get_poke_name() == "Blastoise":
             self.hp = 15 + 2 * self.get_level()
-        elif self.get_poke_name == "Venusaur":
+        elif self.get_poke_name() == "Venusaur":
             self.hp = 20 + (self.get_level() // 2)
-        elif self.get_poke_name == "Haunter":
+        elif self.get_poke_name() == "Haunter":
             self.hp = 9 + (self.get_level() // 2)
-        elif self.get_poke_name == "Gengar":
+        elif self.get_poke_name() == "Gengar":
             self.hp = 12 + (self.get_level() // 2)
 
     def get_evolved_version(self) -> PokemonBase:
