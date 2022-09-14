@@ -1,3 +1,5 @@
+from pokemon_base import PokemonBase
+
 class Charmander(PokemonBase):
     def __init__(self):
         self.poke_name = "Charmander"
@@ -129,8 +131,11 @@ class Gengar(PokemonBase):
         super().__init__(self.hp, self.poke_type)
 
 if __name__ == "__main__":
-    e = Venusaur()
-    e.level_up()
-    e.level_up()
-    e.level_up()
-    print(e.get_hp())
+    e = Eevee()
+    print(e.get_poke_name())
+    print(e.get_hp()) # 10
+    e.lose_hp(4)
+    print(e.get_hp()) # 6
+    e.heal()
+    print(e.get_hp()) # 10
+    
