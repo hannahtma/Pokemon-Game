@@ -138,3 +138,11 @@ if __name__ == "__main__":
     e.level_up()
     e.level_up()
     print(e.get_hp())
+    e = Eevee()
+    print(e.get_poke_name())
+    print(e.get_hp()) # 10
+    e.lose_hp(4)
+    print(e.get_hp()) # 6
+    e.heal()
+    print(e.get_hp()) # 10
+    
