@@ -1,6 +1,7 @@
 """
 """
 from pokemon_base import PokemonBase
+from random_gen import RandomGen
 
 class Charmander(PokemonBase):
     def __init__(self):
@@ -11,9 +12,29 @@ class Charmander(PokemonBase):
         self.attack_damage = 6 + 1 * self.level
         self.speed = 7 + 1 * self.level
         self.defence = 4
+        self.status_effect = ""
         # defence calculation
 
-        super().__init__(self.hp, self.poke_type)
+    def defend(self, damage: int) -> None:
+        if damage > self.defence:
+            self.hp -= damage
+        else:
+            self.hp -= damage // 2
+
+    def attack(self, other: PokemonBase):
+        if self.get_status_effect == "Sleep":
+            return None
+        elif self.get_status_effect == "Confusion":
+            if RandomGen.random_chance(0.5) == True:
+                other = self
+        elif self.get_status_effect == "Paralysis":
+            self.speed = self.speed // 2
+
+
+
+        if other.get_poke_type == "Fire":
+            
+        #super().__init__(self.hp, self.poke_type)
 
 class Squirtle(PokemonBase):
     def __init__(self):
