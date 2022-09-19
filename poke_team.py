@@ -9,7 +9,7 @@ __author__ = "Scaffold by Jackson Goerner, Code by ______________"
 from enum import Enum, auto
 from pokemon_base import PokeType, PokemonBase
 from pokemon import Charmander, Bulbasaur, Squirtle, Gastly, Eevee
-from array_sorted_list import ArraySortedList
+from referential_array import ArrayR
 from stack_adt import Stack
 from queue_adt import Queue
 from sorted_list import SortedList
@@ -60,18 +60,18 @@ class PokeTeam:
             team_count.append(number)
         team_count = team_count[2:]
 
-        cls.pokemon_team = ArraySortedList(len(team_count))
+        cls.pokemon_team = ArrayR(len(team_count))
         pokemon_arranged = [Charmander, Bulbasaur, Squirtle, Gastly, Eevee]
         for index in range(len(team_count)):
             if index == 0:
                 number = 0
                 while number < team[index]:
-                    cls.pokemon_team.add(pokemon_arranged[index])
+                    cls.pokemon_team.__setitem__(index, pokemon_arranged[index])
                     number += 1
             else:
                 number = 0
                 while number < (team[index]-team[index-1]):
-                    cls.pokemon_team.add(pokemon_arranged[index])
+                    cls.pokemon_team.__setitem__(index, pokemon_arranged[index])
                     number += 1
 
         return cls.pokemon_team
@@ -120,8 +120,7 @@ class PokeTeam:
         #"Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Eevee: 10 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Charmander: 9 HP]"
     
     def is_empty(self):
-        return cls(**self)
-        return len(self) == 0
+        return self.__len__()
 
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
         raise NotImplementedError()
