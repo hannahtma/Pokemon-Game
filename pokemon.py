@@ -13,7 +13,8 @@ class Charmander(PokemonBase):
         self.speed = 7 + 1 * self.level
         self.defence = 4
         self.status_effect = ""
-        # defence calculation
+
+        super().__init__(self.hp, self.poke_type)
 
     def defend(self, damage: int) -> None:
         if damage > self.defence:
@@ -30,11 +31,27 @@ class Charmander(PokemonBase):
         elif self.get_status_effect == "Paralysis":
             self.speed = self.speed // 2
 
-
-
         if other.get_poke_type == "Fire":
-            
-        #super().__init__(self.hp, self.poke_type)
+            effective_attack = self.attack_damage * 1
+        elif other.get_poke_type == "Grass":
+            effective_attack = self.attack_damage * 2
+        elif other.get_poke_type == "Water":
+            effective_attack = self.attack_damage * 0.5
+        elif other.get_poke_type == "Ghost":
+            effective_attack = self.attack_damage * 1
+        elif other.get_poke_type == "Normal":
+            effective_attack = self.attack_damage * 1
+
+        other.defend(effective_attack)
+
+        if self.get_status_effect == "Burn":
+            self.hp -= 1
+        elif self.get_status_effect == "Poison":
+            self.hp -= 3
+
+        if RandomGen.random_chance(0.2) == True:
+            other.status_effect = "Burn"
+
 
 class Squirtle(PokemonBase):
     def __init__(self):

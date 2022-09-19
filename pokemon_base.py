@@ -63,55 +63,24 @@ class PokemonBase:
     def defend(self, damage: int) -> None:
         pass
 
-    def attack(self, other: PokemonBase):
-        attack_multiplier = [[1, 2, 0.5, 1, 1],
-                             [0.5, 1, 2, 1, 1],
-                             [2, 0.5, 1, 1, 1],
-                             [1.25, 1.25, 1.25, 2, 0],
-                             [1.25, 1.25, 1.25, 0, 1]]
-                self.hp -= damage
-            else:
-                self.hp -= damage // 2
-        elif pokemon_name == "Squirtle" or pokemon_name == "Blastoise":
-            if damage > 2 * self.defence:
-                self.hp -= damage
-            else:
-                self.hp -= damage // 2
-        elif pokemon_name == "Bulbasaur" or pokemon_name == "Venusaur":
-            if damage > self.defence + 5:
-                self.hp -= damage
-            else:
-                self.hp -= damage // 2
-        elif pokemon_name == "Gastly" or pokemon_name == "Haunter" or pokemon_name == "Gengar":
-            self.hp -= damage
-        elif pokemon_name == "Eevee":
-            if damage >= self.defence:
-                self.hp -= damage
-            else:
-                self.hp = self.hp
-        elif pokemon_name == "Charizard":
-            if damage > self.defence:
-                self.hp -= 2 * damage
-            else:
-                self.hp -= damage
-
+    @abstractmethod
     def attack(self, other: PokemonBase):
         pass
-        #if other.get_defence() == 
         # Step 1: Status effects on attack damage / redirecting attacks
         # Step 2: Do the attack
         # Step 3: Losing hp to status effects
         # Step 4: Possibly applying status effects
-        pass
 
     def should_evolve(self) -> bool:
-        return not self.isfainted()
+        return not self.is_fainted()
+
     def should_evolve(self) -> bool:
         if self.is_fainted() == False:
             return True
-        elif self.is_fainter() == True:
+        elif self.is_fainted() == True:
             return False
         
+    @abstractmethod
     def can_evolve(self) -> bool:
         if self.get_level() == 1 and self.get_poke_name == "Gastly":
             return True
