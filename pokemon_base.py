@@ -11,7 +11,7 @@ from pokemon import Charizard, Blastoise, Venusaur, Haunter, Gengar
 class PokemonBase:
 
     def __init__(self, hp: int, poke_type: str) -> None:
-       self.hp = hp
+       self.base_hp = hp
        self.poke_type = poke_type
 
     def is_fainted(self) -> bool:
@@ -82,76 +82,26 @@ class PokemonBase:
         
     @abstractmethod
     def can_evolve(self) -> bool:
-        if self.get_level() == 1 and self.get_poke_name == "Gastly":
-            return True
-        elif self.get_level() == 3 and (self.get_poke_name == "Charmander" or self.get_poke_name == "Squirtle" or self.get_poke_name == "Haunter"):
-            return True
-        elif self.get_level() == 2 and self.get_poke_name == "Bulbasaur":
-            return True
-        else:
-            return False
+        pass
 
     def heal(self) -> None:
-        self.current_hp = self.hp
+        self.hp = self.base_hp
         self.status_effect = ""
 
+    @abstractmethod
     def get_evolved_version(self) -> PokemonBase:
-        if self.poke_name == "Charmander":
-            return Charizard()
-        elif self.poke_name == "Squirtle":
-            return Blastoise()
-        elif self.poke_name == "Bulbasaur":
-            return Venusaur()
-        elif self.poke_name == "Gastly":
-            return Haunter()
-        elif self.poke_name == "Haunter":
-            return Gengar()
-
-    def __str__(self) -> str:
-        pokemon_string = f"LV. {self.level}: {self.hp} HP"
-        return pokemon_string
-
-class PokeType(Enum):
-    FIRE = "fire"
-    GRASS = "grass"
-    WATER = "water"
-    GHOST = "ghost"
-    NORMAL = "normal"
-    def heal(self):
-        if self.get_poke_name() == "Charmander":
-            self.hp = 8 + 1 * self.get_level()
-        elif self.get_poke_name() == "Squirtle":
-            self.hp = 9 + 2 * self.get_level()
-        elif self.get_poke_name() == "Bulbasaur" or self.get_poke_name == "Charizard":
-            self.hp = 12 + 1 * self.get_level()
-        elif self.get_poke_name() == "Gastly":
-            self.hp = 6 + (self.get_level() // 2)
-        elif self.get_poke_name() == "Eevee":
-            self.hp = 10
-        elif self.get_poke_name() == "Blastoise":
-            self.hp = 15 + 2 * self.get_level()
-        elif self.get_poke_name() == "Venusaur":
-            self.hp = 20 + (self.get_level() // 2)
-        elif self.get_poke_name() == "Haunter":
-            self.hp = 9 + (self.get_level() // 2)
-        elif self.get_poke_name() == "Gengar":
-            self.hp = 12 + (self.get_level() // 2)
-
-    def get_evolved_version(self) -> PokemonBase:
-        if self.poke_name == "Charmander":
-            return self.Charizard()
-        elif self.poke_name == "Squirtle":
-            return self.Blastoise()
-        elif self.poke_name == "Bulbasaur":
-            return self.Venusaur()
-        elif self.poke_name == "Gastly":
-            return self.Haunter()
-        elif self.poke_name == "Haunter":
-            return self.Gengar()
+        pass
 
     def __str__(self) -> str:
         pokemon_string = f"LV. {self.level} {self.poke_name}: {self.hp} HP"
         return pokemon_string
+
+class PokeType(Enum):
+    FIRE = "Fire"
+    GRASS = "Grass"
+    WATER = "Water"
+    GHOST = "Ghost"
+    NORMAL = "Normal"
 
 class PokeType:
     def __init__(self):
