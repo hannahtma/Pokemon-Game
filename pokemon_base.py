@@ -38,7 +38,9 @@ class PokemonBase:
         return self.level
 
     def level_up(self) -> None:
+        holder = self.base_hp - self.hp
         self.level += 1
+        self.hp = self.hp - holder
 
     def get_speed(self) -> int:
         return self.speed
@@ -71,10 +73,10 @@ class PokemonBase:
         # Step 4: Possibly applying status effects
 
     def should_evolve(self) -> bool:
-        return not self.is_fainted()
-
-    def should_evolve(self) -> bool:
         if self.is_fainted() == False and self.can_evolve() == True:
+            holder = self.base_hp - self.hp
+            a = self.get_evolved_version()
+            a.hp = a.hp - holder
             return True
         elif self.is_fainted() == True:
             return False
