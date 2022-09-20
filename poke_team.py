@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .random_gen import RandomGen
+from random_gen import RandomGen
 
 """
 """
@@ -142,7 +142,6 @@ class PokeTeam:
     
     def is_empty(self):
         return cls(**self)
-        return len(self) == 0
 
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
         raise NotImplementedError()

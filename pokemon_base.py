@@ -39,6 +39,10 @@ class PokemonBase:
 
     def level_up(self) -> None:
         self.level += 1
+        self.set_hp()
+        self.set_attack()
+        self.set_speed()
+        self.set_defence()
 
     def get_speed(self) -> int:
         return self.speed
@@ -76,6 +80,22 @@ class PokemonBase:
         elif self.is_fainted() == True:
             return False
         
+    @abstractmethod
+    def set_hp(self) -> None:
+        pass
+
+    @abstractmethod
+    def set_attack(self) -> None:
+        pass
+
+    @abstractmethod
+    def set_speed(self) -> None:
+        pass
+
+    @abstractmethod
+    def set_defence(self) -> None:
+        pass
+
     @abstractmethod
     def can_evolve(self) -> bool:
         pass
