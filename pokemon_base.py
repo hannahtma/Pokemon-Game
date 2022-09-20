@@ -5,13 +5,15 @@ from __future__ import annotations
 __author__ = "Scaffold by Jackson Goerner, Code by ______________"
 
 from abc import abstractmethod
-from enum import Enum
+from enum import Enum, auto
 
 class PokemonBase:
 
     def __init__(self, hp: int, poke_type: str) -> None:
-       self.base_hp = hp
-       self.poke_type = poke_type
+        if type(poke_type) != str:
+            raise TypeError(poke_type + ' is invalid, only string values accepted')
+        self.base_hp = hp
+        self.poke_type = poke_type
 
     def is_fainted(self) -> bool:
         if self.hp <= 0:
@@ -113,9 +115,9 @@ class PokemonBase:
         return pokemon_string
 
 class PokeType(Enum):
-    FIRE = "Fire"
-    GRASS = "Grass"
-    WATER = "Water"
-    GHOST = "Ghost"
-    NORMAL = "Normal"
+    FIRE = auto()
+    GRASS = auto()
+    WATER = auto()
+    GHOST = auto()
+    NORMAL = auto()
 
