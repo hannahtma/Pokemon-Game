@@ -363,6 +363,9 @@ class Eevee(PokemonBase):
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Confusion"
 
+    def can_evolve(self) -> bool:
+        raise Exception('This pokemon cannot be evolved')
+
 class Charizard(PokemonBase):
     def __init__(self):
         self.poke_name = "Charizard"
@@ -426,6 +429,9 @@ class Charizard(PokemonBase):
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Burn"
+
+    def can_evolve(self) -> bool:
+        raise Exception('This pokemon cannot be evolved')
 
 class Blastoise(PokemonBase):
     def __init__(self):
@@ -491,6 +497,9 @@ class Blastoise(PokemonBase):
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Paralysis"
 
+    def can_evolve(self) -> bool:
+        raise Exception('This pokemon cannot be evolved')
+
 class Venusaur(PokemonBase):
     def __init__(self):
         self.poke_name = "Venusaur"
@@ -554,6 +563,9 @@ class Venusaur(PokemonBase):
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Poison"
+
+    def can_evolve(self) -> bool:
+        raise Exception('This pokemon cannot be evolved')
 
 class Haunter(PokemonBase):
     def __init__(self):
@@ -688,6 +700,9 @@ class Gengar(PokemonBase):
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Sleep"
+
+    def can_evolve(self) -> bool:
+        raise Exception('This pokemon cannot be evolved')
 
 if __name__ == "__main__":
     RandomGen.set_seed(0)
