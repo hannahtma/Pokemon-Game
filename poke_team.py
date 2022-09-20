@@ -86,27 +86,25 @@ class PokeTeam:
             self.add(poke)
 
     def retrieve_pokemon(self) -> PokemonBase | None:
-        if self.is_empty():
-            print("here")
-            return None
-        else:
-            print("there")
-            if self.battle_mode == 0:
-                self.new_stack = Stack() 
-                for pokemon in range((self.pokemon_team.__len__() - 1), -1, -1):
-                    self.new_stack.push(self.pokemon_team.__getitem__(pokemon))
-                retrieved_pokemon = self.new_stack.pop()
-            elif self.battle_mode == 1:
-                self.new_queue = Queue()
-                for pokemon in self.pokemon_team:
-                    self.new_queue.append(pokemon)
-                retrieved_pokemon = self.new_queue.serve()
-            elif self.battle_mode == 2:
-                new_sorted_list = SortedList()
-                for pokemon in range(len(self.pokemon_team)):
-                    pass
+        # if self.is_empty():
+        #     return None
+        # else:
+        #     if self.battle_mode == 0:
+        #         self.new_stack = Stack() 
+        #         for pokemon in range((self.pokemon_team.__len__() - 1), -1, -1):
+        #             self.new_stack.push(self.pokemon_team.__getitem__(pokemon))
+        #         retrieved_pokemon = self.new_stack.pop()
+        #     elif self.battle_mode == 1:
+        #         self.new_queue = Queue()
+        #         for pokemon in self.pokemon_team:
+        #             self.new_queue.append(pokemon)
+        #         retrieved_pokemon = self.new_queue.serve()
+        #     elif self.battle_mode == 2:
+        #         new_sorted_list = SortedList()
+        #         for pokemon in range(len(self.pokemon_team)):
+        #             pass
 
-            return retrieved_pokemon
+        #     return retrieved_pokemon
 
     def special(self):
         raise NotImplementedError()
@@ -121,10 +119,23 @@ class PokeTeam:
         #"Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Eevee: 10 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Charmander: 9 HP]"
     
     def is_empty(self):
-        return self.__len__() == 0
+        return len(self) == 0
 
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
-        raise NotImplementedError()
+        counter = 0
+        if self.ai_type == None:
+            self.AI.RANDOM()
+        else:
+            if self.AI.USER_INPUT == "ATTACK":
+                Action.ATTACK()
+            elif self.AI.USER_INPUT == "SWAP":
+                Action.SWAP()
+            elif self.AI.USER_INPUT == "HEAL":
+                if counter <3:
+                    Action.HEAL()
+                    counter+=1
+            elif self.AI.USER_INPUT == "SPECIAL":
+                Action.SPECIAL()
 
     @classmethod
     def leaderboard_team(cls):
