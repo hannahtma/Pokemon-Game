@@ -59,7 +59,10 @@ class Charmander(PokemonBase):
             return False
 
     def get_evolved_version(self) -> PokemonBase:
-        return Charizard()
+        c = Charizard()
+        holder = self.base_hp - self.hp
+        c.hp -= holder
+        return c
 
 
 class Squirtle(PokemonBase):
@@ -117,7 +120,10 @@ class Squirtle(PokemonBase):
             return False
 
     def get_evolved_version(self) -> PokemonBase:
-        return Blastoise()
+        b = Blastoise()
+        holder = self.base_hp - self.hp
+        b.hp -= holder
+        return b
 
 class Bulbasaur(PokemonBase):
     def __init__(self):
@@ -174,7 +180,10 @@ class Bulbasaur(PokemonBase):
             return False
 
     def get_evolved_version(self) -> PokemonBase:
-        return Venusaur()
+        v = Venusaur()
+        holder = self.base_hp - self.hp
+        v.hp -= holder
+        return v
 
 class Gastly(PokemonBase):
     def __init__(self):
@@ -228,7 +237,10 @@ class Gastly(PokemonBase):
             return False
 
     def get_evolved_version(self) -> PokemonBase:
-        return Haunter()
+        h = Haunter()
+        holder = self.base_hp - self.hp
+        h.hp -= holder
+        return h
 
 class Eevee(PokemonBase):
     def __init__(self):
@@ -472,7 +484,10 @@ class Haunter(PokemonBase):
             return False
 
     def get_evolved_version(self) -> PokemonBase:
-        return Gengar()
+        g = Gengar()
+        holder = self.base_hp - self.hp
+        g.hp -= holder
+        return g
 
 class Gengar(PokemonBase):
     def __init__(self):
