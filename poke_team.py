@@ -112,7 +112,7 @@ class PokeTeam:
         raise NotImplementedError()
 
     def regenerate_team(self):
-        raise NotImplementedError()
+        
 
     def __str__(self):
         poke_team_string = f"{self.team_name} ({self.team_numbers}): [{self.battle_mode}]"
@@ -121,7 +121,7 @@ class PokeTeam:
         #"Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Eevee: 10 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Charmander: 9 HP]"
     
     def is_empty(self):
-        return self.__len__()
+        return self.__len__() == 0
 
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
         raise NotImplementedError()
