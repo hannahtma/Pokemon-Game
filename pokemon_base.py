@@ -4,9 +4,8 @@ from __future__ import annotations
 """
 __author__ = "Scaffold by Jackson Goerner, Code by ______________"
 
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from enum import Enum
-from pokemon import Charizard, Blastoise, Venusaur, Haunter, Gengar
 
 class PokemonBase:
 
@@ -75,7 +74,7 @@ class PokemonBase:
         return not self.is_fainted()
 
     def should_evolve(self) -> bool:
-        if self.is_fainted() == False:
+        if self.is_fainted() == False and self.can_evolve() == True:
             return True
         elif self.is_fainted() == True:
             return False
@@ -103,11 +102,3 @@ class PokeType(Enum):
     GHOST = "Ghost"
     NORMAL = "Normal"
 
-class PokeType:
-    def __init__(self):
-        attack_multiplier = [[1, 2, 0.5, 1, 1],[0.5, 1, 2, 1, 1],[2, 0.5, 1, 1, 1],[1.25, 1.25, 1.25, 2, 0],[1.25, 1.25, 1.25, 0, 1]]
-        FIRE = attack_multiplier[0]
-        GRASS = attack_multiplier[1]
-        WATER = attack_multiplier[2]
-        GHOST = attack_multiplier[3]
-        NORMAL = attack_multiplier[4]

@@ -52,6 +52,15 @@ class Charmander(PokemonBase):
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Burn"
 
+    def can_evolve(self) -> bool:
+        if self.level == 3:
+            return True
+        else:
+            return False
+
+    def get_evolved_version(self) -> PokemonBase:
+        return Charizard()
+
 
 class Squirtle(PokemonBase):
     def __init__(self):
@@ -101,6 +110,15 @@ class Squirtle(PokemonBase):
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Paralysis"
 
+    def can_evolve(self) -> bool:
+        if self.level == 3:
+            return True
+        else:
+            return False
+
+    def get_evolved_version(self) -> PokemonBase:
+        return Blastoise()
+
 class Bulbasaur(PokemonBase):
     def __init__(self):
         self.poke_name = "Bulbasaur"
@@ -149,6 +167,15 @@ class Bulbasaur(PokemonBase):
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Poison"
 
+    def can_evolve(self) -> bool:
+        if self.level == 2:
+            return True
+        else:
+            return False
+
+    def get_evolved_version(self) -> PokemonBase:
+        return Venusaur()
+
 class Gastly(PokemonBase):
     def __init__(self):
         self.poke_name = "Gastly"
@@ -193,6 +220,15 @@ class Gastly(PokemonBase):
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Sleep"
+
+    def can_evolve(self) -> bool:
+        if self.level == 1:
+            return True
+        else:
+            return False
+
+    def get_evolved_version(self) -> PokemonBase:
+        return Haunter()
 
 class Eevee(PokemonBase):
     def __init__(self):
@@ -428,6 +464,15 @@ class Haunter(PokemonBase):
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Sleep"
+
+    def can_evolve(self) -> bool:
+        if self.level == 3:
+            return True
+        else:
+            return False
+
+    def get_evolved_version(self) -> PokemonBase:
+        return Gengar()
 
 class Gengar(PokemonBase):
     def __init__(self):
