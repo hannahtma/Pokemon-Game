@@ -12,6 +12,8 @@ class PokemonBase:
     def __init__(self, hp: int, poke_type: str) -> None:
         if type(poke_type) != str:
             raise TypeError(poke_type + ' is invalid, only string values accepted')
+        if type(hp) != int:
+            raise TypeError(hp + " is invalid, only integer values accepted")
         self.base_hp = hp
         self.poke_type = poke_type
 
@@ -77,9 +79,11 @@ class PokemonBase:
         # Step 4: Possibly applying status effects
 
     def should_evolve(self) -> bool:
-        if self.is_fainted() == False and self.can_evolve() == True:
+        if self.can_evolve() == False:
+            raise Exception("This pokemon cannot be evolved")
+        elif self.is_fainted() == False:
             return True
-        elif self.is_fainted() == True:
+        else:
             return False
         
     @abstractmethod

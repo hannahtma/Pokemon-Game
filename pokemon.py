@@ -366,6 +366,9 @@ class Eevee(PokemonBase):
     def can_evolve(self) -> bool:
         raise Exception('This pokemon cannot be evolved')
 
+    def get_evolved_version(self) -> PokemonBase:
+        raise Exception('This pokemon does not have an evolved version')
+
 class Charizard(PokemonBase):
     def __init__(self):
         self.poke_name = "Charizard"
@@ -432,6 +435,9 @@ class Charizard(PokemonBase):
 
     def can_evolve(self) -> bool:
         raise Exception('This pokemon cannot be evolved')
+
+    def get_evolved_version(self) -> PokemonBase:
+        raise Exception('This pokemon does not have an evolved version')
 
 class Blastoise(PokemonBase):
     def __init__(self):
@@ -500,6 +506,9 @@ class Blastoise(PokemonBase):
     def can_evolve(self) -> bool:
         raise Exception('This pokemon cannot be evolved')
 
+    def get_evolved_version(self) -> PokemonBase:
+        raise Exception('This pokemon does not have an evolved version')
+
 class Venusaur(PokemonBase):
     def __init__(self):
         self.poke_name = "Venusaur"
@@ -566,6 +575,9 @@ class Venusaur(PokemonBase):
 
     def can_evolve(self) -> bool:
         raise Exception('This pokemon cannot be evolved')
+
+    def get_evolved_version(self) -> PokemonBase:
+        raise Exception('This pokemon does not have an evolved version')
 
 class Haunter(PokemonBase):
     def __init__(self):
@@ -703,6 +715,9 @@ class Gengar(PokemonBase):
 
     def can_evolve(self) -> bool:
         raise Exception('This pokemon cannot be evolved')
+
+    def get_evolved_version(self) -> PokemonBase:
+        raise Exception('This pokemon does not have an evolved version')
 
 if __name__ == "__main__":
     RandomGen.set_seed(0)
