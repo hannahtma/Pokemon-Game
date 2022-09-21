@@ -53,15 +53,14 @@ class PokeTeam:
 
         if battle_mode == 0:
             self.pokemon_team = ArrayStack(team_size)
-            print(team_size)
             i = 0
             pokemon_total = 0
             for index in range(-1, (team_size+1)*-1, -1):
                 if team_numbers[index] != 0:
                     pokemon_total += team_numbers[index]
                     number = 0
-                    while number < team_numbers[index]: # 0 < 1
-                        while i < pokemon_total: # 0 < 1
+                    while number < team_numbers[index]:
+                        while i < pokemon_total:
                             self.pokemon_team.push(pokemon_arranged[index])
                             i += 1
                         number += 1
@@ -159,9 +158,6 @@ class PokeTeam:
             for x in range(temporary_stack.__len__()):
                 self.pokemon_team.push(temporary_stack.pop())
             
-            for x in range(self.pokemon_team.__len__()):
-                print(self.pokemon_team.pop())
-                
         elif self.battle_mode == 1:
             new_team_size = self.pokemon_team.__len__() // 2
             temporary_stack = ArrayStack(new_team_size)
@@ -172,9 +168,6 @@ class PokeTeam:
             for x in range(temporary_stack.__len__()):
                 temporary_pokemon = temporary_stack.pop()
                 self.pokemon_team.append(temporary_pokemon)
-            
-            for x in range(self.pokemon_team.__len__()):
-                print(self.pokemon_team.serve())
 
     def regenerate_team(self):
         PokeTeam(self.team_name, self.team_numbers, self.battle_mode, self.ai_type, self.criterion, self.criterion_value)
@@ -273,16 +266,16 @@ if __name__ == "__main__":
     # print(t.__str__())
         # self.assertEqual(str(t), "Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Eevee: 10 HP, LV. 1 Charmander: 9 HP]")
     
-    t = PokeTeam("Lance", [1, 1, 1, 1, 1], 0, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE)
+    t = PokeTeam("Lance", [1, 1, 1, 1, 1], 1, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE)
     # C B S G E
     t.special()
     # S G E B C
-    # pokemon = []
-    # while not t.is_empty():
-    #     pokemon.append(t.retrieve_pokemon())
-    # print(pokemon)
-    # expected_classes = [Eevee, Bulbasaur, Squirtle, Gastly, Charmander]
-    # self.assertEqual(len(pokemon), len(expected_classes))
-    # for p, e in zip(pokemon, expected_classes):
-    #     self.assertIsInstance(p, e)
+    pokemon = []
+    while not t.is_empty():
+        pokemon.append(t.retrieve_pokemon())
+    expected_classes = [Squirtle, Gastly, Eevee, Bulbasaur, Charmander]
+    print(len(pokemon))
+    print(len(expected_classes))
+    for p, e in zip(pokemon, expected_classes):
+        self.assertIsInstance(p, e)
     
