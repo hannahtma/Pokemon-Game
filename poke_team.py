@@ -144,39 +144,24 @@ class PokeTeam:
 
     def special(self):
         if self.battle_mode == 0:
-            self.special_pokemon_team = LinkedList()
+            top = self.pokemon_team.pop()
+            bottom = self.pokemon_team.index(0)
+            self.pokemon_team.push(bottom)
+
+            temporary_stack = ArrayStack(self.pokemon_team.__len__())
 
             for x in range(self.pokemon_team.__len__()):
-                pokemon = self.pokemon_team.pop()
-                self.special_pokemon_team.insert(x, pokemon)
+                temporary_stack.push(self.pokemon_team.pop())
             
+            temporary_stack.pop()
+            temporary_stack.push(top)
+
+            for x in range(temporary_stack.__len__()):
+                self.pokemon_team.push(temporary_stack.pop())
             
-            # for x in range(self.special_pokemon_team.__len__()):
-            #     print(self.special_pokemon_team.__getitem__(x))
-
-            first_pokemon = self.special_pokemon_team.head
-            print(str(first_pokemon))
-            print(self.special_pokemon_team.get_node_at_index(0))
-            last_pokemon = self.special_pokemon_team.__get_node_at_index(-1)
-            print(last_pokemon)
-            # print(self.special_pokemon_team.index(first_pokemon))
-            # first_pokemon = self.special_pokemon_team.__get_node_at_index(0)
-            # print(first_pokemon)
-            # last_pokemon = self.special_pokemon_team.__get_node_at_index(-1)
-            # print(last_pokemon)
-            # copy_last_to_first = Node(last_pokemon.item)
-            # copy_last_to_first.link = first_pokemon.link
-            # copy_first_to_last = Node(first_pokemon.item)
-            # copy_first_to_last.link = last_pokemon.link
-
-            # self.special_pokemon_team.delete_at_index(0)
-            # self.special_pokemon_team._shuffle_left(1)
-            # self.special_pokemon_team.delete_at_index(-2)
-            # self.special_pokemon_team._shuffle_left(-1)
-
-            # for x in range(self.special_pokemon_team.__len__()):
-            #     print(self.special_pokemon_team.__getitem__(x))
-
+            for x in range(self.pokemon_team.__len__()):
+                print(self.pokemon_team.pop())
+                
         elif self.battle_mode == 1:
             new_team_size = self.pokemon_team.__len__() // 2
             temporary_stack = ArrayStack(new_team_size)
@@ -288,7 +273,7 @@ if __name__ == "__main__":
     # print(t.__str__())
         # self.assertEqual(str(t), "Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Eevee: 10 HP, LV. 1 Charmander: 9 HP]")
     
-    t = PokeTeam("Lance", [1, 1, 1, 1, 1], 1, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE)
+    t = PokeTeam("Lance", [1, 1, 1, 1, 1], 0, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE)
     # C B S G E
     t.special()
     # S G E B C
