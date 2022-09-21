@@ -11,9 +11,11 @@ from enum import Enum, auto
 from pokemon_base import PokeType, PokemonBase
 from pokemon import Charmander, Bulbasaur, Squirtle, Gastly, Eevee
 from referential_array import ArrayR
-from stack_adt import Stack
-from queue_adt import Queue
-from sorted_list import SortedList
+from stack_adt import ArrayStack
+from queue_adt import CircularQueue
+from array_sorted_list import ArraySortedList
+from linked_list import LinkedList
+from node import Node
 
 class Action(Enum):
     ATTACK = auto()
@@ -86,31 +88,66 @@ class PokeTeam:
             self.add(poke)
 
     def retrieve_pokemon(self) -> PokemonBase | None:
-        # if self.is_empty():
-        #     return None
-        # else:
-        #     if self.battle_mode == 0:
-        #         self.new_stack = Stack() 
-        #         for pokemon in range((self.pokemon_team.__len__() - 1), -1, -1):
-        #             self.new_stack.push(self.pokemon_team.__getitem__(pokemon))
-        #         retrieved_pokemon = self.new_stack.pop()
-        #     elif self.battle_mode == 1:
-        #         self.new_queue = Queue()
-        #         for pokemon in self.pokemon_team:
-        #             self.new_queue.append(pokemon)
-        #         retrieved_pokemon = self.new_queue.serve()
-        #     elif self.battle_mode == 2:
-        #         new_sorted_list = SortedList()
-        #         for pokemon in range(len(self.pokemon_team)):
-        #             pass
+        if self.is_empty():
+            return None
+        else:
+            if self.battle_mode == 0:
+                self.new_stack = Stack() 
+                for pokemon in range((self.pokemon_team.__len__() - 1), -1, -1):
+                    self.new_stack.push(self.pokemon_team.__getitem__(pokemon))
+                retrieved_pokemon = self.new_stack.pop()
+            elif self.battle_mode == 1:
+                self.new_queue = Queue()
+                for pokemon in self.pokemon_team:
+                    self.new_queue.append(pokemon)
+                retrieved_pokemon = self.new_queue.serve()
+            elif self.battle_mode == 2:
+                new_sorted_list = SortedList()
+                for pokemon in range(len(self.pokemon_team)):
+                    pass
 
-        #     return retrieved_pokemon
+            return retrieved_pokemon
 
     def special(self):
-        raise NotImplementedError()
+        if self.battle_mode == 0:
+            top = self.pokemon_team.pop()
+            bottom = self.pokemon_team.index(0)
+            self.pokemon_team.push(bottom)
+
+            temporary_stack = ArrayStack(self.pokemon_team.__len__())
+
+            for x in range(self.pokemon_team.__len__()):
+                temporary_stack.push(self.pokemon_team.pop())
+            
+            temporary_stack.pop()
+            temporary_stack.push(top)
+
+            for x in range(temporary_stack.__len__()):
+                self.pokemon_team.push(temporary_stack.pop())
+            
+            for x in range(self.pokemon_team.__len__()):
+                print(self.pokemon_team.pop())
+                
+        elif self.battle_mode == 1:
+            new_team_size = self.pokemon_team.__len__() // 2
+            temporary_stack = ArrayStack(new_team_size)
+            for x in range(new_team_size):
+                temporary_pokemon = self.pokemon_team.serve()
+                temporary_stack.push(temporary_pokemon)
+            
+            for x in range(temporary_stack.__len__()):
+                temporary_pokemon = temporary_stack.pop()
+                self.pokemon_team.append(temporary_pokemon)
+            
+            for x in range(self.pokemon_team.__len__()):
+                print(self.pokemon_team.serve())
+
+        elif self.battle_mode == 2:
+
+
 
     def regenerate_team(self):
-        
+        pass
 
     def __str__(self):
         poke_team_string = f"{self.team_name} ({self.team_numbers}): [{self.battle_mode}]"
