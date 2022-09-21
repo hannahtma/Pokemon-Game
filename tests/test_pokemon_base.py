@@ -1,57 +1,41 @@
-from poke_team import Action, Criterion, PokeTeam
 from random_gen import RandomGen
-from pokemon import Bulbasaur, Charizard, Charmander, Gastly, Squirtle, Eevee
+from pokemon_base import PokemonBase, PokeType
+from pokemon import Eevee, Gastly, Haunter
 from tests.base_test import BaseTest
 
-class TestPokeTeam(BaseTest):
+class TestPokemonBase(BaseTest):
 
-    def test_random(self):
-        RandomGen.set_seed(123456789)
-        t = PokeTeam.random_team("Cynthia", 0)
-        pokemon = []
-        while not t.is_empty():
-            pokemon.append(t.retrieve_pokemon())
-        expected_classes = [Squirtle, Gastly, Eevee, Eevee, Eevee, Eevee]
-        self.assertEqual(len(pokemon), len(expected_classes))
-        for p, e in zip(pokemon, expected_classes):
-            self.assertIsInstance(p, e)
+    def test_cannot_init(self):
+        """Tests that we cannot initialise PokemonBase, and that it raises the correct error."""
+        self.assertRaises(TypeError, lambda: PokemonBase(30, PokeType.FIRE))
 
-    def test_regen_team(self):
-        RandomGen.set_seed(123456789)
-        t = PokeTeam.random_team("Cynthia", 2, team_size=4, criterion=Criterion.HP)
-        # This should end, since all pokemon are fainted, slowly.
-        while not t.is_empty():
-            p = t.retrieve_pokemon()
-            p.lose_hp(1)
-            t.return_pokemon(p)
-        t.regenerate_team()
-        pokemon = []
-        while not t.is_empty():
-            pokemon.append(t.retrieve_pokemon())
-        expected_classes = [Bulbasaur, Eevee, Charmander, Gastly]
-        self.assertEqual(len(pokemon), len(expected_classes))
-        for p, e in zip(pokemon, expected_classes):
-            self.assertIsInstance(p, e)
-
-    def test_battle_option_attack(self):
-        t = PokeTeam("Wallace", [1, 0, 0, 0, 0], 1, PokeTeam.AI.ALWAYS_ATTACK)
-        p = t.retrieve_pokemon()
+    def test_level(self):
         e = Eevee()
-        self.assertEqual(t.choose_battle_option(p, e), Action.ATTACK)
+        self.assertEqual(e.get_level(), 1)
+        e.level_up()
+        self.assertEqual(e.get_level(), 2)
+    
+    def test_hp(self):
+        e = Eevee()
+        self.assertEqual(e.get_hp(), 10)
+        e.lose_hp(4)
+        self.assertEqual(e.get_hp(), 6)
+        e.heal()
+        self.assertEqual(e.get_hp(), 10)
 
-    def test_special_mode_1(self):
-        t = PokeTeam("Lance", [1, 1, 1, 1, 1], 1, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE)
-        # C B S G E
-        t.special()
-        # S G E B C
-        pokemon = []
-        while not t.is_empty():
-            pokemon.append(t.retrieve_pokemon())
-        expected_classes = [Squirtle, Gastly, Eevee, Bulbasaur, Charmander]
-        self.assertEqual(len(pokemon), len(expected_classes))
-        for p, e in zip(pokemon, expected_classes):
-            self.assertIsInstance(p, e)
+    def test_status(self):
+        RandomGen.set_seed(0)
+        e1 = Eevee()
+        e2 = Eevee()
+        e1.attack(e2)
+        # e2 now is confused.
+        e2.attack(e1)
+        # e2 takes damage in confusion.
+        self.assertEqual(e1.get_hp(), 10)
 
-    def test_string(self):
-        t = PokeTeam("Dawn", [1, 1, 1, 1, 1], 2, PokeTeam.AI.RANDOM, Criterion.DEF)
-        self.assertEqual(str(t), "Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Eevee: 10 HP, LV. 1 Charmander: 9 HP]")
+    def test_evolution(self):
+        g = Gastly()
+        self.assertEqual(g.can_evolve(), True)
+        self.assertEqual(g.should_evolve(), True)
+        new_g = g.get_evolved_version()
+        self.assertIsInstance(new_g, Haunter)
