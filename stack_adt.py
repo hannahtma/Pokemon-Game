@@ -99,6 +99,9 @@ class ArrayStack(Stack[T]):
             raise Exception("Stack is empty")
         return self.array[self.length-1]
 
+    def index(self, index: int):
+        return self.array[index]
+
 class TestStack(unittest.TestCase):
     """ Tests for the above class."""
     EMPTY = 0

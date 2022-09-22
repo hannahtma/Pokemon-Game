@@ -190,7 +190,7 @@ class PokeTeam:
         #     self.pokemon_team.add(retrieved_pokemon)
             
         # for x in self.pokemon_team:
-        #         print('here', x)
+        #         print(x)
 
     def regenerate_team(self):
         pass
