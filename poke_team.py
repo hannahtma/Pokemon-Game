@@ -217,30 +217,23 @@ class PokeTeam:
     def __str__(self):
         poke_team_string = ""
         poke_team_string += f"{self.team_name} ({self.battle_mode}): ["
-
-        for pokemon in range(self.pokemon_team.__len__()):
-            if self.battle_mode == 0:
-                temporary_string = f"{self.pokemon_team.index(pokemon)} "
-                poke_team_string += temporary_string
-            elif self.battle_mode == 1:
-                temporary_string = f"{self.pokemon_team.serve()} "
-                poke_team_string += temporary_string
-            elif self.battle_mode == 2:
-                temporary_string = f"{self.pokemon_team.__getitem__(pokemon).value}, "
-                poke_team_string += temporary_string
-
-        poke_team_string += f"]"
-
+        if self.battle_mode == 0:
+            for pokemon in range(-1, -((self.pokemon_team.__len__())),-1):
+                poke_team_string += f"{self.pokemon_team.index(pokemon)}, "
+            poke_team_string += f"{self.pokemon_team.index(0)}]"
+        elif self.battle_mode == 1:
+            for pokemon in range((self.pokemon_team.__len__())-1):
+                poke_team_string += f"{self.pokemon_team.index(pokemon)}, "
+            poke_team_string += f"{self.pokemon_team.index(-1)}]"
+        elif self.battle_mode == 2:
+            for pokemon in range((self.pokemon_team.__len__())-1):
+                poke_team_string += f"{self.pokemon_team.__getitem__(pokemon).value}, "
+            poke_team_string += f"{self.pokemon_team.__getitem__(-1).value}]"
+        else:
+            raise Exception("This battle mode doesn't exist")
+        
         return poke_team_string
 
-        # final_string = "" #initializing the string
-        # for x in range(len(self.people)): #adding each person to the string
-        #     string = f"{self.people[x+1]}\n"
-        #     final_string += string
-        # return final_string
-
-        #"Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Eevee: 10 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Charmander: 9 HP]"
-    
     def is_empty(self):
         return self.pokemon_team.__len__() == 0
 
@@ -280,16 +273,5 @@ class PokeTeam:
         raise NotImplementedError()
 
 if __name__ == "__main__":
-    # t = PokeTeam("Dawn", [1, 1, 1, 1, 1], 0, PokeTeam.AI.RANDOM, Criterion.DEF)
-    # print(type(t.retrieve_pokemon()))
-    # print(t.__str__())
-        #self.assertEqual(str(t), "Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Eevee: 10 HP, LV. 1 Charmander: 9 HP]")
-    
-    t = PokeTeam("Dawn", [1, 1, 1, 1, 1], 2, PokeTeam.AI.RANDOM, Criterion.DEF)
-    p = t.retrieve_pokemon()
-    print("p",p)
-    p.lose_hp(7)
-    t.return_pokemon(p)
-
-    print(str(t))
+    pass
     
