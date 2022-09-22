@@ -36,9 +36,9 @@ class ArraySortedList(SortedList[T]):
             if possible (!). Shift the following elements to the right.
         """
         if self.is_empty() or \
-                (index == 0 and item.key <= self[index].key) or \
-                (index == len(self) and self[index - 1].key <= item.key) or \
-                (index > 0 and self[index - 1].key <= item.key <= self[index].key):
+                (index == 0 and item.key >= self[index].key) or \
+                (index == len(self) and self[index - 1].key >= item.key) or \
+                (index > 0 and self[index - 1].key >= item.key >= self[index].key):
 
             if self.is_full():
                 self._resize()
@@ -116,9 +116,9 @@ class ArraySortedList(SortedList[T]):
 
         while low <= high:
             mid = (low + high) // 2
-            if self[mid].key < item.key:
+            if self[mid].key > item.key:
                 low = mid + 1
-            elif self[mid].key > item.key:
+            elif self[mid].key < item.key:
                 high = mid - 1
             else:
                 return mid
