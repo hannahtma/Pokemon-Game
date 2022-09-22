@@ -43,7 +43,6 @@ class PokeTeam:
         self.ai_type = ai_type
         self.criterion = criterion
         self.criterion_value = criterion_value
-        print(self.criterion)
 
         kwargs = {"criterion":self.criterion}
 
@@ -80,7 +79,7 @@ class PokeTeam:
                             i += 1
                         number += 1
         elif battle_mode == 2:
-            self.temporary_list = ArraySortedList(team_size)
+            self.pokemon_team = ArraySortedList(team_size)
             i = 0
             pokemon_total = 0
             for index in range(len(team_numbers)):
@@ -91,27 +90,30 @@ class PokeTeam:
                         while i < pokemon_total:
                             self.pokemon_class = pokemon_arranged[index]
                             pokemon = ListItem(pokemon_arranged[index], self.pokemon_criterion(self.pokemon_class))
-                            self.temporary_list.add(pokemon)
+                            self.pokemon_team.add(pokemon)
                             i += 1
                         number += 1
-            
-            self.pokemon_team = ArraySortedList(team_size)
-            counter = 0
-            while counter < team_size:
-                for element in range(-1, -(self.temporary_list.__len__() + 1), -1):
-                    print(element)
-                    print(counter)
-                    self.pokemon_team.__setitem__(counter, self.temporary_list.__getitem__(element))
 
-                    counter += 1
-
-            pokemon = ListItem(Bulbasaur(), 13)
-            print(self.pokemon_team.__contains__(pokemon))
-            #print(self.pokemon_team.is_full())
             for x in self.pokemon_team:
-                print("x",x)
+                print("here",x)
+            
+            # self.pokemon_team = ArraySortedList(team_size)
+            # counter = 0
+            # while counter < team_size:
+            #     for element in range(-1, -(self.temporary_list.__len__() + 1), -1):
+            #         print(element)
+            #         print(counter)
+            #         self.pokemon_team.__setitem__(counter, self.temporary_list.__getitem__(element))
 
-            print("hello",self.pokemon_team.delete_at_index().value)
+            #         counter += 1
+
+            # pokemon = ListItem(Bulbasaur(), 13)
+            # print(self.pokemon_team.index(pokemon))
+            # #print(self.pokemon_team.is_full())
+            # for x in self.pokemon_team:
+            #     print("x",x)
+
+            # print("hello",self.pokemon_team.delete_at_index().value)
 
             # self.unsorted_poketeam = ArraySortedList(team_size)
             # i = 0
