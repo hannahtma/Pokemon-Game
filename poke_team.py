@@ -78,7 +78,6 @@ class PokeTeam:
                             i += 1
                         number += 1
         elif battle_mode == 2:
-            self.criterion_list = ArraySortedList(team_size)
             self.pokemon_team = ArraySortedList(team_size)
             i = 0
             pokemon_total = 0
@@ -89,17 +88,10 @@ class PokeTeam:
                     while number < team_numbers[index]:
                         while i < pokemon_total:
                             self.pokemon_class = pokemon_arranged[index]
-                            self.criterion_list.add(self.pokemon_criterion(self.pokemon_class))
+                            pokemon = ListItem(pokemon_arranged[index], self.pokemon_criterion(self.pokemon_class))
+                            self.pokemon_team.add(pokemon)
                             i += 1
                         number += 1
-            while len(self.pokemon_team) < team_size:
-                max = 0
-                for index in range(len(self.criterion_list)):
-                    if self.criterion_list[index] > max:
-                        max = self.criterion_list
-                        index_of_max = index
-                self.pokemon_team.add(self.pokemon_arrange[index_of_max])
-            
         else:
             raise Exception("Battle Mode doesn't exist")
     
@@ -195,9 +187,6 @@ class PokeTeam:
                 temporary_pokemon = temporary_stack.pop()
                 self.pokemon_team.append(temporary_pokemon)
 
-
-
-
     def regenerate_team(self):
         team_size = 0
         for number in range(len(self.team_numbers)):
@@ -207,18 +196,18 @@ class PokeTeam:
 
         if self.battle_mode == 0:
             self.pokemon_team = ArrayStack(team_size)
-            print(team_size)
             i = 0
             pokemon_total = 0
-            for index in range(-1, (team_size+1)*-1, -1):
+            for index in range(-1, -(team_size+1), -1):
                 if index > -(team_size) and self.team_numbers[index] != 0:
                     pokemon_total += self.team_numbers[index]
                     number = 0
-                    while number < self.team_numbers[index]: # 0 < 1
-                        while i < pokemon_total: # 0 < 1
+                    while number < self.team_numbers[index]:
+                        while i < pokemon_total:
                             self.pokemon_team.push(pokemon_arranged[index])
                             i += 1
                         number += 1
+            self.pokemon_team.push(pokemon_arranged[0])
         elif self.battle_mode == 1:
             self.pokemon_team = CircularQueue(team_size)
             i = 0
@@ -240,38 +229,38 @@ class PokeTeam:
                 if self.team_numbers[index] != 0:
                     pokemon_total += self.team_numbers[index]
                     number = 0
-                    while number < self.team_numbers[index]: # 0 < 1
-                        while i < pokemon_total: # 0 < 1
-                            self.pokemon_team.add(pokemon_arranged[index])
+                    while number < self.team_numbers[index]:
+                        while i < pokemon_total:
+                            self.pokemon_class = pokemon_arranged[index]
+                            pokemon = ListItem(pokemon_arranged[index], self.pokemon_criterion(self.pokemon_class))
+                            self.pokemon_team.add(pokemon)
                             i += 1
                         number += 1
-            for index in range(self.pokemon_team):
+            if self.pokemon_team.__getitem__(index).value:
                 pass
         else:
             raise Exception("Battle Mode doesn't exist")
 
-
     def __str__(self):
+        poke_team_string = ""
+        poke_team_string += f"{self.team_name} ({self.battle_mode}): ["
         if self.battle_mode == 0:
-            poke_team_string = ""
-            poke_team_string += f"{self.team_name} ({self.battle_mode}): ["
             for pokemon in range(-1, -((self.pokemon_team.__len__())),-1):
                 poke_team_string += f"{self.pokemon_team.index(pokemon)}, "
             poke_team_string += f"{self.pokemon_team.index(0)}]"
-
-            return poke_team_string
         elif self.battle_mode == 1:
-            poke_team_string = ""
-            poke_team_string += f"{self.team_name} ({self.battle_mode}): ["
             for pokemon in range((self.pokemon_team.__len__())-1):
                 poke_team_string += f"{self.pokemon_team.index(pokemon)}, "
             poke_team_string += f"{self.pokemon_team.index(-1)}]"
-
-            return poke_team_string
         elif self.battle_mode == 2:
-            pass
+            for pokemon in range((self.pokemon_team.__len__())-1):
+                poke_team_string += f"{self.pokemon_team.__getitem__(pokemon).value}, "
+            poke_team_string += f"{self.pokemon_team.__getitem__(-1).value}]"
         else:
             raise Exception("This battle mode doesn't exist")
+        
+        return poke_team_string
+
     
     def is_empty(self):
         return len(self.pokemon_team) == 0
@@ -311,30 +300,7 @@ class PokeTeam:
         raise NotImplementedError()
 
 if __name__ == "__main__":
-    # RandomGen.set_seed(123456789)
-    # t = PokeTeam.random_team("Cynthia", 0)
-    # pokemon = []
-    # while not t.is_empty():
-    #     pokemon.append(t.retrieve_pokemon())
-    # print(pokemon)
-    # expected_classes = [Squirtle, Gastly, Eevee, Eevee, Eevee, Eevee]
-    # print(len(pokemon))
-    # print(len(expected_classes))
-    # for p, e in zip(pokemon, expected_classes):
-    #     print("p",p)
-    #     print("e",e)
     
-    # t = PokeTeam("Wallace", [1, 0, 0, 0, 0], 1, PokeTeam.AI.ALWAYS_ATTACK)
-    # p = t.retrieve_pokemon()
-    # e = Eevee()
-    # print(t.choose_battle_option(p, e))
-
-    # RandomGen.set_seed(123456789)
-    # t = PokeTeam.random_team("Cynthia", 0)
-    # for index in range(len(t)):
-    #     print(str(t.__getitem__(index)))
-    RandomGen.set_seed(123456789)
-    print(PokeTeam.random_team("Cynthia", 2))
-    # t = PokeTeam("Dawn", [1, 1, 1, 1, 1], 1, PokeTeam.AI.RANDOM, Criterion.DEF)
-    # print(t.__str__())
+    t = PokeTeam("Dawn", [1, 1, 1, 1, 1], 2, PokeTeam.AI.RANDOM, Criterion.DEF)
+    print(t.__str__())
     # self.assertEqual(str(t), "Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Eevee: 10 HP, LV. 1 Charmander: 9 HP]")
