@@ -94,6 +94,9 @@ class ArraySortedList(SortedList[T]):
             return pos
         raise ValueError('item not in list')
 
+    def item_at_index(self, index: int) -> int:
+        return self.array[index]
+
     def is_full(self):
         """ Check if the list is full. """
         return len(self) >= len(self.array)

@@ -14,6 +14,7 @@ from referential_array import ArrayR
 from stack_adt import ArrayStack
 from queue_adt import CircularQueue
 from array_sorted_list import ArraySortedList
+from sorted_list import ListItem
 
 class Action(Enum):
     ATTACK = auto()
@@ -77,6 +78,7 @@ class PokeTeam:
                             i += 1
                         number += 1
         elif battle_mode == 2:
+            self.criterion_list = ArraySortedList(team_size)
             self.pokemon_team = ArraySortedList(team_size)
             i = 0
             pokemon_total = 0
@@ -84,16 +86,33 @@ class PokeTeam:
                 if team_numbers[index] != 0:
                     pokemon_total += team_numbers[index]
                     number = 0
-                    while number < team_numbers[index]: # 0 < 1
-                        while i < pokemon_total: # 0 < 1
-                            self.pokemon_team.add(pokemon_arranged[index])
+                    while number < team_numbers[index]:
+                        while i < pokemon_total:
+                            self.pokemon_class = pokemon_arranged[index]
+                            self.criterion_list.add(self.pokemon_criterion(self.pokemon_class))
                             i += 1
                         number += 1
-            for index in range(self.pokemon_team):
-                pass
+            while len(self.pokemon_team) < team_size:
+                max = 0
+                for index in range(len(self.criterion_list)):
+                    if self.criterion_list[index] > max:
+                        max = self.criterion_list
+                        index_of_max = index
+                self.pokemon_team.add(self.pokemon_arrange[index_of_max])
+            
         else:
             raise Exception("Battle Mode doesn't exist")
     
+    def pokemon_criterion(self, pokemon: PokemonBase):
+        if self.criterion == Criterion.SPD:
+            return pokemon.get_speed()
+        elif self.criterion == Criterion.HP:
+            return pokemon.get_hp()
+        elif self.criterion == Criterion.LV:
+            return pokemon.get_level()
+        elif self.criterion == Criterion.DEF:
+            return pokemon.get_defence()
+
     @classmethod
     def random_team(cls, team_name: str, battle_mode: int, team_size=None, ai_mode=None, **kwargs):
         if team_size == None:
@@ -314,7 +333,8 @@ if __name__ == "__main__":
     # t = PokeTeam.random_team("Cynthia", 0)
     # for index in range(len(t)):
     #     print(str(t.__getitem__(index)))
-
-    t = PokeTeam("Dawn", [1, 1, 1, 1, 1], 1, PokeTeam.AI.RANDOM, Criterion.DEF)
-    print(t.__str__())
+    RandomGen.set_seed(123456789)
+    print(PokeTeam.random_team("Cynthia", 2))
+    # t = PokeTeam("Dawn", [1, 1, 1, 1, 1], 1, PokeTeam.AI.RANDOM, Criterion.DEF)
+    # print(t.__str__())
     # self.assertEqual(str(t), "Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Eevee: 10 HP, LV. 1 Charmander: 9 HP]")
