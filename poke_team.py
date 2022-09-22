@@ -93,9 +93,6 @@ class PokeTeam:
                             self.pokemon_team.add(pokemon)
                             i += 1
                         number += 1
-
-            for x in self.pokemon_team:
-                print("here",x)
             
             # self.pokemon_team = ArraySortedList(team_size)
             # counter = 0
@@ -275,7 +272,8 @@ class PokeTeam:
                 elif action_choice == 4:
                     return Action.SPECIAL
                 else:
-                    action_choice = input("Please enter a valid choice.\nChoose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
+                    while action_choice not in range(1,4):
+                        action_choice = input("Please enter a valid choice.\nChoose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
 
     @classmethod
     def leaderboard_team(cls):
@@ -287,11 +285,11 @@ if __name__ == "__main__":
     # print(t.__str__())
         #self.assertEqual(str(t), "Dawn (2): [LV. 1 Gastly: 6 HP, LV. 1 Squirtle: 11 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Eevee: 10 HP, LV. 1 Charmander: 9 HP]")
     
-    t = PokeTeam("Dawn", [1, 1, 1, 1, 1], 2, PokeTeam.AI.RANDOM, Criterion.HP)
+    t = PokeTeam("Dawn", [1, 1, 1, 1, 1], 2, PokeTeam.AI.RANDOM, Criterion.DEF)
     p = t.retrieve_pokemon()
-    # print("p",p)
-    # p.lose_hp(1)
-    # t.return_pokemon(p)
+    print("p",p)
+    p.lose_hp(7)
+    t.return_pokemon(p)
 
-    # print(str(t))
+    print(str(t))
     
