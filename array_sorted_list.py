@@ -124,20 +124,3 @@ class ArraySortedList(SortedList[T]):
                 return mid
 
         return low
-
-    # def _index_to_add(self, item: ListItem) -> int:
-    #     """ Find the position where the new item should be placed. """
-    #     low = 0 # 0
-    #     high = len(self) - 1 # 4
-
-    #     while low <= high:
-    #         mid = (low + high) // 2 # 2 - 3
-    #         if self[mid].key < item.key: # 9 < 11
-    #             low = mid + 1 # 3
-    #         elif self[mid].key > item.key: # 13 > 11
-    #             high = mid - 1 # 2
-    #         else:
-    #             return mid # 
-
-    #     return low
-
