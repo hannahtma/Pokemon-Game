@@ -94,6 +94,8 @@ class PokeTeam:
                         number += 1
         else:
             raise Exception("Battle Mode doesn't exist")
+
+        self.original_team = self.pokemon_team
     
     def pokemon_criterion(self, pokemon: PokemonBase):
         if self.criterion == Criterion.SPD:
@@ -188,58 +190,7 @@ class PokeTeam:
                 self.pokemon_team.append(temporary_pokemon)
 
     def regenerate_team(self):
-        team_size = 0
-        for number in range(len(self.team_numbers)):
-            team_size += self.team_numbers.__getitem__(number)
-
-        pokemon_arranged = [Charmander(), Bulbasaur(), Squirtle(), Gastly(), Eevee()]
-
-        if self.battle_mode == 0:
-            self.pokemon_team = ArrayStack(team_size)
-            i = 0
-            pokemon_total = 0
-            for index in range(-1, -(team_size+1), -1):
-                if index > -(team_size) and self.team_numbers[index] != 0:
-                    pokemon_total += self.team_numbers[index]
-                    number = 0
-                    while number < self.team_numbers[index]:
-                        while i < pokemon_total:
-                            self.pokemon_team.push(pokemon_arranged[index])
-                            i += 1
-                        number += 1
-            self.pokemon_team.push(pokemon_arranged[0])
-        elif self.battle_mode == 1:
-            self.pokemon_team = CircularQueue(team_size)
-            i = 0
-            pokemon_total = 0
-            for index in range(len(self.team_numbers)):
-                if self.team_numbers[index] != 0:
-                    pokemon_total += self.team_numbers[index]
-                    number = 0
-                    while number < self.team_numbers[index]: # 0 < 1
-                        while i < pokemon_total: # 0 < 1
-                            self.pokemon_team.append(pokemon_arranged[index])
-                            i += 1
-                        number += 1
-        elif self.battle_mode == 2:
-            self.pokemon_team = ArraySortedList(team_size)
-            i = 0
-            pokemon_total = 0
-            for index in range(len(self.team_numbers)):
-                if self.team_numbers[index] != 0:
-                    pokemon_total += self.team_numbers[index]
-                    number = 0
-                    while number < self.team_numbers[index]:
-                        while i < pokemon_total:
-                            self.pokemon_class = pokemon_arranged[index]
-                            pokemon = ListItem(pokemon_arranged[index], self.pokemon_criterion(self.pokemon_class))
-                            self.pokemon_team.add(pokemon)
-                            i += 1
-                        number += 1
-            if self.pokemon_team.__getitem__(index).value:
-                pass
-        else:
-            raise Exception("Battle Mode doesn't exist")
+        return self.original_team
 
     def __str__(self):
         poke_team_string = ""

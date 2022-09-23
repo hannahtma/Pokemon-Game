@@ -20,7 +20,7 @@ class TestBattle(BaseTest):
         self.assertEqual(len(remaining), 2)
         self.assertEqual(remaining[0].get_hp(), 1)
         self.assertIsInstance(remaining[0], Venusaur)
-        self.assertEqual(remaining[1].get_hp(), 11)
+        self.assertEqual(remaining[1].get_hp(), 11) 
         self.assertIsInstance(remaining[1], Squirtle)
 
     def test_complicated_battle(self):
