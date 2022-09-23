@@ -48,7 +48,7 @@ class PokeTeam:
             criterion - The trait which the team is arranged by
             criterion_value - UNUSED
         """
-        # initialise all the class variables
+        # initialise all the instance variables
         self.team_name = team_name
         self.team_numbers = team_numbers
         self.battle_mode = battle_mode
@@ -56,9 +56,10 @@ class PokeTeam:
         self.criterion = criterion
         self.criterion_value = criterion_value
 
+        # finds the maximum number of pokemons in the team by adding up the numbers in the list, team_numbers
         team_size = 0
         for number in range(len(team_numbers)):
-            team_size += team_numbers.__getitem__(number)
+            team_size += team_numbers[number]
 
         pokemon_arranged = [Charmander(), Bulbasaur(), Squirtle(), Gastly(), Eevee()]
 
