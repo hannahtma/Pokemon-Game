@@ -37,6 +37,18 @@ class PokeTeam:
         USER_INPUT = auto()
 
     def __init__(self, team_name: str, team_numbers: list[int], battle_mode: int, ai_type: PokeTeam.AI, criterion=None, criterion_value=None) -> None:
+        """
+        Initialises the arguments as variables and put the pokemon into pokemon_team
+
+        Parameters:
+            team_name - A string holding the name of the pokemon team
+            team_numbers - A list of integers with the amount of pokemons listed out
+            battle_mode - An integer between 0 to 2 indicating the battle mode of the team
+            ai_type - An enum that auto generates the AI's actions
+            criterion - The trait which the team is arranged by
+            criterion_value - UNUSED
+        """
+        # initialise all the class variables
         self.team_name = team_name
         self.team_numbers = team_numbers
         self.battle_mode = battle_mode
@@ -98,6 +110,12 @@ class PokeTeam:
         self.original_team = self.pokemon_team
     
     def pokemon_criterion(self, pokemon: PokemonBase):
+        """
+        Returns the stat in reference to the criterion enum given in the init
+
+        Parameter:
+            pokemon - the pokemon class and it's stats
+        """
         if self.criterion == Criterion.SPD:
             return pokemon.get_speed()
         elif self.criterion == Criterion.HP:
@@ -109,6 +127,16 @@ class PokeTeam:
 
     @classmethod
     def random_team(cls, team_name: str, battle_mode: int, team_size=None, ai_mode=None, **kwargs):
+        """
+        Creates a random team in reference to the parameters given
+
+        Paramters:
+            team_name - A string holding the name of the pokemon team
+            battle_mode - An integer between 0 to 2 that represents the battle mode of the team
+            team_size - An integer or None of the max number of pokemons in their team
+            ai_mode - This is used when fighting against an AI where the AI will have a mode
+            kwargs - 
+        """
         if team_size == None:
             team_size = RandomGen.randint(3,6)
         
