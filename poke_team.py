@@ -44,8 +44,6 @@ class PokeTeam:
         self.criterion = criterion
         self.criterion_value = criterion_value
 
-        kwargs = {"criterion":self.criterion}
-
         team_size = 0
         for number in range(len(team_numbers)):
             team_size += team_numbers.__getitem__(number)
@@ -93,39 +91,6 @@ class PokeTeam:
                             self.pokemon_team.add(pokemon)
                             i += 1
                         number += 1
-            
-            # self.pokemon_team = ArraySortedList(team_size)
-            # counter = 0
-            # while counter < team_size:
-            #     for element in range(-1, -(self.temporary_list.__len__() + 1), -1):
-            #         print(element)
-            #         print(counter)
-            #         self.pokemon_team.__setitem__(counter, self.temporary_list.__getitem__(element))
-
-            #         counter += 1
-
-            # pokemon = ListItem(Bulbasaur(), 13)
-            # print(self.pokemon_team.index(pokemon))
-            # #print(self.pokemon_team.is_full())
-            # for x in self.pokemon_team:
-            #     print("x",x)
-
-            # print("hello",self.pokemon_team.delete_at_index().value)
-
-            # self.unsorted_poketeam = ArraySortedList(team_size)
-            # i = 0
-            # pokemon_total = 0
-            # for index in range(len(team_numbers)):
-            #     if team_numbers[index] != 0:
-            #         pokemon_total += team_numbers[index]
-            #         number = 0
-            #         while number < team_numbers[index]: # 0 < 1
-            #             while i < pokemon_total: # 0 < 1
-            #                 self.unsorted_poketeam.__setitem__(index, pokemon_arranged[index])
-            #                 i += 1
-            #             number += 1
-            
-            # print(self.unsorted_poketeam.__getitem__(index))
 
     def pokemon_criterion(self, pokemon: PokemonBase):
         if self.criterion == Criterion.SPD:
@@ -139,6 +104,11 @@ class PokeTeam:
 
     @classmethod
     def random_team(cls, team_name: str, battle_mode: int, team_size=None, ai_mode=None, **kwargs):
+        if kwargs == {}:
+            criterion = None
+        elif kwargs != None:
+            criterion = kwargs["criterion"]
+
         if team_size == None:
             team_size = RandomGen.randint(3,6)
         
@@ -157,7 +127,7 @@ class PokeTeam:
             team_count.append(number)
         team_count = team_count[len(team_count)-5:]
 
-        return PokeTeam(team_name, team_count, battle_mode, ai_mode, kwargs)
+        return PokeTeam(team_name, team_count, battle_mode, ai_mode, criterion)
     
     def return_pokemon(self, poke: PokemonBase) -> None:
         if self.battle_mode == 0:
@@ -167,8 +137,6 @@ class PokeTeam:
         elif self.battle_mode == 2:
             pokemon = ListItem(poke, self.pokemon_criterion(poke))
             self.pokemon_team.add(pokemon)
-
-            #pokemon = ListItem(pokemon_arranged[index], self.pokemon_criterion(self.pokemon_class))
 
     def retrieve_pokemon(self) -> PokemonBase | None:
         if self.is_empty():
@@ -273,5 +241,21 @@ class PokeTeam:
         raise NotImplementedError()
 
 if __name__ == "__main__":
-    pass
-    
+    RandomGen.set_seed(123456789)
+    t = PokeTeam.random_team("Cynthia", 2, team_size=4, criterion=Criterion.HP)
+    # This should end, since all pokemon are fainted, slowly.
+    while not t.is_empty():
+        p = t.retrieve_pokemon()
+        p.lose_hp(1)
+        t.return_pokemon(p)
+    t.regenerate_team()
+    pokemon = []
+    while not t.is_empty():
+        pokemon.append(t.retrieve_pokemon())
+    expected_classes = [Bulbasaur, Eevee, Charmander, Gastly]
+    print(len(pokemon))
+    print(len(expected_classes))
+    for p, e in zip(pokemon, expected_classes):
+        print("p",p)
+        print("e",e)
+        
