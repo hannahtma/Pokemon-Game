@@ -16,16 +16,16 @@ class Battle:
         team2_healcount = 0
         team1_pokemon = team1.retrieve_pokemon()
         team2_pokemon = team2.retrieve_pokemon()
-        i = 0
-        while team1.is_empty() == False or team2.is_empty() == False:
-            print(team1_pokemon)
-            print(team2_pokemon)
+        while not team1.is_empty() and not team2.is_empty():
             team1_battle_option = team1.choose_battle_option(team1_pokemon, team2_pokemon)
             team2_battle_option = team2.choose_battle_option(team2_pokemon, team1_pokemon)
             if team1_battle_option == Action.ATTACK and team2_battle_option == Action.ATTACK:
                 if team1_pokemon.get_speed() >= team2_pokemon.get_speed() and team1_pokemon.is_fainted() == False:
                     team1_pokemon.attack(team2_pokemon)
+                    print(team1_pokemon.get_attack())
+                    print(team2_pokemon.get_hp())
                     team2_pokemon.attack(team1_pokemon)
+
                 elif team2_pokemon.get_speed() > team1_pokemon.get_speed() and team2_pokemon.is_fainted() == False:
                     team2_pokemon.attack(team1_pokemon)
                     team1_pokemon.attack(team2_pokemon)
@@ -65,11 +65,8 @@ class Battle:
             elif team2_pokemon.is_fainted() == True and team1_pokemon.is_fainted() == False:
                 team1_pokemon.level_up()
 
-            print("fainted?",team1_pokemon,team1_pokemon.is_fainted())
-            print("can evolve?",team1_pokemon,team1_pokemon.can_evolve())
             if team1_pokemon.is_fainted() == False and team1_pokemon.can_evolve() == True:
-                print("Does it come here?")
-                team1_pokemon.get_evolved_version()
+                team1_pokemon.evolve()
             if team2_pokemon.is_fainted() == False and team2_pokemon.can_evolve() == True:
                 team2_pokemon.get_evolved_version()
 
@@ -79,14 +76,13 @@ class Battle:
             if team2_pokemon.is_fainted():
                 team2.return_pokemon(team2_pokemon)
                 team2_pokemon = team2.retrieve_pokemon()
-            print("i",i)
-            i += 1
+            print("Empty?",team2.is_empty())
 
-        if team1.is_empty() == True and team2.is_empty() == True:
+        if team1.is_empty() and team2.is_empty():
             return 0
-        if team1.is_empty() == True:
+        elif team1.is_empty():
             return 2
-        if team2.is_empty() == True:
+        elif team2.is_empty():
             return 1
 
 if __name__ == "__main__":
@@ -103,7 +99,6 @@ if __name__ == "__main__":
     remaining = []
     while not team1.is_empty():
         remaining.append(team1.retrieve_pokemon())
-    print(remaining)
     print(len(remaining)) # 2
     print(remaining[0].get_hp()) # 1 
     print(remaining[0]) # Venusaur
