@@ -44,7 +44,6 @@ class PokeTeam:
         self.ai_type = ai_type
         self.criterion = criterion
         self.criterion_value = criterion_value
-        print(self.criterion)
 
         kwargs = {"criterion":self.criterion}
 
@@ -96,10 +95,6 @@ class PokeTeam:
                             i += 1
                         number += 1
             
-
-            for x in self.pokemon_team:
-                print(x)
-    
     def pokemon_criterion(self, pokemon: PokemonBase):
         if self.criterion == Criterion.SPD:
             return pokemon.get_speed()
@@ -193,7 +188,8 @@ class PokeTeam:
         #         print(x)
 
     def regenerate_team(self):
-        pass
+        self.pokemon_team.reset()
+        PokeTeam(self.team_name, self.team_numbers, self.battle_mode, self.ai_type, self.criterion, self.criterion_value)
 
     def __str__(self):
         poke_team_string = ""
