@@ -46,6 +46,10 @@ class Stack(ABC, Generic[T]):
     def clear(self):
         """ Clears all elements from the stack. """
         self.length = 0
+    
+    @abstractmethod
+    def index(self):
+        pass
 
 
 class ArrayStack(Stack[T]):
@@ -98,7 +102,7 @@ class ArrayStack(Stack[T]):
         if self.is_empty():
             raise Exception("Stack is empty")
         return self.array[self.length-1]
-
+    
     def index(self, index: int):
         return self.array[index]
 

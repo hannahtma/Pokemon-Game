@@ -9,15 +9,16 @@ from enum import Enum, auto
 
 class PokemonBase:
 
-    def __init__(self, hp: int, poke_type: str) -> None:
+    def __init__(self, hp: int, poke_type: PokeType) -> None:
         """
             PokemonBase class definition which initializes max hit points of the pokemon and pokemon type
             
             Parameters: the hit points in integer form and pokemon type in string form
         """
-        # Raise error if poke_type is not a string 
-        if type(poke_type) != str:
-            raise TypeError(poke_type + ' is invalid, only string values accepted')
+        if type(poke_type) != PokeType:
+            raise TypeError(str(poke_type) + ' is invalid, only string values accepted')
+        if type(hp) != int:
+            raise TypeError(hp + " is invalid, only integer values accepted")
         self.base_hp = hp
         self.poke_type = poke_type
 
@@ -28,7 +29,6 @@ class PokemonBase:
             Parameters:
                 self - refers to this instance of the class
         """
-        # if hit points goes down or to or below 0, the pokemon is 'fainted'
         if self.hp <= 0:
             return True
         else:
@@ -70,6 +70,12 @@ class PokemonBase:
         """
         return self.speed
 
+    # def get_hp(self):
+    #     return self.hp
+
+    # def get_level(self) -> int:
+    #     return self.level
+
     def level_up(self) -> None:
         """
             Method for pokemon to level up
@@ -82,6 +88,9 @@ class PokemonBase:
         self.set_attack()
         self.set_speed()
         self.set_defence()
+
+    # def get_speed(self) -> int:
+    #     return self.speed
 
     def get_attack_damage(self) -> int:
         """
@@ -122,10 +131,10 @@ class PokemonBase:
 
     def get_status_effect(self) -> str:
         """
-            Define getter method for defence points of pokemon
+            Define getter method for status effect of pokemon
 
             Returns: 
-                self.defence
+                self.status_effect
         """
         return self.status_effect
 
@@ -142,9 +151,11 @@ class PokemonBase:
         # Step 4: Possibly applying status effects
 
     def should_evolve(self) -> bool:
-        if self.is_fainted() == False and self.can_evolve() == True:
+        if self.can_evolve() == False:
+            raise Exception("This pokemon cannot be evolved")
+        elif self.is_fainted() == False:
             return True
-        elif self.is_fainted() == True:
+        else:
             return False
         
     @abstractmethod
