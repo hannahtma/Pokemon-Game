@@ -11,7 +11,7 @@ class PokemonBase:
 
     def __init__(self, hp: int, poke_type: PokeType) -> None:
         if type(poke_type) != PokeType:
-            raise TypeError(str(poke_type) + ' is invalid, only string values accepted')
+            raise TypeError(str(poke_type) + ' is invalid, only PokeType values accepted')
         if type(hp) != int:
             raise TypeError(hp + " is invalid, only integer values accepted")
         self.base_hp = hp
@@ -85,7 +85,10 @@ class PokemonBase:
             return True
         else:
             return False
-        
+    
+    def remove_status_effect(self):
+        self.status_effect = ""
+
     @abstractmethod
     def set_hp(self) -> None:
         pass
