@@ -14,9 +14,9 @@ class Battle:
     def battle(self, team1: PokeTeam, team2: PokeTeam) -> int:
         team1_healcount = 0
         team2_healcount = 0
+        counter = 1
         pokemon1 = team1.retrieve_pokemon()
         pokemon2 = team2.retrieve_pokemon()
-        counter = 1
         while pokemon1 != None and pokemon2 != None:
             print("================\nTHIS IS ROUND ",counter,"\n")
             print(pokemon1)
@@ -115,6 +115,12 @@ class Battle:
 
             counter += 1
         print("is team2 empty?",team2.is_empty())
+
+        if pokemon1 != None:
+            team1.return_pokemon(pokemon1)
+        if pokemon2 != None:
+            team2.return_pokemon(pokemon2)
+
         if team1.is_empty() and pokemon1 == None and team2.is_empty() and pokemon2 == None:
             return 0
         elif team1.is_empty() and pokemon1 == None:
@@ -124,22 +130,35 @@ class Battle:
             return 1
 
 if __name__ == "__main__":
-    RandomGen.set_seed(1337)
-    team1 = PokeTeam("Ash", [1, 1, 1, 0, 0], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Charmander: 9 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Squirtle: 11 HP]
-    print("Before battle: ",team1)
-    team2 = PokeTeam("Gary", [0, 0, 0, 0, 3], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP]
-    print("Before battle: ",team2)
-    e = team2.retrieve_pokemon()
+    # RandomGen.set_seed(1337)
+    # team1 = PokeTeam("Ash", [1, 1, 1, 0, 0], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Charmander: 9 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Squirtle: 11 HP]
+    # print("Before battle: ",team1)
+    # team2 = PokeTeam("Gary", [0, 0, 0, 0, 3], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP]
+    # print("Before battle: ",team2)
+    # e = team2.retrieve_pokemon()
+    # b = Battle(verbosity=0)
+    # res = b.battle(team1, team2)
+    # print(res) # 1
+    # remaining = []
+    # while not team1.is_empty():
+    #     remaining.append(team1.retrieve_pokemon())
+    # print(len(remaining)) # 2
+    # print(remaining[0].get_hp()) # 1 
+    # print(remaining[0]) # Venusaur
+    # print(remaining[1].get_hp()) # 11
+    # print(remaining[1]) # Squirtle
+
+    RandomGen.set_seed(192837465)
+    team1 = PokeTeam("Brock", [1, 1, 1, 1, 1], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.HP)
+    team2 = PokeTeam("Misty", [0, 0, 0, 3, 3], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.SPD)
     b = Battle(verbosity=0)
     res = b.battle(team1, team2)
-    print("res",res) # 1
-    print("After battle: ",team1)
-    print("After battle: ",team2)
+    print(res) # 1
     remaining = []
     while not team1.is_empty():
         remaining.append(team1.retrieve_pokemon())
     print(len(remaining)) # 2
-    print(remaining[0].get_hp()) # 1 
-    print(remaining[0]) # Venusaur
-    print(remaining[1].get_hp()) # 11
-    print(remaining[1]) # Squirtle
+    print(remaining[0].get_hp()) # 11
+    print(remaining[0]) # Charizard
+    print(remaining[1].get_hp()) # 6
+    print(remaining[1]) # Gastly
