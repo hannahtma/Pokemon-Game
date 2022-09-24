@@ -25,21 +25,21 @@ class BattleTower:
 
     def __iter__(self):
         return BattleTowerIterator(self)
-
-class BattleTowerIterator:
-
-    def __init__(self, team):
-        self.team = team
-        self.index = 0
-
+    
     def __next__(self):
-        if self.index < (len(self.tower_queue)):
-            result = self.tower_queue[self.index]
-            self.index += 1
+        if self._index < (len(self._battle_tower.battle)):
+            result = self._battle_tower.battle[self._index]
+            self._index += 1
 
             return result
         
         raise StopIteration
+
+class BattleTowerIterator:
+
+    def __init__(self, battle_tower):
+        self._battle_tower = battle_tower
+        self._index = 0
 
     def avoid_duplicates(self):
         pass
@@ -64,7 +64,6 @@ if __name__ == "__main__":
         (2, 9)
     ]
     it = iter(bt)
-    print(it)
     for (expected_res, expected_lives), (res, me, tower, lives) in zip(results, it):
         self.assertEqual(expected_res, res, (expected_res, expected_lives))
         self.assertEqual(expected_lives, lives)
