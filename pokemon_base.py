@@ -138,6 +138,12 @@ class PokemonBase:
         """
         return self.status_effect
 
+    def remove_status_effect(self):
+        """
+            Define method for removing and resetting status effect of pokemon
+        """
+        self.status_effect = ""
+
     @abstractmethod
     def defend(self, damage: int) -> None:
         pass
