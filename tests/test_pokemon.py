@@ -1,4 +1,4 @@
-from pokemon import Venusaur
+from pokemon import Venusaur, Squirtle
 from tests.base_test import BaseTest
 
 class TestPokemon(BaseTest):
@@ -21,3 +21,15 @@ class TestPokemon(BaseTest):
         v.lose_hp(5)
 
         self.assertEqual(str(v), "LV. 5 Venusaur: 17 HP")
+    
+    def test_squirtle_stats(self):
+        s = Squirtle()
+        self.assertEqual(s.get_hp(), 11)
+        self.assertEqual(s.get_level(), 1)
+        self.assertEqual(s.get_attack_damage(), 4)
+        self.assertEqual(s.get_speed(), 7)
+        self.assertEqual(s.get_defence(), 7)
+        s.level_up()
+        s.level_up()
+        s.level_up()
+        self.assertEqual(s.get_level(), 4)
