@@ -1,10 +1,12 @@
 from __future__ import annotations
+from symbol import xor_expr
 
 from poke_team import PokeTeam
 from battle import Battle
 from random_gen import RandomGen
-from queue_adt import CircularQueue
 from poke_team import Criterion
+from node import Node, T
+from linked_list import LinkedList
 
 class BattleTower:
 
@@ -13,33 +15,46 @@ class BattleTower:
     
     def set_my_team(self, team: PokeTeam) -> None:
         self.team = team
+        self.head = self.team
     
     def generate_teams(self, n: int) -> None:
-        self.tower_queue = CircularQueue(n)
-        i = 1
+        i = 0
+        self.tower = LinkedList(n+1)
+        #print(self.tower.__len__())
+        self.tower.append(self.team)
+        #print(self.tower)
         while i < n:
             battle_mode = RandomGen.randint(0,1)
+            lives = RandomGen.randint(2,10)
+            print(lives)
             other_team = PokeTeam.random_team(str(i), battle_mode)
-            self.tower_queue.append(other_team)
+            self.tower.append(other_team)
             i += 1
 
-    def __iter__(self):
-        return BattleTowerIterator(self)
-    
-    def __next__(self):
-        if self._index < (len(self._battle_tower.battle)):
-            result = self._battle_tower.battle[self._index]
-            self._index += 1
+        # for x in self.tower:
+        #     print(x)
 
-            return result
-        
-        raise StopIteration
+    def __iter__(self):
+        return BattleTowerIterator(self.head)
 
 class BattleTowerIterator:
 
-    def __init__(self, battle_tower):
-        self._battle_tower = battle_tower
-        self._index = 0
+    def __init__(self, node: Node[T]):
+        self.cur = node
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        item = self.cur.item
+        self.cur = self.cur.link
+
+        self.battle(self.head, self.cur)
+
+        if self.cur is None:
+            raise StopIteration
+
+        return item
 
     def avoid_duplicates(self):
         pass
@@ -54,14 +69,11 @@ if __name__ == "__main__":
     bt.set_my_team(PokeTeam.random_team("N", 2, team_size=6, criterion=Criterion.HP))
     bt.generate_teams(4)
     # Teams have 7, 10, 10, 3 lives.
-    RandomGen.set_seed(213098)
+    RandomGen.set_seed(1029873918273)
     results = [
         (1, 6),
         (1, 9),
-        (1, 9),
-        (1, 2),
-        (1, 5),
-        (2, 9)
+        (2, 10)
     ]
     it = iter(bt)
     for (expected_res, expected_lives), (res, me, tower, lives) in zip(results, it):
