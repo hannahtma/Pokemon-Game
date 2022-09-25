@@ -95,10 +95,10 @@ class Battle:
 
             if pokemon1.is_fainted() == False and pokemon1.can_evolve() == True:
                 print('POKEMON1 EVOLVE BOOM')
-                pokemon1.get_evolved_version()
+                pokemon1 = pokemon1.get_evolved_version()
             elif pokemon2.is_fainted() == False and pokemon2.can_evolve() == True:
                 print('POKEMON2 EVOLVE BOOM')
-                pokemon2.get_evolved_version()
+                pokemon2 = pokemon2.get_evolved_version()
 
             if pokemon1.is_fainted():
                 print("pokemon1 is dead")
