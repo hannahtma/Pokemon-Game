@@ -23,6 +23,7 @@ class TestTower(BaseTest):
             self.assertEqual(expected_res, res, (expected_res, expected_lives))
             self.assertEqual(expected_lives, lives)
 
+
     def test_duplicates(self):
         RandomGen.set_seed(29183712400123)
     
