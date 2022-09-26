@@ -45,18 +45,18 @@ class PokeTeam:
         self.criterion_value = criterion_value
 
         team_size = 0
-        for number in range(len(team_numbers)):
-            team_size += team_numbers.__getitem__(number)
+        for number in range(len(self.team_numbers)):
+            team_size += self.team_numbers.__getitem__(number)
         
-        if battle_mode == 0:
+        if self.battle_mode == 0:
             self.pokemon_team = ArrayStack(team_size)
             i = 0
             pokemon_total = 0
-            for index in range(-1, -(len(team_numbers)+1), -1):
-                if index > -7 and team_numbers[index] != 0:
-                    pokemon_total += team_numbers[index]
+            for index in range(-1, -(len(self.team_numbers)+1), -1):
+                if index > -7 and self.team_numbers[index] != 0:
+                    pokemon_total += self.team_numbers[index]
                     number = 0
-                    while number < team_numbers[index]:
+                    while number < self.team_numbers[index]:
                         while i < pokemon_total:
                             if index == -1:
                                 self.pokemon_team.push(Eevee())
@@ -70,37 +70,37 @@ class PokeTeam:
                                 self.pokemon_team.push(Charmander())
                             i += 1
                         number += 1
-        elif battle_mode == 1:
+        elif self.battle_mode == 1:
             self.pokemon_team = CircularQueue(team_size)
             i = 0
             pokemon_total = 0
-            for index in range(len(team_numbers)):
-                if team_numbers[index] != 0:
-                    pokemon_total += team_numbers[index]
+            for index in range(len(self.team_numbers)):
+                if self.team_numbers[index] != 0:
+                    pokemon_total += self.team_numbers[index]
                     number = 0
-                    while number < team_numbers[index]: # 0 < 1
+                    while number < self.team_numbers[index]: # 0 < 1
                         while i < pokemon_total: # 0 < 1
                             if index == 0:
-                                self.pokemon_team.push(Charmander())
+                                self.pokemon_team.append(Charmander())
                             elif index == 1:
-                                self.pokemon_team.push(Bulbasaur())
+                                self.pokemon_team.append(Bulbasaur())
                             elif index == 2:
-                                self.pokemon_team.push(Squirtle())
+                                self.pokemon_team.append(Squirtle())
                             elif index == 3:
-                                self.pokemon_team.push(Gastly())
+                                self.pokemon_team.append(Gastly())
                             elif index == 4:
-                                self.pokemon_team.push(Eevee())
+                                self.pokemon_team.append(Eevee())
                             i += 1
                         number += 1
-        elif battle_mode == 2:
+        elif self.battle_mode == 2:
             self.pokemon_team = ArraySortedList(team_size)
             i = 0
             pokemon_total = 0
-            for index in range(len(team_numbers)):
-                if team_numbers[index] != 0:
-                    pokemon_total += team_numbers[index]
+            for index in range(len(self.team_numbers)):
+                if self.team_numbers[index] != 0:
+                    pokemon_total += self.team_numbers[index]
                     number = 0
-                    while number < team_numbers[index]:
+                    while number < self.team_numbers[index]:
                         while i < pokemon_total:
                             if index == 0:
                                 self.pokemon_class = Charmander()
@@ -163,6 +163,7 @@ class PokeTeam:
         return PokeTeam(team_name, team_count, battle_mode, ai_mode, criterion)
     
     def return_pokemon(self, poke: PokemonBase) -> None:
+        poke.status_effect = ""
         if self.battle_mode == 0:
             if poke.is_fainted() == False:
                 self.pokemon_team.push(poke)
@@ -216,10 +217,129 @@ class PokeTeam:
                 self.pokemon_team.append(temporary_pokemon)
 
     def regenerate_team(self):
-        self.pokemon_team.reset()
-        new_team = PokeTeam(self.team_name, self.team_numbers, self.battle_mode, self.ai_type, self.criterion, self.criterion_value)
+        team_size = 0
+        for number in range(len(self.team_numbers)):
+            team_size += self.team_numbers.__getitem__(number)
+        
+        if self.battle_mode == 0:
+            self.pokemon_team = ArrayStack(team_size)
+            i = 0
+            pokemon_total = 0
+            for index in range(-1, -(len(self.team_numbers)+1), -1):
+                if index > -7 and self.team_numbers[index] != 0:
+                    pokemon_total += self.team_numbers[index]
+                    number = 0
+                    while number < self.team_numbers[index]:
+                        while i < pokemon_total:
+                            if index == -1:
+                                self.pokemon_team.push(Eevee())
+                            elif index == -2:
+                                self.pokemon_team.push(Gastly())
+                            elif index == -3:
+                                self.pokemon_team.push(Squirtle())
+                            elif index == -4:
+                                self.pokemon_team.push(Bulbasaur())
+                            elif index == -5:
+                                self.pokemon_team.push(Charmander())
+                            i += 1
+                        number += 1
+        elif self.battle_mode == 1:
+            self.pokemon_team = CircularQueue(team_size)
+            i = 0
+            pokemon_total = 0
+            for index in range(len(self.team_numbers)):
+                if self.team_numbers[index] != 0:
+                    pokemon_total += self.team_numbers[index]
+                    number = 0
+                    while number < self.team_numbers[index]: # 0 < 1
+                        while i < pokemon_total: # 0 < 1
+                            if index == 0:
+                                self.pokemon_team.append(Charmander())
+                            elif index == 1:
+                                self.pokemon_team.append(Bulbasaur())
+                            elif index == 2:
+                                self.pokemon_team.append(Squirtle())
+                            elif index == 3:
+                                self.pokemon_team.append(Gastly())
+                            elif index == 4:
+                                self.pokemon_team.append(Eevee())
+                            i += 1
+                        number += 1
+        elif self.battle_mode == 2:
+            self.pokemon_team = ArraySortedList(team_size)
+            i = 0
+            pokemon_total = 0
+            for index in range(len(self.team_numbers)):
+                if self.team_numbers[index] != 0:
+                    pokemon_total += self.team_numbers[index]
+                    number = 0
+                    while number < self.team_numbers[index]:
+                        while i < pokemon_total:
+                            if index == 0:
+                                self.pokemon_class = Charmander()
+                                pokemon = ListItem(self.pokemon_class, self.pokemon_criterion(self.pokemon_class))
+                                self.pokemon_team.add(pokemon)
+                            elif index == 1:
+                                self.pokemon_class = Bulbasaur()
+                                pokemon = ListItem(self.pokemon_class, self.pokemon_criterion(self.pokemon_class))
+                                self.pokemon_team.add(pokemon)
+                            elif index == 2:
+                                self.pokemon_class = Squirtle()
+                                pokemon = ListItem(self.pokemon_class, self.pokemon_criterion(self.pokemon_class))
+                                self.pokemon_team.add(pokemon)
+                            elif index == 3:
+                                self.pokemon_class = Gastly()
+                                pokemon = ListItem(self.pokemon_class, self.pokemon_criterion(self.pokemon_class))
+                                self.pokemon_team.add(pokemon)
+                            elif index == 4:
+                                self.pokemon_class = Eevee()
+                                pokemon = ListItem(self.pokemon_class, self.pokemon_criterion(self.pokemon_class))
+                                self.pokemon_team.add(pokemon)
+                            i += 1
+                        number += 1
 
-        return new_team
+    def is_empty(self):
+        return (self.pokemon_team.__len__() == 0)
+
+    def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
+        counter = 0
+        if self.ai_type == None:
+            return Action.RANDOM
+        else:
+            if self.ai_type == PokeTeam.AI.ALWAYS_ATTACK:
+                return Action.ATTACK
+            elif self.ai_type == PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE:
+                if their_pokemon.get_effective_attack() >= (1.5 * their_pokemon.get_attack_damage()):
+                    return Action.SWAP
+                else:
+                    return Action.ATTACK
+            elif self.ai_type == PokeTeam.AI.RANDOM:
+                random_action = RandomGen.randint(0, 3)
+                if random_action == 2 and counter < 3:
+                    counter += 1
+                    return Action.random_action
+                elif random_action == 2 and counter >= 3:
+                    raise ValueError("Heal count exceeded 3")
+                else:
+                    return Action.random_action
+            elif self.ai_type == PokeTeam.AI.USER_INPUT:
+                action_choice = input("Choose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
+                if action_choice == 1:
+                    return Action.ATTACK
+                elif action_choice == 2:
+                    return Action.SWAP
+                elif action_choice == 3 and counter < 4:
+                    counter += 1
+                    return Action.HEAL
+                elif action_choice == 4:
+                    return Action.SPECIAL
+                else:
+                    while action_choice not in range(1,4):
+                        action_choice = input("Please enter a valid choice.\nChoose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
+
+    @classmethod
+    def leaderboard_team(cls):
+        raise NotImplementedError()
 
     def __str__(self):
         poke_team_string = ""
@@ -241,44 +361,6 @@ class PokeTeam:
         
         return poke_team_string
 
-    def is_empty(self):
-        return self.pokemon_team.__len__() == 0
-
-    def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
-        counter = 0
-        if self.ai_type == None:
-            return Action.RANDOM
-        else:
-            if self.ai_type == PokeTeam.AI.ALWAYS_ATTACK:
-                return Action.ATTACK
-            elif self.ai_type == PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE:
-                return Action.SWAP
-            elif self.ai_type == PokeTeam.AI.RANDOM:
-                random_action = RandomGen.randint(0, 3)
-                if random_action == 2 and counter < 4:
-                    counter += 1
-                    return Action(random_action)
-                else:
-                    return Action(random_action)
-            elif self.ai_type == PokeTeam.AI.USER_INPUT:
-                action_choice = input("Choose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
-                if action_choice == 1:
-                    return Action.ATTACK
-                elif action_choice == 2:
-                    return Action.SWAP
-                elif action_choice == 3 and counter < 4:
-                    counter += 1
-                    return Action.HEAL
-                elif action_choice == 4:
-                    return Action.SPECIAL
-                else:
-                    while action_choice not in range(1,4):
-                        action_choice = input("Please enter a valid choice.\nChoose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
-
-    @classmethod
-    def leaderboard_team(cls):
-        raise NotImplementedError()
-
 if __name__ == "__main__":
     RandomGen.set_seed(123456789)
     t = PokeTeam.random_team("Cynthia", 2, team_size=4, criterion=Criterion.HP)
@@ -287,10 +369,12 @@ if __name__ == "__main__":
         p = t.retrieve_pokemon()
         p.lose_hp(1)
         t.return_pokemon(p)
+    print(t.is_empty())
     t.regenerate_team()
-    print("here",t.retrieve_pokemon())
+    print(t)
     pokemon = []
     while not t.is_empty():
+        print("Here")
         pokemon.append(t.retrieve_pokemon())
     expected_classes = [Bulbasaur, Eevee, Charmander, Gastly]
     print("pokemon length",len(pokemon))
