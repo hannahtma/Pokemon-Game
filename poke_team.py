@@ -323,7 +323,7 @@ class PokeTeam:
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
         counter = 0
         if self.ai_type == None:
-            return Action.RANDOM
+            return PokeTeam.AI.RANDOM
         else:
             if self.ai_type == PokeTeam.AI.ALWAYS_ATTACK:
                 return Action.ATTACK

@@ -16,46 +16,45 @@ class BattleTower:
     
     def set_my_team(self, team: PokeTeam) -> None:
         self.team = team
-        self.head = self.team
     
     def generate_teams(self, n: int) -> None:
-        i = 0
-        self.tower = LinkedList(n+1)
+        i = 1
+        self.teams = LinkedList(n+1)
         #print(self.tower.__len__())
-        self.tower.append(self.team)
+        # self.teams.append(self.team)
         #print(self.tower)
         while i < n:
             battle_mode = RandomGen.randint(0,1)
             lives = RandomGen.randint(2,10)
             print(lives)
             other_team = PokeTeam.random_team(str(i), battle_mode)
-            self.tower.append(other_team)
+            self.teams.append(other_team)
             i += 1
-
-        # for x in self.tower:
-        #     print(x)
+        
+        print(str(self.teams))
 
     def __iter__(self):
-        return BattleTowerIterator(self)
+        return BattleTowerIterator(self.battle, self.team, self.teams)
 
 class BattleTowerIterator:
 
-    def __init__(self, tower):
+    def __init__(self, b, my_team, tower):
+        self.b = b
         self.tower = tower
+        self.my_team = my_team
+        self.current_index = 0
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        item = self.cur.item
-        self.cur = self.cur.link
+        self.b.battle(self.my_team, self.tower[self.current_index])
 
-        self.battle(self.head, self.cur)
+        if self.current_index < self.tower.__len__():
+            return self.tower[self.current_index+1]
 
-        if self.cur is None:
+        else:
             raise StopIteration
-
-        return item
 
     def avoid_duplicates(self):
         pass
@@ -77,6 +76,10 @@ if __name__ == "__main__":
         (2, 10)
     ]
     it = iter(bt)
+    print(type(bt))
+    print(zip(it))
     for (expected_res, expected_lives), (res, me, tower, lives) in zip(results, it):
-        self.assertEqual(expected_res, res, (expected_res, expected_lives))
-        self.assertEqual(expected_lives, lives)
+        print("expected res: ",expected_res, ", res: ",res)
+        print("(expected_res, expected_lives): ", (expected_res, expected_lives))
+        print("expected_lives: ",expected_lives)
+        print("lives",lives)
