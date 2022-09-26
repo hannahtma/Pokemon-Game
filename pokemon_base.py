@@ -9,9 +9,9 @@ from enum import Enum, auto
 
 class PokemonBase:
 
-    def __init__(self, hp: int, poke_type: PokeType) -> None:
-        if type(poke_type) != PokeType:
-            raise TypeError(str(poke_type) + ' is invalid, only PokeType values accepted')
+    def __init__(self, hp: int, poke_type: str) -> None:
+        if type(poke_type) != str:
+            raise TypeError(poke_type + ' is invalid, only string values accepted')
         if type(hp) != int:
             raise TypeError(hp + " is invalid, only integer values accepted")
         self.base_hp = hp
