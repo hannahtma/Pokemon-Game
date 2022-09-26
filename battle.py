@@ -23,7 +23,37 @@ class Battle:
             print(pokemon2)
             team1_battle_option = team1.choose_battle_option(pokemon1, pokemon2)
             team2_battle_option = team2.choose_battle_option(pokemon2, pokemon1)
-            if team1_battle_option == Action.ATTACK and team2_battle_option == Action.ATTACK:
+
+            # Handle swap actions
+            if team1_battle_option == Action.SWAP:
+                team1.return_pokemon(pokemon1)
+                team1.retrieve_pokemon()
+            elif team2_battle_option == Action.SWAP:
+                team2.return_pokemon(pokemon2)
+                team2.retrieve_pokemon()
+
+            # Handle special actions
+            elif team1_battle_option == Action.SPECIAL:
+                team1.return_pokemon(pokemon1)
+                team1.special()
+                pokemon1 = team1.retrieve_pokemon()
+            elif team2_battle_option == Action.SPECIAL:
+                team2.return_pokemon(pokemon2)
+                team2.special()
+                pokemon2 = team2.retrieve_pokemon()
+
+            elif team1_battle_option == Action.HEAL:
+                if team1_healcount >= 3:
+                    return 2
+                else:
+                    pokemon1.heal()
+            elif team2_battle_option == Action.HEAL:
+                if team2_healcount >= 3:
+                    return 1
+                else:
+                    pokemon2.heal()
+
+            elif team1_battle_option == Action.ATTACK and team2_battle_option == Action.ATTACK:
                 if pokemon1.get_speed() >= pokemon2.get_speed() and pokemon1.is_fainted() == False and pokemon2.is_fainted() == False:
                     print("pokemon1 attack first")
                     print("pokemon2's hp before attack",pokemon2,pokemon2.get_hp())
@@ -49,32 +79,6 @@ class Battle:
                     print("pokemon1's attack damage",pokemon1.get_attack_damage())
                     print("pokemon2's hp after attack",pokemon2.get_hp())
                     print()
-                
-            elif team1_battle_option == Action.SWAP:
-                team1.return_pokemon(pokemon1)
-                team1.retrieve_pokemon()
-            elif team2_battle_option == Action.SWAP:
-                team2.return_pokemon(pokemon2)
-                team2.retrieve_pokemon()
-
-            elif team1_battle_option == Action.SPECIAL:
-                team1.return_pokemon(pokemon1)
-                team1.special()
-                pokemon1 = team1.retrieve_pokemon()
-            elif team2_battle_option == Action.SPECIAL:
-                team2.return_pokemon(pokemon2)
-                team2.special()
-                pokemon2 = team2.retrieve_pokemon()
-            elif team1_battle_option == Action.HEAL:
-                if team1_healcount >= 3:
-                    return 2
-                else:
-                    pokemon1.heal()
-            elif team2_battle_option == Action.HEAL:
-                if team2_healcount >= 3:
-                    return 1
-                else:
-                    pokemon2.heal()
             
             print(pokemon1,"my status effect is: ",pokemon1.get_status_effect())
             print(pokemon2,"my status effect is: ",pokemon2.get_status_effect())
@@ -111,7 +115,6 @@ class Battle:
                 pokemon2.remove_status_effect()
 
             counter += 1
-        print("is team2 empty?",team2.is_empty())
 
         if pokemon1 != None:
             team1.return_pokemon(pokemon1)
@@ -127,29 +130,12 @@ class Battle:
             return 1
 
 if __name__ == "__main__":
-    # RandomGen.set_seed(1337)
-    # team1 = PokeTeam("Ash", [1, 1, 1, 0, 0], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Charmander: 9 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Squirtle: 11 HP]
-    # print("Before battle: ",team1)
-    # team2 = PokeTeam("Gary", [0, 0, 0, 0, 3], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP]
-    # print("Before battle: ",team2)
-    # e = team2.retrieve_pokemon()
-    # b = Battle(verbosity=0)
-    # res = b.battle(team1, team2)
-    # print(res) # 1
-    # remaining = []
-    # while not team1.is_empty():
-    #     remaining.append(team1.retrieve_pokemon())
-    # print(len(remaining)) # 2
-    # print(remaining[0].get_hp()) # 1 
-    # print(remaining[0]) # Venusaur
-    # print(remaining[1].get_hp()) # 11
-    # print(remaining[1]) # Squirtle
-
-    RandomGen.set_seed(192837465)
-    team1 = PokeTeam("Brock", [1, 1, 1, 1, 1], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.HP)
-    print(team1)
-    team2 = PokeTeam("Misty", [0, 0, 0, 3, 3], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.SPD)
-    print(team2)
+    RandomGen.set_seed(1337)
+    team1 = PokeTeam("Ash", [1, 1, 1, 0, 0], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Charmander: 9 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Squirtle: 11 HP]
+    print("Before battle: ",team1)
+    team2 = PokeTeam("Gary", [0, 0, 0, 0, 3], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP]
+    print("Before battle: ",team2)
+    e = team2.retrieve_pokemon()
     b = Battle(verbosity=0)
     res = b.battle(team1, team2)
     print(res) # 1
@@ -157,7 +143,24 @@ if __name__ == "__main__":
     while not team1.is_empty():
         remaining.append(team1.retrieve_pokemon())
     print(len(remaining)) # 2
-    print(remaining[0].get_hp()) # 11
-    print(remaining[0]) # Charizard
-    print(remaining[1].get_hp()) # 6
-    print(remaining[1]) # Gastly
+    print(remaining[0].get_hp()) # 1 
+    print(remaining[0]) # Venusaur
+    print(remaining[1].get_hp()) # 11
+    print(remaining[1]) # Squirtle
+
+    # RandomGen.set_seed(192837465)
+    # team1 = PokeTeam("Brock", [1, 1, 1, 1, 1], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.HP)
+    # print(team1)
+    # team2 = PokeTeam("Misty", [0, 0, 0, 3, 3], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.SPD)
+    # print(team2)
+    # b = Battle(verbosity=0)
+    # res = b.battle(team1, team2)
+    # print(res) # 1
+    # remaining = []
+    # while not team1.is_empty():
+    #     remaining.append(team1.retrieve_pokemon())
+    # print(len(remaining)) # 2
+    # print(remaining[0].get_hp()) # 11
+    # print(remaining[0]) # Charizard
+    # print(remaining[1].get_hp()) # 6
+    # print(remaining[1]) # Gastly
