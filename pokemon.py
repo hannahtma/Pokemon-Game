@@ -6,7 +6,7 @@ from random_gen import RandomGen
 class Charmander(PokemonBase):
     def __init__(self):
         self.poke_name = "Charmander"
-        self.poke_type = PokeType.FIRE
+        self.poke_type = "Fire"
         self.level = 1
         self.hp = int(8 + 1 * self.level)
         self.attack_damage = int(6 + 1 * self.level)
@@ -47,15 +47,15 @@ class Charmander(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
+        if other.get_poke_type() == "Fire":
             self.effective_attack = self.attack_damage * 1
-        elif other.get_poke_type() == PokeType.GRASS:
+        elif other.get_poke_type() == "Grass":
             self.effective_attack = int(self.attack_damage * 2)
-        elif other.get_poke_type() == PokeType.WATER:
+        elif other.get_poke_type() == "Water":
             self.effective_attack = int(self.attack_damage * 0.5)
-        elif other.get_poke_type() == PokeType.GHOST:
+        elif other.get_poke_type() == "Ghost":
             self.effective_attack = self.attack_damage * 1
-        elif other.get_poke_type() == PokeType.NORMAL:
+        elif other.get_poke_type() == "Normal":
             self.effective_attack = int(self.attack_damage * 1)
 
         other.defend(self.effective_attack)
@@ -86,7 +86,7 @@ class Charmander(PokemonBase):
 class Squirtle(PokemonBase):
     def __init__(self):
         self.poke_name = "Squirtle"
-        self.poke_type = PokeType.WATER
+        self.poke_type = "Water"
         self.level = 1
         self.hp = int(9 + 2 * self.level)
         self.attack_damage = int(4 + (self.level // 2))
@@ -127,15 +127,15 @@ class Squirtle(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
+        if other.get_poke_type() == "Fire":
             self.effective_attack = self.attack_damage * 2
-        elif other.get_poke_type() == PokeType.GRASS:
+        elif other.get_poke_type() == "Grass":
             self.effective_attack = self.attack_damage * 0.5
-        elif other.get_poke_type() == PokeType.WATER:
+        elif other.get_poke_type() == "Water":
             self.effective_attack = self.attack_damage * 1
-        elif other.get_poke_type() == PokeType.GHOST:
+        elif other.get_poke_type() == "Ghost":
             self.effective_attack = self.attack_damage * 1
-        elif other.get_poke_type() == PokeType.NORMAL:
+        elif other.get_poke_type() == "Normal":
             self.effective_attack = self.attack_damage * 1
 
         other.defend(self.effective_attack)
@@ -166,7 +166,7 @@ class Squirtle(PokemonBase):
 class Bulbasaur(PokemonBase):
     def __init__(self):
         self.poke_name = "Bulbasaur"
-        self.poke_type = PokeType.GRASS
+        self.poke_type = "Grass"
         self.level = 1
         self.hp = int(12 + 1 * self.level)
         self.attack_damage = int(5)
@@ -207,15 +207,15 @@ class Bulbasaur(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
+        if other.get_poke_type() == "Fire":
             self.effective_attack = int(self.attack_damage * 0.5)
-        elif other.get_poke_type() == PokeType.GRASS:
+        elif other.get_poke_type() == "Grass":
             self.effective_attack = int(self.attack_damage * 1)
-        elif other.get_poke_type() == PokeType.WATER:
+        elif other.get_poke_type() == "Water":
             self.effective_attack = int(self.attack_damage * 2)
-        elif other.get_poke_type() == PokeType.GHOST:
+        elif other.get_poke_type() == "Ghost":
             self.effective_attack = int(self.attack_damage * 1)
-        elif other.get_poke_type() == PokeType.NORMAL:
+        elif other.get_poke_type() == "Normal":
             self.effective_attack = int(self.attack_damage * 1)
 
         other.defend(self.effective_attack)
@@ -246,7 +246,7 @@ class Bulbasaur(PokemonBase):
 class Gastly(PokemonBase):
     def __init__(self):
         self.poke_name = "Gastly"
-        self.poke_type = PokeType.GHOST
+        self.poke_type = "Ghost"
         self.level = 1
         self.hp = 6 + (self.level // 2)
         self.attack_damage = 4
@@ -284,15 +284,15 @@ class Gastly(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
+        if other.get_poke_type() == "Fire":
             self.effective_attack = self.attack_damage * 1.25
-        elif other.get_poke_type() == PokeType.GRASS:
+        elif other.get_poke_type() == "Grass":
             self.effective_attack = self.attack_damage * 1.25
-        elif other.get_poke_type() == PokeType.WATER:
+        elif other.get_poke_type() == "Water":
             self.effective_attack = self.attack_damage * 1.25
-        elif other.get_poke_type() == PokeType.GHOST:
+        elif other.get_poke_type() == "Ghost":
             self.effective_attack = self.attack_damage * 2
-        elif other.get_poke_type() == PokeType.NORMAL:
+        elif other.get_poke_type() == "Normal":
             self.effective_attack = self.attack_damage * 0
 
         other.defend(self.effective_attack)
@@ -323,7 +323,7 @@ class Gastly(PokemonBase):
 class Eevee(PokemonBase):
     def __init__(self):
         self.poke_name = "Eevee"
-        self.poke_type = PokeType.NORMAL
+        self.poke_type = "Normal"
         self.level = 1
         self.hp = int(10)
         self.attack_damage = int(6 + self.level)
@@ -359,15 +359,15 @@ class Eevee(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
+        if other.get_poke_type() == "Fire":
             self.effective_attack = int(self.attack_damage * 1.25)
-        elif other.get_poke_type() == PokeType.GRASS:
+        elif other.get_poke_type() == "Grass":
             self.effective_attack = int(self.attack_damage * 1.25)
-        elif other.get_poke_type() == PokeType.WATER:
+        elif other.get_poke_type() == "Water":
             self.effective_attack = int(self.attack_damage * 1.25)
-        elif other.get_poke_type() == PokeType.GHOST:
+        elif other.get_poke_type() == "Ghost":
             self.effective_attack = int(self.attack_damage * 0)
-        elif other.get_poke_type() == PokeType.NORMAL:
+        elif other.get_poke_type() == "Normal":
             self.effective_attack = int(self.attack_damage * 1)
 
         other.defend(self.effective_attack)
@@ -393,13 +393,14 @@ class Eevee(PokemonBase):
 class Charizard(PokemonBase):
     def __init__(self):
         self.poke_name = "Charizard"
-        self.poke_type = PokeType.FIRE
+        self.poke_type = "Fire"
         self.level = 3
         self.hp = 12 + 1 * self.level
         self.attack_damage = 10 + 2 * self.level
         self.speed = 9 + 1 * self.level
         self.defence = 4
         self.status_effect = ""
+        self.effective_attack = 0
 
         super().__init__(self.hp, self.poke_type)
 
@@ -433,18 +434,18 @@ class Charizard(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
-            effective_attack = self.attack_damage * 1
-        elif other.get_poke_type() == PokeType.GRASS:
-            effective_attack = self.attack_damage * 2
-        elif other.get_poke_type() == PokeType.WATER:
-            effective_attack = self.attack_damage * 0.5
-        elif other.get_poke_type() == PokeType.GHOST:
-            effective_attack = self.attack_damage * 1
-        elif other.get_poke_type() == PokeType.NORMAL:
-            effective_attack = self.attack_damage * 1
+        if other.get_poke_type() == "Fire":
+            self.effective_attack = self.attack_damage * 1
+        elif other.get_poke_type() == "Grass":
+            self.effective_attack = self.attack_damage * 2
+        elif other.get_poke_type() == "Water":
+            self.effective_attack = self.attack_damage * 0.5
+        elif other.get_poke_type() == "Ghost":
+            self.effective_attack = self.attack_damage * 1
+        elif other.get_poke_type() == "Normal":
+            self.effective_attack = self.attack_damage * 1
 
-        other.defend(effective_attack)
+        other.defend(self.effective_attack)
 
         if self.get_status_effect() == "Burn":
             self.hp -= 1
@@ -460,16 +461,20 @@ class Charizard(PokemonBase):
     def get_evolved_version(self) -> PokemonBase:
         raise Exception('This pokemon does not have an evolved version')
 
+    def get_effective_attack(self):
+        return self.effective_attack
+
 class Blastoise(PokemonBase):
     def __init__(self):
         self.poke_name = "Blastoise"
-        self.poke_type = PokeType.WATER
+        self.poke_type = "Water"
         self.level = 3
         self.hp = 15 + 2 * self.level
         self.attack_damage = 8 + (self.level // 2)
         self.speed = 10
         self.defence = 8 + 1 * self.level
         self.status_effect = ""
+        self.effective_attack = 0
 
         super().__init__(self.hp, self.poke_type)
 
@@ -503,18 +508,18 @@ class Blastoise(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
-            effective_attack = self.attack_damage * 2
-        elif other.get_poke_type() == PokeType.GRASS:
-            effective_attack = self.attack_damage * 0.5
-        elif other.get_poke_type() == PokeType.WATER:
-            effective_attack = self.attack_damage * 1
-        elif other.get_poke_type() == PokeType.GHOST:
-            effective_attack = self.attack_damage * 1
-        elif other.get_poke_type() == PokeType.NORMAL:
-            effective_attack = self.attack_damage * 1
+        if other.get_poke_type() == "Fire":
+            self.effective_attack = self.attack_damage * 2
+        elif other.get_poke_type() == "Grass":
+            self.effective_attack = self.attack_damage * 0.5
+        elif other.get_poke_type() == "Water":
+            self.effective_attack = self.attack_damage * 1
+        elif other.get_poke_type() == "Ghost":
+            self.effective_attack = self.attack_damage * 1
+        elif other.get_poke_type() == "Normal":
+            self.effective_attack = self.attack_damage * 1
 
-        other.defend(effective_attack)
+        other.defend(self.effective_attack)
 
         if self.get_status_effect() == "Burn":
             self.hp -= 1
@@ -530,10 +535,13 @@ class Blastoise(PokemonBase):
     def get_evolved_version(self) -> PokemonBase:
         raise Exception('This pokemon does not have an evolved version')
 
+    def get_effective_attack(self):
+        return self.effective_attack
+
 class Venusaur(PokemonBase):
     def __init__(self):
         self.poke_name = "Venusaur"
-        self.poke_type = PokeType.GRASS
+        self.poke_type = "Grass"
         self.level = 2
         self.hp = int(20 + (self.level // 2))
         self.attack_damage = int(5)
@@ -575,15 +583,15 @@ class Venusaur(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
+        if other.get_poke_type() == "Fire":
             self.effective_attack = int(self.attack_damage * 0.5)
-        elif other.get_poke_type() == PokeType.GRASS:
+        elif other.get_poke_type() == "Grass":
             self.effective_attack = int(self.attack_damage * 1)
-        elif other.get_poke_type() == PokeType.WATER:
+        elif other.get_poke_type() == "Water":
             self.effective_attack = int(self.attack_damage * 2)
-        elif other.get_poke_type() == PokeType.GHOST:
+        elif other.get_poke_type() == "Ghost":
             self.effective_attack = int(self.attack_damage * 1)
-        elif other.get_poke_type() == PokeType.NORMAL:
+        elif other.get_poke_type() == "Normal":
             self.effective_attack = int(self.attack_damage * 1)
             print("does venusaur attack eevee?")
         else:
@@ -612,13 +620,14 @@ class Venusaur(PokemonBase):
 class Haunter(PokemonBase):
     def __init__(self):
         self.poke_name = "Haunter"
-        self.poke_type = PokeType.GHOST
+        self.poke_type = "Ghost"
         self.level = 1
         self.hp = 9 + (self.level // 2)
         self.attack_damage = 8
         self.speed = 6
         self.defence = 6
         self.status_effect = ""
+        self.effective_attack = 0
 
         super().__init__(self.hp, self.poke_type)
 
@@ -649,18 +658,18 @@ class Haunter(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
-            effective_attack = self.attack_damage * 1.25
-        elif other.get_poke_type() == PokeType.GRASS:
-            effective_attack = self.attack_damage * 1.25
-        elif other.get_poke_type() == PokeType.WATER:
-            effective_attack = self.attack_damage * 1.25
-        elif other.get_poke_type() == PokeType.GHOST:
-            effective_attack = self.attack_damage * 2
-        elif other.get_poke_type() == PokeType.NORMAL:
-            effective_attack = self.attack_damage * 0
+        if other.get_poke_type() == "Fire":
+            self.effective_attack = self.attack_damage * 1.25
+        elif other.get_poke_type() == "Grass":
+            self.effective_attack = self.attack_damage * 1.25
+        elif other.get_poke_type() == "Water":
+            self.effective_attack = self.attack_damage * 1.25
+        elif other.get_poke_type() == "Ghost":
+            self.effective_attack = self.attack_damage * 2
+        elif other.get_poke_type() == "Normal":
+            self.effective_attack = self.attack_damage * 0
 
-        other.defend(effective_attack)
+        other.defend(self.effective_attack)
 
         if self.get_status_effect() == "Burn":
             self.hp -= 1
@@ -682,10 +691,13 @@ class Haunter(PokemonBase):
         g.hp -= holder
         return g
 
+    def get_effective_attack(self):
+        return self.effective_attack
+
 class Gengar(PokemonBase):
     def __init__(self):
         self.poke_name = "Gengar"
-        self.poke_type = PokeType.GHOST
+        self.poke_type = "Ghost"
         self.level = 3
         self.hp = 12 + (self.level // 2)
         self.attack_damage = 18
@@ -722,15 +734,15 @@ class Gengar(PokemonBase):
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
 
-        if other.get_poke_type() == PokeType.FIRE:
+        if other.get_poke_type() == "Fire":
             effective_attack = self.attack_damage * 1.25
-        elif other.get_poke_type() == PokeType.GRASS:
+        elif other.get_poke_type() == "Grass":
             effective_attack = self.attack_damage * 1.25
-        elif other.get_poke_type() == PokeType.WATER:
+        elif other.get_poke_type() == "Water":
             effective_attack = self.attack_damage * 1.25
-        elif other.get_poke_type() == PokeType.GHOST:
+        elif other.get_poke_type() == "Ghost":
             effective_attack = self.attack_damage * 2
-        elif other.get_poke_type() == PokeType.NORMAL:
+        elif other.get_poke_type() == "Normal":
             effective_attack = self.attack_damage * 0
 
         other.defend(effective_attack)

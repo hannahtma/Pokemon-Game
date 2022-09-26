@@ -12,6 +12,7 @@ class BattleTower:
 
     def __init__(self, battle: Battle|None=None) -> None:
         self.battle = battle
+        self.index = 0
     
     def set_my_team(self, team: PokeTeam) -> None:
         self.team = team
@@ -35,12 +36,12 @@ class BattleTower:
         #     print(x)
 
     def __iter__(self):
-        return BattleTowerIterator(self.head)
+        return BattleTowerIterator(self)
 
 class BattleTowerIterator:
 
-    def __init__(self, node: Node[T]):
-        self.cur = node
+    def __init__(self, tower):
+        self.tower = tower
 
     def __iter__(self):
         return self
