@@ -364,7 +364,7 @@ class Eevee(PokemonBase):
             other.status_effect = "Confusion"
 
     def can_evolve(self) -> bool:
-        raise Exception('This pokemon cannot be evolved')
+        return False
 
     def get_evolved_version(self) -> PokemonBase:
         raise Exception('This pokemon does not have an evolved version')

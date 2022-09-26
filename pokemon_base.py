@@ -85,7 +85,10 @@ class PokemonBase:
             return True
         else:
             return False
-        
+    
+    def remove_status_effect(self):
+        self.status_effect = ""
+
     @abstractmethod
     def set_hp(self) -> None:
         pass
