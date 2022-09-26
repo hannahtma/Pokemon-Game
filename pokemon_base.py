@@ -66,12 +66,12 @@ class PokemonBase:
     def get_status_effect(self) -> str:
         return self.status_effect
 
+    def get_effective_attack(self) -> int:
+        return self.effective_attack
+
     @abstractmethod
     def get_evolved_version(self) -> PokemonBase:
         pass
-
-    def get_effective_attack(self) -> int:
-        return self.effective_attack
 
     @abstractmethod
     def defend(self, damage: int) -> None:
@@ -95,6 +95,12 @@ class PokemonBase:
         if self.status_effect == "Paralysis":
             self.speed = self.speed * 2
         self.status_effect = ""
+
+    def health_cuts(self):
+        if self.get_status_effect() == "Burn":
+            self.hp -= 1
+        elif self.get_status_effect() == "Poison":
+            self.hp -= 3
 
     @abstractmethod
     def set_hp(self) -> None:

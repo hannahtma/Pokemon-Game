@@ -163,6 +163,7 @@ class PokeTeam:
         return PokeTeam(team_name, team_count, battle_mode, ai_mode, criterion)
     
     def return_pokemon(self, poke: PokemonBase) -> None:
+        poke.status_effect = ""
         if self.battle_mode == 0:
             if poke.is_fainted() == False:
                 self.pokemon_team.push(poke)
