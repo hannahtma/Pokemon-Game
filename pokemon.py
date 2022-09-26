@@ -41,7 +41,7 @@ class Charmander(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -58,7 +58,7 @@ class Charmander(PokemonBase):
             self.effective_attack = self.attack_damage * 1
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
@@ -77,6 +77,7 @@ class Charmander(PokemonBase):
         c = Charizard()
         holder = self.base_hp - self.hp
         c.hp -= holder
+        c.status_effect = self.status_effect
         return c
 
 class Squirtle(PokemonBase):
@@ -117,7 +118,7 @@ class Squirtle(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -134,7 +135,7 @@ class Squirtle(PokemonBase):
             self.effective_attack = self.attack_damage * 1
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
@@ -153,6 +154,7 @@ class Squirtle(PokemonBase):
         b = Blastoise()
         holder = self.base_hp - self.hp
         b.hp -= holder
+        b.status_effect = self.status_effect
         return b
 
 class Bulbasaur(PokemonBase):
@@ -193,7 +195,7 @@ class Bulbasaur(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -210,7 +212,7 @@ class Bulbasaur(PokemonBase):
             self.effective_attack = self.attack_damage * 1
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
@@ -229,6 +231,7 @@ class Bulbasaur(PokemonBase):
         v = Venusaur()
         holder = self.base_hp - self.hp
         v.hp -= holder
+        v.status_effect = self.status_effect
         return v
     
 class Gastly(PokemonBase):
@@ -266,7 +269,7 @@ class Gastly(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -283,7 +286,7 @@ class Gastly(PokemonBase):
             self.effective_attack = 0
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
@@ -302,6 +305,7 @@ class Gastly(PokemonBase):
         h = Haunter()
         holder = self.base_hp - self.hp
         h.hp -= holder
+        h.status_effect = self.status_effect
         return h
 
 class Eevee(PokemonBase):
@@ -337,7 +341,7 @@ class Eevee(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -354,7 +358,7 @@ class Eevee(PokemonBase):
             self.effective_attack = self.attack_damage
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
@@ -407,7 +411,7 @@ class Charizard(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -424,7 +428,7 @@ class Charizard(PokemonBase):
             self.effective_attack = self.attack_damage * 1
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
@@ -477,7 +481,7 @@ class Blastoise(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -494,7 +498,7 @@ class Blastoise(PokemonBase):
             self.effective_attack = self.attack_damage * 1
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
@@ -547,7 +551,7 @@ class Venusaur(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -564,7 +568,7 @@ class Venusaur(PokemonBase):
             self.effective_attack = self.attack_damage * 1
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
@@ -615,7 +619,7 @@ class Haunter(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -632,7 +636,7 @@ class Haunter(PokemonBase):
             self.effective_attack = 0
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
@@ -651,6 +655,7 @@ class Haunter(PokemonBase):
         g = Gengar()
         holder = self.base_hp - self.hp
         g.hp -= holder
+        g.status_effect = self.status_effect
         return g
 
 class Gengar(PokemonBase):
@@ -688,7 +693,7 @@ class Gengar(PokemonBase):
     def attack(self, other: PokemonBase):
         if self.get_status_effect() == "Sleep":
             return None
-        elif RandomGen.random_chance(0.5) == True and self.get_status_effect() == "Confusion":
+        elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
             other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -705,7 +710,7 @@ class Gengar(PokemonBase):
             self.effective_attack = 0
 
         if self.get_status_effect() == "Burn":
-            self.effective_attack // 2
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
