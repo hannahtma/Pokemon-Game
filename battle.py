@@ -57,8 +57,13 @@ class Battle:
             if team1.choose_battle_option(pokemon1,pokemon2) == Action.ATTACK and team2.choose_battle_option(pokemon2,pokemon1) == Action.ATTACK:
                 if pokemon2.get_speed() > pokemon1.get_speed():
                     pokemon2.attack(pokemon1)
+                    if pokemon1.is_fainted() == False:
+                        pokemon1.attack(pokemon2)
+                elif pokemon1.get_speed() > pokemon2.get_speed():
                     pokemon1.attack(pokemon2)
-                elif pokemon1.get_speed() >= pokemon2.get_speed():
+                    if pokemon2.is_fainted() == False:
+                        pokemon2.attack(pokemon1)
+                elif pokemon1.get_speed() == pokemon2.get_speed():
                     pokemon1.attack(pokemon2)
                     pokemon2.attack(pokemon1)
             elif team1.choose_battle_option(pokemon1,pokemon2) == Action.ATTACK:
@@ -114,37 +119,37 @@ class Battle:
         return result
 
 if __name__ == "__main__":
-    RandomGen.set_seed(1337)
-    team1 = PokeTeam("Ash", [1, 1, 1, 0, 0], 0, PokeTeam.AI.ALWAYS_ATTACK)
-    team2 = PokeTeam("Gary", [0, 0, 0, 0, 3], 0, PokeTeam.AI.ALWAYS_ATTACK)
-    b = Battle(verbosity=0)
-    res = b.battle(team1, team2)
-    print(res) #1
-    print(team2.is_empty()) #True
-    print(team1)
-    print(team2)
-    remaining = []
-    while not team1.is_empty():
-        remaining.append(team1.retrieve_pokemon())
-    print(len(remaining))#2
-    print(remaining[0].get_hp()) #1
-    print(remaining[0]) # Venusaur
-    print(remaining[1].get_hp()) #11
-    print(remaining[1]) # Squirtle
-
-    # RandomGen.set_seed(192837465)
-    # team1 = PokeTeam("Brock", [1, 1, 1, 1, 1], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.HP)
-    # print(team1)
-    # team2 = PokeTeam("Misty", [0, 0, 0, 3, 3], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.SPD)
-    # print(team2)
+    # RandomGen.set_seed(1337)
+    # team1 = PokeTeam("Ash", [1, 1, 1, 0, 0], 0, PokeTeam.AI.ALWAYS_ATTACK)
+    # team2 = PokeTeam("Gary", [0, 0, 0, 0, 3], 0, PokeTeam.AI.ALWAYS_ATTACK)
     # b = Battle(verbosity=0)
     # res = b.battle(team1, team2)
-    # print(res) # 1
+    # print(res) #1
+    # print(team2.is_empty()) #True
+    # print(team1)
+    # print(team2)
     # remaining = []
     # while not team1.is_empty():
     #     remaining.append(team1.retrieve_pokemon())
-    # print(len(remaining)) # 2
-    # print(remaining[0].get_hp()) # 11
-    # print(remaining[0]) # Charizard
-    # print(remaining[1].get_hp()) # 6
-    # print(remaining[1]) # Gastly
+    # print(len(remaining))#2
+    # print(remaining[0].get_hp()) #1
+    # print(remaining[0]) # Venusaur
+    # print(remaining[1].get_hp()) #11
+    # print(remaining[1]) # Squirtle
+
+    RandomGen.set_seed(192837465)
+    team1 = PokeTeam("Brock", [1, 1, 1, 1, 1], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.HP)
+    print(team1)
+    team2 = PokeTeam("Misty", [0, 0, 0, 3, 3], 2, PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE, criterion=Criterion.SPD)
+    print(team2)
+    b = Battle(verbosity=0)
+    res = b.battle(team1, team2)
+    print(res) # 1
+    remaining = []
+    while not team1.is_empty():
+        remaining.append(team1.retrieve_pokemon())
+    print(len(remaining)) # 2
+    print(remaining[0].get_hp()) # 11
+    print(remaining[0]) # Charizard
+    print(remaining[1].get_hp()) # 6
+    print(remaining[1]) # Gastly
