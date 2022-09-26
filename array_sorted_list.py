@@ -125,3 +125,6 @@ class ArraySortedList(SortedList[T]):
 
         return low
 
+    def __len__(self) -> int:
+        return len(self)
+

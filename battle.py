@@ -21,8 +21,10 @@ class Battle:
         
         self.team1_heal_count = 0
         self.team2_heal_count = 0
+        count = 1
 
         while team1.retrieve_pokemon() != None and team2.retrieve_pokemon() != None:
+            print("Round",count)
             if team1.choose_battle_option(pokemon1,pokemon2) == Action.SWAP:
                 team1.return_pokemon(pokemon1)
                 team1.retrieve_pokemon()
@@ -63,27 +65,46 @@ class Battle:
             elif team2.choose_battle_option(pokemon2,pokemon1) == Action.ATTACK:
                 pokemon2.attack(pokemon1)
 
+            print("this round:",pokemon1)
+            print("this round:",pokemon2)
+
             if pokemon1.is_fainted() == False and pokemon2.is_fainted() == False:
+                print("hi")
                 pokemon1.lose_hp(1)
                 pokemon2.lose_hp(1)
-            elif pokemon1.is_fainted() == True and pokemon2.is_fainted() == False:
+
+            print("this round:",pokemon1)
+            print("this round:",pokemon2)
+
+            if pokemon1.is_fainted() == True and pokemon2.is_fainted() == False:
+                print("blah")
                 pokemon2.level_up()
                 if pokemon2.should_evolve() == True:
                     pokemon2 = pokemon2.get_evolved_version()
-                pokemon1 = team1.retrieve_pokemon()
+                team2.return_pokemon(pokemon2)
             elif pokemon2.is_fainted() == True and pokemon1.is_fainted() == False:
+                print("damnit")
                 pokemon1.level_up()
                 if pokemon1.should_evolve() == True:
                     pokemon1 = pokemon1.get_evolved_version()
-                pokemon2 = team2.retrieve_pokemon()
+                team1.return_pokemon(pokemon1)
 
-        if team1.retrieve_pokemon() == None and team2.is_empty() == False:
-            team2.return_pokemon(pokemon2)
+            pokemon1 = team1.retrieve_pokemon()
+            pokemon2 = team2.retrieve_pokemon()
+            
+            print("next round:",pokemon1)
+            print("next round:",pokemon2)
+            count += 1
+
+        print(pokemon1)
+        print(pokemon1.get_hp)
+        print(pokemon2)
+        print(pokemon2.get_hp)
+        if team1.is_empty() == True and team2.is_empty() == False:
             result = 2
-        elif team2.retrieve_pokemon() == None and team1.is_empty() == True:
-            team1.return_pokemon(pokemon1)
+        elif team2.is_empty() == True and team1.is_empty() == False:
             result = 1
-        elif team1.retrieve_pokemon() == None and team2.retrieve_pokemon() == None:
+        elif team1.is_empty() == True and team2.is_empty() == True:
             result = 0
         
         return result
@@ -91,12 +112,15 @@ class Battle:
 if __name__ == "__main__":
     RandomGen.set_seed(1337)
     team1 = PokeTeam("Ash", [1, 1, 1, 0, 0], 0, PokeTeam.AI.ALWAYS_ATTACK)
+    print(team1)
     team2 = PokeTeam("Gary", [0, 0, 0, 0, 3], 0, PokeTeam.AI.ALWAYS_ATTACK)
+    print(team2)
     b = Battle(verbosity=0)
     res = b.battle(team1, team2)
     print(res) #1
     print(team2.is_empty()) #True
     print(team1)
+    print(team2)
     remaining = []
     while not team1.is_empty():
         remaining.append(team1.retrieve_pokemon())

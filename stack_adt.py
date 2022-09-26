@@ -106,6 +106,7 @@ class ArrayStack(Stack[T]):
     def index(self, index: int):
         return self.array[index]
 
+
 class TestStack(unittest.TestCase):
     """ Tests for the above class."""
     EMPTY = 0

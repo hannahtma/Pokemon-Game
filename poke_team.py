@@ -298,7 +298,7 @@ class PokeTeam:
                         number += 1
 
     def is_empty(self):
-        return self.pokemon_team.__len__() == 0
+        return (self.pokemon_team.__len__() == 0)
 
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
         counter = 0
