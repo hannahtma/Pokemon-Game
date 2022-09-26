@@ -309,7 +309,7 @@ class PokeTeam:
             if self.ai_type == PokeTeam.AI.ALWAYS_ATTACK:
                 return Action.ATTACK
             elif self.ai_type == PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE:
-                if their_pokemon.get_effective_attack() >= (1.5 * their_pokemon.get_attack_damage()):
+                if (their_pokemon.attack(my_pokemon)) >= (1.5 * their_pokemon.get_attack_damage()):
                     return Action.SWAP
                 else:
                     return Action.ATTACK

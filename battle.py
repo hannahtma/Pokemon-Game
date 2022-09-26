@@ -24,7 +24,7 @@ class Battle:
         count = 1
 
         while not((team1.is_empty() == True and pokemon1 == None) or (team2.is_empty() == True and pokemon2 == None)):
-            # print("Round",count)
+            print("Round",count)
             if team1.choose_battle_option(pokemon1,pokemon2) == Action.SWAP:
                 team1.return_pokemon(pokemon1)
                 pokemon1 = team1.retrieve_pokemon()
@@ -51,8 +51,8 @@ class Battle:
                 else:
                     return 1
 
-            # print("this round:",pokemon1)
-            # print("this round:",pokemon2)
+            print("this round:",pokemon1)
+            print("this round:",pokemon2)
 
             if team1.choose_battle_option(pokemon1,pokemon2) == Action.ATTACK and team2.choose_battle_option(pokemon2,pokemon1) == Action.ATTACK:
                 if pokemon2.get_speed() > pokemon1.get_speed():
@@ -71,17 +71,17 @@ class Battle:
             elif team2.choose_battle_option(pokemon2,pokemon1) == Action.ATTACK:
                 pokemon2.attack(pokemon1)
 
-            # print("1 status effect", pokemon1.get_status_effect())
-            # print("2 status effect", pokemon2.get_status_effect())
+            print("1 status effect", pokemon1.get_status_effect())
+            print("2 status effect", pokemon2.get_status_effect())
 
-            # print("after attack:",pokemon1)
-            # print("after attack:",pokemon2)
+            print("after attack:",pokemon1)
+            print("after attack:",pokemon2)
 
             if pokemon1.is_fainted() == False and pokemon2.is_fainted() == False:
                 pokemon1.lose_hp(1)
                 pokemon2.lose_hp(1)
-                # print("after hp cut:",pokemon1)
-                # print("after hp cut:",pokemon2)
+                print("after hp cut:",pokemon1)
+                print("after hp cut:",pokemon2)
 
             if pokemon1.is_fainted() == True and pokemon2.is_fainted() == False:
                 pokemon2.level_up()
@@ -94,15 +94,15 @@ class Battle:
                     pokemon1 = pokemon1.get_evolved_version()
                 pokemon2 = team2.retrieve_pokemon()
 
-            # print(team1)
-            # print(team2)
+            print(team1)
+            print(team2)
 
-            # print("next round:",pokemon1)
-            # print("next round:",pokemon2)
-            # count += 1
+            print("next round:",pokemon1)
+            print("next round:",pokemon2)
+            count += 1
 
-        # print(pokemon1)
-        # print(pokemon2)
+        print(pokemon1)
+        print(pokemon2)
 
         if pokemon1 == None and pokemon2 == None:
             result = 0
@@ -113,8 +113,8 @@ class Battle:
             team1.return_pokemon(pokemon1)
             result = 1
         
-        # print(team1)
-        # print(team2)
+        print(team1)
+        print(team2)
 
         return result
 
