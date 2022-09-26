@@ -78,8 +78,10 @@ class Battle:
                 pokemon2 = team2.retrieve_pokemon()
 
         if team1.retrieve_pokemon() == None and team2.is_empty() == False:
+            team2.return_pokemon(pokemon2)
             result = 2
         elif team2.retrieve_pokemon() == None and team1.is_empty() == True:
+            team1.return_pokemon(pokemon1)
             result = 1
         elif team1.retrieve_pokemon() == None and team2.retrieve_pokemon() == None:
             result = 0
@@ -88,21 +90,20 @@ class Battle:
 
 if __name__ == "__main__":
     RandomGen.set_seed(1337)
-    team1 = PokeTeam("Ash", [1, 1, 1, 0, 0], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Charmander: 9 HP, LV. 1 Bulbasaur: 13 HP, LV. 1 Squirtle: 11 HP]
-    print("Before battle: ",team1)
-    team2 = PokeTeam("Gary", [0, 0, 0, 0, 3], 0, PokeTeam.AI.ALWAYS_ATTACK) # [LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP, LV. 1 Eevee: 10 HP]
-    print("Before battle: ",team2)
-    e = team2.retrieve_pokemon()
+    team1 = PokeTeam("Ash", [1, 1, 1, 0, 0], 0, PokeTeam.AI.ALWAYS_ATTACK)
+    team2 = PokeTeam("Gary", [0, 0, 0, 0, 3], 0, PokeTeam.AI.ALWAYS_ATTACK)
     b = Battle(verbosity=0)
     res = b.battle(team1, team2)
-    print(res) # 1
+    print(res) #1
+    print(team2.is_empty()) #True
+    print(team1)
     remaining = []
     while not team1.is_empty():
         remaining.append(team1.retrieve_pokemon())
-    print(len(remaining)) # 2
-    print(remaining[0].get_hp()) # 1 
+    print(len(remaining))#2
+    print(remaining[0].get_hp()) #1
     print(remaining[0]) # Venusaur
-    print(remaining[1].get_hp()) # 11
+    print(remaining[1].get_hp()) #11
     print(remaining[1]) # Squirtle
 
     # RandomGen.set_seed(192837465)
