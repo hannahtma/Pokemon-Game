@@ -10,6 +10,11 @@ from enum import Enum, auto
 class PokemonBase:
 
     def __init__(self, hp: int, poke_type: str) -> None:
+        """
+            PokemonBase class definition which initializes max hit points of the pokemon and pokemon type
+            
+            Parameters: the hit points in integer form and pokemon type in string form
+        """
         if type(poke_type) != str:
             raise TypeError(poke_type + ' is invalid, only string values accepted')
         if type(hp) != int:
@@ -18,6 +23,12 @@ class PokemonBase:
         self.poke_type = poke_type
 
     def is_fainted(self) -> bool:
+        """
+            Determine if the pokemon fainted
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         if self.hp <= 0:
             return True
         else:
@@ -42,6 +53,12 @@ class PokemonBase:
         return self.level
 
     def level_up(self) -> None:
+        """
+            Method for pokemon to level up
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         self.level += 1
         self.set_hp()
         self.set_attack()
@@ -58,6 +75,13 @@ class PokemonBase:
         return self.defence
 
     def lose_hp(self, lost_hp: int) -> None:
+        """
+            Method for pokemon losing hit points
+
+            Parameters:
+                self - refers to this instance of the class
+                lost_hp - the hit points lost due to the attack
+        """
         self.hp -= lost_hp
 
     def get_poke_type(self) -> str:
