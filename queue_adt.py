@@ -46,7 +46,7 @@ class Queue(ABC, Generic[T]):
         self.length = 0
 
     @abstractmethod
-    def index(self):
+    def index(self, index: int):
         pass
 
 class CircularQueue(Queue[T]):
@@ -104,6 +104,9 @@ class CircularQueue(Queue[T]):
         self.front = 0
         self.rear = 0
     
+    def index(self, index: int):
+        return self.array[index]
+
     def index(self, index: int):
         return self.array[index]
 

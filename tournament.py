@@ -11,23 +11,41 @@ from linked_list import LinkedList
 class Tournament:
     
     def __init__(self, battle: Battle|None=None) -> None:
-        raise NotImplementedError()
+        if battle != None:
+            self.battle = battle
+        else:
+            self.battle = Battle()
 
     def set_battle_mode(self, battle_mode: int) -> None:
-        raise NotImplementedError()
+        self.battle_mode = battle_mode
 
     def is_valid_tournament(self, tournament_str: str) -> bool:
-        raise NotImplementedError()
+        if "(" in tournament_str:
+            return False
+        else:
+            return True
 
     def is_balanced_tournament(self, tournament_str: str) -> bool:
         # 1054 only
         raise NotImplementedError()
 
     def start_tournament(self, tournament_str: str) -> None:
-        raise NotImplementedError()
+        tournaments = tournament_str.split('+')
+        participant_names = []
+        for element in tournaments:
+            if element == " ":
+                tournaments.remove(element)
+            else:
+                participant_names.append(element.split())
+        participants = []
+        for participant in participant_names:
+            counter = 0
+            while counter < 2:
+                participants.append(PokeTeam.random_team(participant[counter],self.battle_mode))
+                counter += 1        
 
     def advance_tournament(self) -> tuple[PokeTeam, PokeTeam, int] | None:
-        raise NotImplementedError()
+        pass
 
     def linked_list_of_games(self) -> LinkedList[tuple[PokeTeam, PokeTeam]]:
         l = LinkedList()
@@ -44,3 +62,8 @@ class Tournament:
     def flip_tournament(self, tournament_list: LinkedList[tuple[PokeTeam, PokeTeam]], team1: PokeTeam, team2: PokeTeam) -> None:
         # 1054
         raise NotImplementedError()
+
+if __name__ == "__main__":
+    t = Tournament(Battle(verbosity=0))
+    t.set_battle_mode(0)
+    t.start_tournament("Roark Gardenia + Maylene Crasher_Wake + Fantina Byron + + + Candice Volkner + +")

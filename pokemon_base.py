@@ -66,6 +66,13 @@ class PokemonBase:
     def get_status_effect(self) -> str:
         return self.status_effect
 
+    def get_effective_attack(self) -> int:
+        return self.effective_attack
+
+    @abstractmethod
+    def get_evolved_version(self) -> PokemonBase:
+        pass
+
     @abstractmethod
     def defend(self, damage: int) -> None:
         pass
@@ -83,8 +90,7 @@ class PokemonBase:
             return True
         else:
             return False
-
-
+    
     def remove_status_effect(self):
         if self.status_effect == "Paralysis":
             self.speed = self.speed * 2
@@ -118,11 +124,9 @@ class PokemonBase:
 
     def heal(self) -> None:
         self.hp = self.base_hp
+        if self.status_effect == "Paralysis":
+            self.speed = self.speed * 2
         self.status_effect = ""
-
-    @abstractmethod
-    def get_evolved_version(self) -> PokemonBase:
-        pass
 
     def __str__(self) -> str:
         pokemon_string = f"LV. {self.level} {self.poke_name}: {self.hp} HP"
@@ -134,3 +138,4 @@ class PokeType(Enum):
     WATER = auto()
     GHOST = auto()
     NORMAL = auto()
+

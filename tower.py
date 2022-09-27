@@ -1,6 +1,8 @@
 from __future__ import annotations
 from symbol import xor_expr
 
+from node import Node
+from linked_list import LinkedList
 from poke_team import PokeTeam
 from battle import Battle
 from random_gen import RandomGen

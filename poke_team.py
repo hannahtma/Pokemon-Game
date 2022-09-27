@@ -163,6 +163,7 @@ class PokeTeam:
         return PokeTeam(team_name, team_count, battle_mode, ai_mode, criterion)
     
     def return_pokemon(self, poke: PokemonBase) -> None:
+        poke.status_effect = ""
         if self.battle_mode == 0:
             if poke.is_fainted() == False:
                 self.pokemon_team.push(poke)
@@ -297,28 +298,8 @@ class PokeTeam:
                             i += 1
                         number += 1
 
-    def __str__(self):
-        poke_team_string = ""
-        poke_team_string += f"{self.team_name} ({self.battle_mode}): ["
-        if self.battle_mode == 0:
-            for pokemon in range(-1, -((self.pokemon_team.__len__())),-1):
-                poke_team_string += f"{self.pokemon_team.index(pokemon)}, "
-            poke_team_string += f"{self.pokemon_team.index(0)}]"
-        elif self.battle_mode == 1:
-            for pokemon in range((self.pokemon_team.__len__())-1):
-                poke_team_string += f"{self.pokemon_team.index(pokemon)}, "
-            poke_team_string += f"{self.pokemon_team.index(-1)}]"
-        elif self.battle_mode == 2:
-            for pokemon in range((self.pokemon_team.__len__())-1):
-                poke_team_string += f"{self.pokemon_team.__getitem__(pokemon).value}, "
-            poke_team_string += f"{self.pokemon_team.__getitem__(-1).value}]"
-        else:
-            raise Exception("This battle mode doesn't exist")
-        
-        return poke_team_string
-
     def is_empty(self):
-        return self.pokemon_team.__len__() == 0
+        return (self.pokemon_team.__len__() == 0)
 
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
         counter = 0
@@ -359,6 +340,26 @@ class PokeTeam:
     @classmethod
     def leaderboard_team(cls):
         raise NotImplementedError()
+
+    def __str__(self):
+        poke_team_string = ""
+        poke_team_string += f"{self.team_name} ({self.battle_mode}): ["
+        if self.battle_mode == 0:
+            for pokemon in range(-1, -((self.pokemon_team.__len__())),-1):
+                poke_team_string += f"{self.pokemon_team.index(pokemon)}, "
+            poke_team_string += f"{self.pokemon_team.index(0)}]"
+        elif self.battle_mode == 1:
+            for pokemon in range((self.pokemon_team.__len__())-1):
+                poke_team_string += f"{self.pokemon_team.index(pokemon)}, "
+            poke_team_string += f"{self.pokemon_team.index(-1)}]"
+        elif self.battle_mode == 2:
+            for pokemon in range((self.pokemon_team.__len__())-1):
+                poke_team_string += f"{self.pokemon_team.__getitem__(pokemon).value}, "
+            poke_team_string += f"{self.pokemon_team.__getitem__(-1).value}]"
+        else:
+            raise Exception("This battle mode doesn't exist")
+        
+        return poke_team_string
 
 if __name__ == "__main__":
     RandomGen.set_seed(123456789)
