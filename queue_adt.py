@@ -45,6 +45,10 @@ class Queue(ABC, Generic[T]):
         """ Clears all elements from the queue. """
         self.length = 0
 
+    @abstractmethod
+    def index(self, index: int):
+        pass
+
 class CircularQueue(Queue[T]):
     """ Circular implementation of a queue with arrays.
     
@@ -99,6 +103,12 @@ class CircularQueue(Queue[T]):
         Queue.__init__(self)
         self.front = 0
         self.rear = 0
+    
+    def index(self, index: int):
+        return self.array[index]
+
+    def index(self, index: int):
+        return self.array[index]
 
 
 class TestQueue(unittest.TestCase):
