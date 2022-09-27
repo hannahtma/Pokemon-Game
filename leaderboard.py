@@ -2,7 +2,7 @@
 Run leaderboard matches against the leaderboard team.
 """
 
-from battle1 import Battle
+from battle import Battle
 from poke_team import PokeTeam, Criterion
 from random_gen import RandomGen
 

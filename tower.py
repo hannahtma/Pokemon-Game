@@ -1,30 +1,26 @@
 from __future__ import annotations
+from linked_list import LinkedList
 
 from poke_team import PokeTeam
 from battle import Battle
 from random_gen import RandomGen
-from queue_adt import CircularQueue
 from poke_team import Criterion
 
 class BattleTower:
 
     def __init__(self, battle: Battle|None=None) -> None:
         self.battle = battle
+        self.tower_teams = LinkedList(PokeTeam)
     
     def set_my_team(self, team: PokeTeam) -> None:
         self.team = team
     
     def generate_teams(self, n: int) -> None:
-        self.tower_queue = CircularQueue(n)
-        i = 1
-        while i < n:
-            battle_mode = RandomGen.randint(0,1)
-            other_team = PokeTeam.random_team(str(i), battle_mode)
-            self.tower_queue.append(other_team)
-            i += 1
+        for index in range(n):
+            self.tower_teams.__setitem__(index, PokeTeam.random_team())
 
     def __iter__(self):
-        return BattleTowerIterator(self)
+        return BattleTowerIterator(self.head)
     
     def __next__(self):
         if self._index < (len(self._battle_tower.battle)):
@@ -42,7 +38,8 @@ class BattleTowerIterator:
         self._index = 0
 
     def avoid_duplicates(self):
-        pass
+        print(self.team)
+        # for i in range(len())
 
     def sort_by_lives(self):
         # 1054
