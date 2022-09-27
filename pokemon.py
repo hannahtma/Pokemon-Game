@@ -58,15 +58,16 @@ class Charmander(PokemonBase):
         elif other.get_poke_type() == "Normal":
             self.effective_attack = int(self.attack_damage * 1)
 
+        if self.get_status_effect() == "Burn":
+            self.effective_attack = self.effective_attack // 2
+
         other.defend(self.effective_attack)
 
-        if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Burn"
+
 
     def can_evolve(self) -> bool:
         if self.level == 3:
@@ -138,12 +139,12 @@ class Squirtle(PokemonBase):
         elif other.get_poke_type() == "Normal":
             self.effective_attack = self.attack_damage * 1
 
+        if self.get_status_effect() == "Burn":
+            self.effective_attack = self.effective_attack // 2
+
         other.defend(self.effective_attack)
 
-        if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Paralysis"
@@ -218,12 +219,12 @@ class Bulbasaur(PokemonBase):
         elif other.get_poke_type() == "Normal":
             self.effective_attack = int(self.attack_damage * 1)
 
+        if self.get_status_effect() == "Burn":
+            self.effective_attack = self.effective_attack // 2
+
         other.defend(self.effective_attack)
 
-        if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Poison"
@@ -295,12 +296,12 @@ class Gastly(PokemonBase):
         elif other.get_poke_type() == "Normal":
             self.effective_attack = self.attack_damage * 0
 
+        if self.get_status_effect() == "Burn":
+            self.effective_attack = self.effective_attack // 2
+
         other.defend(self.effective_attack)
 
-        if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Sleep"
@@ -370,12 +371,12 @@ class Eevee(PokemonBase):
         elif other.get_poke_type() == "Normal":
             self.effective_attack = int(self.attack_damage * 1)
 
+        if self.get_status_effect() == "Burn":
+            self.effective_attack = self.effective_attack // 2
+
         other.defend(self.effective_attack)
 
-        if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Confusion"
@@ -445,12 +446,12 @@ class Charizard(PokemonBase):
         elif other.get_poke_type() == "Normal":
             self.effective_attack = self.attack_damage * 1
 
+        if self.get_status_effect() == "Burn":
+            self.effective_attack = self.effective_attack // 2
+
         other.defend(self.effective_attack)
 
-        if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Burn"
@@ -519,12 +520,12 @@ class Blastoise(PokemonBase):
         elif other.get_poke_type() == "Normal":
             self.effective_attack = self.attack_damage * 1
 
+        if self.get_status_effect() == "Burn":
+            self.effective_attack = self.effective_attack // 2
+
         other.defend(self.effective_attack)
 
-        if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Paralysis"
@@ -578,7 +579,6 @@ class Venusaur(PokemonBase):
             return None
         elif self.get_status_effect() == "Confusion":
             if RandomGen.random_chance(0.5) == True:
-                print("are we confusion?")
                 other = self
         elif self.get_status_effect() == "Paralysis":
             self.speed = self.speed // 2
@@ -593,16 +593,13 @@ class Venusaur(PokemonBase):
             self.effective_attack = int(self.attack_damage * 1)
         elif other.get_poke_type() == "Normal":
             self.effective_attack = int(self.attack_damage * 1)
-            print("does venusaur attack eevee?")
-        else:
-            print("so where are we?")
+
+        if self.get_status_effect() == "Burn":
+            self.effective_attack = self.effective_attack // 2
 
         other.defend(self.effective_attack)
 
-        if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Poison"
@@ -669,12 +666,12 @@ class Haunter(PokemonBase):
         elif other.get_poke_type() == "Normal":
             self.effective_attack = self.attack_damage * 0
 
+        if self.get_status_effect() == "Burn":
+            self.effective_attack = self.effective_attack // 2
+
         other.defend(self.effective_attack)
 
-        if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Sleep"
@@ -745,15 +742,16 @@ class Gengar(PokemonBase):
         elif other.get_poke_type() == "Normal":
             effective_attack = self.attack_damage * 0
 
-        other.defend(effective_attack)
-
         if self.get_status_effect() == "Burn":
-            self.hp -= 1
-        elif self.get_status_effect() == "Poison":
-            self.hp -= 3
+            self.effective_attack = self.effective_attack // 2
+
+        other.defend(self.effective_attack)
+
+        self.health_cuts()
 
         if RandomGen.random_chance(0.2) == True:
             other.status_effect = "Sleep"
+
 
     def can_evolve(self) -> bool:
         raise Exception('This pokemon cannot be evolved')
@@ -765,5 +763,3 @@ if __name__ == "__main__":
     s = Squirtle()
     print(s.get_hp())
     print(s.get_attack_damage())
-
-    
