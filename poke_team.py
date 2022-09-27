@@ -298,6 +298,17 @@ class PokeTeam:
                             i += 1
                         number += 1
 
+    def __str__(self):
+        poke_team_string = ""
+        poke_team_string += f"{self.team_name} ({self.battle_mode}): "
+        for pokemon in range(len(self.pokemon_team)):
+            poke_team_string += f"["
+            temporary_string = f"{self.pokemon_team[pokemon]}"
+            poke_team_string += temporary_string 
+            poke_team_string += f"]"
+
+        return poke_team_string
+    
     def is_empty(self):
         return (self.pokemon_team.__len__() == 0)
 
