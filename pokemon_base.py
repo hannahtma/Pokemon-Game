@@ -79,15 +79,22 @@ class PokemonBase:
         # Step 4: Possibly applying status effects
 
     def should_evolve(self) -> bool:
-        if self.can_evolve() == False:
-            raise Exception("This pokemon cannot be evolved")
-        elif self.is_fainted() == False:
+        if self.is_fainted() == False and self.can_evolve() == True:
             return True
         else:
             return False
-    
+
+
     def remove_status_effect(self):
+        if self.status_effect == "Paralysis":
+            self.speed = self.speed * 2
         self.status_effect = ""
+
+    def health_cuts(self):
+        if self.get_status_effect() == "Burn":
+            self.hp -= 1
+        elif self.get_status_effect() == "Poison":
+            self.hp -= 3
 
     @abstractmethod
     def set_hp(self) -> None:
@@ -127,4 +134,3 @@ class PokeType(Enum):
     WATER = auto()
     GHOST = auto()
     NORMAL = auto()
-
