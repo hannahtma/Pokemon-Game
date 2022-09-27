@@ -315,39 +315,38 @@ class PokeTeam:
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
         counter = 0
         if self.ai_type == None:
-            self.ai_type = PokeTeam.AI.RANDOM
-
-        if self.ai_type == PokeTeam.AI.ALWAYS_ATTACK:
-            return Action.ATTACK
-        elif self.ai_type == PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE:
-            if their_pokemon.get_effective_attack() >= (1.5 * their_pokemon.get_attack_damage()):
-                return Action.SWAP
-            else:
+            return Action.RANDOM
+        else:
+            if self.ai_type == PokeTeam.AI.ALWAYS_ATTACK:
                 return Action.ATTACK
-        elif self.ai_type == PokeTeam.AI.RANDOM:
-            random_action = RandomGen.randint(0, 3)
-            if random_action == 2 and counter < 3:
-                counter += 1
-                return Action.random_action
-            elif random_action == 2 and counter >= 3:
-                raise ValueError("Heal count exceeded 3")
-            else:
-                return Action.random_action
-        elif self.ai_type == PokeTeam.AI.USER_INPUT:
-            action_choice = input("Choose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
-            if action_choice == 1:
-                return Action.ATTACK
-            elif action_choice == 2:
-                return Action.SWAP
-            elif action_choice == 3 and counter < 4:
-                counter += 1
-                return Action.HEAL
-            elif action_choice == 4:
-                return Action.SPECIAL
-            else:
-                while action_choice not in range(1,4):
-                    action_choice = input("Please enter a valid choice.\nChoose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
-
+            elif self.ai_type == PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE:
+                if their_pokemon.get_effective_attack() >= (1.5 * their_pokemon.get_attack_damage()):
+                    return Action.SWAP
+                else:
+                    return Action.ATTACK
+            elif self.ai_type == PokeTeam.AI.RANDOM:
+                random_action = RandomGen.randint(0, 3)
+                if random_action == 2 and counter < 3:
+                    counter += 1
+                    return Action.random_action
+                elif random_action == 2 and counter >= 3:
+                    raise ValueError("Heal count exceeded 3")
+                else:
+                    return Action.random_action
+            elif self.ai_type == PokeTeam.AI.USER_INPUT:
+                action_choice = input("Choose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
+                if action_choice == 1:
+                    return Action.ATTACK
+                elif action_choice == 2:
+                    return Action.SWAP
+                elif action_choice == 3 and counter < 4:
+                    counter += 1
+                    return Action.HEAL
+                elif action_choice == 4:
+                    return Action.SPECIAL
+                else:
+                    while action_choice not in range(1,4):
+                        action_choice = input("Please enter a valid choice.\nChoose your battle option: \n 1. ATTACK 2. SWAP 3. HEAL 4. SPECIAL")
 
     @classmethod
     def leaderboard_team(cls):

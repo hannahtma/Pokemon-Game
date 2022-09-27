@@ -51,10 +51,6 @@ class Stack(ABC, Generic[T]):
     def index(self):
         pass
 
-    @abstractmethod
-    def index(self):
-        pass
-
 
 class ArrayStack(Stack[T]):
     """ Implementation of a stack with arrays.
@@ -109,10 +105,6 @@ class ArrayStack(Stack[T]):
     
     def index(self, index: int):
         return self.array[index]
-
-    def index(self, index: int):
-        return self.array[index]
-
 
 class TestStack(unittest.TestCase):
     """ Tests for the above class."""

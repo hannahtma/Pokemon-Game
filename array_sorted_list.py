@@ -124,5 +124,3 @@ class ArraySortedList(SortedList[T]):
                 return mid
 
         return low
-
-

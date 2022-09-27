@@ -5,6 +5,12 @@ from random_gen import RandomGen
 
 class Charmander(PokemonBase):
     def __init__(self):
+        """
+            Charmander class definition which initializes features of Charmander
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
         self.poke_name = "Charmander"
         self.poke_type = "Fire"
         self.level = 1
@@ -33,12 +39,27 @@ class Charmander(PokemonBase):
         return None
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to defence and damage.
+            Damage reduces by half if defence is larger than damage
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         if damage > self.defence:
             self.hp -= damage
         else:
             self.hp -= damage // 2
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -68,12 +89,26 @@ class Charmander(PokemonBase):
             other.status_effect = "Burn"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return true if level of pokemon is 3, otherwise false.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         if self.level == 3:
             return True
         else:
             return False
 
     def get_evolved_version(self) -> PokemonBase:
+        """
+            Method to get evolved version of pokemon.
+            Modify features of pokemon accordingly.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         c = Charizard()
         holder = self.base_hp - self.hp
         c.hp -= holder
@@ -82,6 +117,12 @@ class Charmander(PokemonBase):
 
 class Squirtle(PokemonBase):
     def __init__(self):
+        """
+            Squirtle class definition which initializes features of Squirtle
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
         self.poke_name = "Squirtle"
         self.poke_type = "Water"
         self.level = 1
@@ -110,12 +151,27 @@ class Squirtle(PokemonBase):
         self.defence = 6 + self.level
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to defence and damage.
+            Damage reduces by half if defence multiplied by 2 is larger than damage
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         if damage > (self.defence * 2):
             self.hp -= damage
         else:
             self.hp -= damage // 2
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -145,12 +201,26 @@ class Squirtle(PokemonBase):
             other.status_effect = "Paralysis"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return true if level of pokemon is 3, otherwise false.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         if self.level == 3:
             return True
         else:
             return False
 
     def get_evolved_version(self) -> PokemonBase:
+        """
+            Method to get evolved version of pokemon.
+            Modify features of pokemon accordingly.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         b = Blastoise()
         holder = self.base_hp - self.hp
         b.hp -= holder
@@ -159,6 +229,12 @@ class Squirtle(PokemonBase):
 
 class Bulbasaur(PokemonBase):
     def __init__(self):
+        """
+            Bulbasaur class definition which initializes features of Bulbasaur
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
         self.poke_name = "Bulbasaur"
         self.poke_type = "Grass"
         self.level = 1
@@ -187,12 +263,27 @@ class Bulbasaur(PokemonBase):
         return None
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to defence and damage.
+            Damage reduces by half if defence with an addition of 5 is larger than damage
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         if damage > (self.defence + 5):
             self.hp -= damage
         else:
             self.hp -= damage // 2
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -222,12 +313,26 @@ class Bulbasaur(PokemonBase):
             other.status_effect = "Poison"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return true if level of pokemon is 2, otherwise false.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         if self.level == 2:
             return True
         else:
             return False
 
     def get_evolved_version(self) -> PokemonBase:
+        """
+            Method to get evolved version of pokemon
+            Modify features of pokemon accordingly.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         v = Venusaur()
         holder = self.base_hp - self.hp
         v.hp -= holder
@@ -235,6 +340,12 @@ class Bulbasaur(PokemonBase):
         return v
     
 class Gastly(PokemonBase):
+    """
+            Gastly class definition which initializes features of Gastly
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
     def __init__(self):
         self.poke_name = "Gastly"
         self.poke_type = "Ghost"
@@ -264,9 +375,23 @@ class Gastly(PokemonBase):
         return None
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to damage.
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         self.hp -= damage
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -296,12 +421,26 @@ class Gastly(PokemonBase):
             other.status_effect = "Sleep"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return true if level of pokemon is 1, otherwise false.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         if self.level == 1:
             return True
         else:
             return False
 
     def get_evolved_version(self) -> PokemonBase:
+        """
+            Method to get evolved version of pokemon
+            Modify features of pokemon accordingly.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         h = Haunter()
         holder = self.base_hp - self.hp
         h.hp -= holder
@@ -309,6 +448,12 @@ class Gastly(PokemonBase):
         return h
 
 class Eevee(PokemonBase):
+    """
+            Eevee class definition which initializes features of Eevee
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
     def __init__(self):
         self.poke_name = "Eevee"
         self.poke_type = "Normal"
@@ -335,10 +480,24 @@ class Eevee(PokemonBase):
         self.defence = int(4 + self.level)
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to defence and damage.
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         if damage >= self.defence:
             self.hp -= damage
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -368,13 +527,33 @@ class Eevee(PokemonBase):
             other.status_effect = "Confusion"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return false.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         return False
 
     def get_evolved_version(self) -> PokemonBase:
+        """
+            Method to get evolved version of pokemon
+            raise Exception saying 'This pokemon does not have an evolved version'
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         raise Exception('This pokemon does not have an evolved version')
 
 class Charizard(PokemonBase):
     def __init__(self):
+        """
+            Charizard class definition which initializes features of Charizard
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
         self.poke_name = "Charizard"
         self.poke_type = "Fire"
         self.level = 3
@@ -403,12 +582,27 @@ class Charizard(PokemonBase):
         return None
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to defence and damage.
+            Damage is doubled if defence is lower than damage
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         if damage > self.defence:
             self.hp -= damage * 2
         else:
             self.hp -= damage
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -438,13 +632,33 @@ class Charizard(PokemonBase):
             other.status_effect = "Burn"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return false.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         return False
 
     def get_evolved_version(self) -> PokemonBase:
+        """
+            Method to get evolved version of pokemon
+            raise Exception saying 'This pokemon does not have an evolved version'
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         raise Exception('This pokemon does not have an evolved version')
 
 class Blastoise(PokemonBase):
     def __init__(self):
+        """
+            Blastoise class definition which initializes features of Blastoise
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
         self.poke_name = "Blastoise"
         self.poke_type = "Water"
         self.level = 3
@@ -473,12 +687,27 @@ class Blastoise(PokemonBase):
         self.defence = 8 + 1 * self.level
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to defence and damage.
+            Damage reduces by half if double of defence is larger than damage.
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         if damage > (self.defence * 2):
             self.hp -= damage
         else:
             self.hp -= damage // 2
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -508,13 +737,33 @@ class Blastoise(PokemonBase):
             other.status_effect = "Paralysis"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return false
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         return False
 
     def get_evolved_version(self) -> PokemonBase:
+        """
+            Method to get evolved version of pokemon
+            raise Exception saying 'This pokemon does not have an evolved version'
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         raise Exception('This pokemon does not have an evolved version')
 
 class Venusaur(PokemonBase):
     def __init__(self):
+        """
+            Venusaur class definition which initializes features of Venusaur
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
         self.poke_name = "Venusaur"
         self.poke_type = "Grass"
         self.level = 2
@@ -543,12 +792,27 @@ class Venusaur(PokemonBase):
         return None
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to defence and damage.
+            Damage reduces by half if defence with an addition of 5 is larger than defence.
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         if damage > (self.defence + 5):
             self.hp -= damage
         else:
             self.hp -= damage // 2
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -578,14 +842,33 @@ class Venusaur(PokemonBase):
             other.status_effect = "Poison"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return false
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         return False
 
     def get_evolved_version(self) -> PokemonBase:
-        raise Exception('This pokemon does not have an evolved version')
+        """
+            Method to get evolved version of pokemon
+            raise Exception saying 'This pokemon does not have an evolved version'
 
+            Parameters:
+                self - refers to this instance of the class
+        """
+        raise Exception('This pokemon does not have an evolved version')
 
 class Haunter(PokemonBase):
     def __init__(self):
+        """
+            Haunter class definition which initializes features of Haunter
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
         self.poke_name = "Haunter"
         self.poke_type = "Ghost"
         self.level = 1
@@ -614,9 +897,23 @@ class Haunter(PokemonBase):
         return None
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to damage
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         self.hp -= damage
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -646,12 +943,26 @@ class Haunter(PokemonBase):
             other.status_effect = "Sleep"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return true if level of pokemon is 3, otherwise false.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         if self.level == 3:
             return True
         else:
             return False
 
     def get_evolved_version(self) -> PokemonBase:
+        """
+            Method to get evolved version of pokemon
+            Modify features of pokemon accordingly.
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         g = Gengar()
         holder = self.base_hp - self.hp
         g.hp -= holder
@@ -660,6 +971,12 @@ class Haunter(PokemonBase):
 
 class Gengar(PokemonBase):
     def __init__(self):
+        """
+            Gengar class definition which initializes features of Gengar
+            
+            Parameters:
+                self - refers to this instance of the class
+        """
         self.poke_name = "Gengar"
         self.poke_type = "Ghost"
         self.level = 3
@@ -688,9 +1005,23 @@ class Gengar(PokemonBase):
         return None
 
     def defend(self, damage: int) -> None:
+        """
+            Method to determine the hp of the pokemon according to damage
+
+            Parameters:
+                self - refers to this instance of the class
+                damage - attack damage of pokemon
+        """
         self.hp -= damage
 
     def attack(self, other: PokemonBase):
+        """
+            Method to determine the attack of the pokemon according to the pokemon type
+
+            Parameters:
+                self - refers to this instance of the class
+                other - PokemonBase class
+        """
         if self.get_status_effect() == "Sleep":
             return None
         elif self.get_status_effect() == "Confusion" and RandomGen.random_chance(0.5) == True:
@@ -720,15 +1051,26 @@ class Gengar(PokemonBase):
             other.status_effect = "Sleep"
 
     def can_evolve(self) -> bool:
+        """
+            Method to determine if the pokemon is able to evolve.
+            Return false
+
+            Parameters:
+                self - refers to this instance of the class
+        """
         return False
 
     def get_evolved_version(self) -> PokemonBase:
-        raise Exception('This pokemon does not have an evolved version')
+        """
+            Method to get evolved version of pokemon
+            raise Exception saying 'This pokemon does not have an evolved version'
 
+            Parameters:
+                self - refers to this instance of the class
+        """
+        raise Exception('This pokemon does not have an evolved version')
 
 if __name__ == "__main__":
     s = Squirtle()
     print(s.get_hp())
     print(s.get_attack_damage())
-
-    

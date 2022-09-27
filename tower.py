@@ -1,5 +1,5 @@
 from __future__ import annotations
-from symbol import xor_expr
+from linked_list import LinkedList
 
 from node import Node
 from linked_list import LinkedList
@@ -7,8 +7,6 @@ from poke_team import PokeTeam
 from battle import Battle
 from random_gen import RandomGen
 from poke_team import Criterion
-from node import Node, T
-from linked_list import LinkedList
 
 class BattleTower:
 

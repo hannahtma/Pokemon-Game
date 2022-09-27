@@ -110,6 +110,9 @@ class CircularQueue(Queue[T]):
     def index(self, index: int):
         return self.array[index]
 
+    def index(self, index: int):
+        return self.array[index]
+
 
 class TestQueue(unittest.TestCase):
     """ Tests for the above class."""
