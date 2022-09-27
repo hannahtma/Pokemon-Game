@@ -103,6 +103,9 @@ class CircularQueue(Queue[T]):
         Queue.__init__(self)
         self.front = 0
         self.rear = 0
+    
+    def index(self, index: int):
+        return self.array[index]
 
     def index(self, index: int):
         return self.array[index]

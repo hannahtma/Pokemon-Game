@@ -304,12 +304,12 @@ class PokeTeam:
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
         counter = 0
         if self.ai_type == None:
-            return Action.RANDOM
+            return PokeTeam.AI.RANDOM
         else:
             if self.ai_type == PokeTeam.AI.ALWAYS_ATTACK:
                 return Action.ATTACK
             elif self.ai_type == PokeTeam.AI.SWAP_ON_SUPER_EFFECTIVE:
-                if (their_pokemon.get_attack_damage()) >= (1.5 * their_pokemon.get_attack_damage()):
+                if their_pokemon.get_effective_attack() >= (1.5 * their_pokemon.get_attack_damage()):
                     return Action.SWAP
                 else:
                     return Action.ATTACK

@@ -12,19 +12,17 @@ class TestTower(BaseTest):
         bt.set_my_team(PokeTeam.random_team("N", 2, team_size=6, criterion=Criterion.HP))
         bt.generate_teams(4)
         # Teams have 7, 10, 10, 3 lives.
-        RandomGen.set_seed(213098)
+        RandomGen.set_seed(1029873918273)
         results = [
             (1, 6),
             (1, 9),
-            (1, 9),
-            (1, 2),
-            (1, 5),
-            (2, 9)
+            (2, 10)
         ]
         it = iter(bt)
         for (expected_res, expected_lives), (res, me, tower, lives) in zip(results, it):
             self.assertEqual(expected_res, res, (expected_res, expected_lives))
             self.assertEqual(expected_lives, lives)
+
 
     def test_duplicates(self):
         RandomGen.set_seed(29183712400123)
