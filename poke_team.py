@@ -37,6 +37,18 @@ class PokeTeam:
         USER_INPUT = auto()
 
     def __init__(self, team_name: str, team_numbers: list[int], battle_mode: int, ai_type: PokeTeam.AI, criterion=None, criterion_value=None) -> None:
+        """
+            PokeTeam class definition which initializes the features of the pokemon team
+            
+            Parameters: 
+                self - refers to this instance of the class
+                team_name - name of pokemon team
+                team_numbers - numbers in the team in a list
+                battle_mode - battle mode number
+                ai_type - PokeTeam.AI
+                criterion - None value
+                criterion_value - None value
+        """
         self.team_name = team_name
         self.team_numbers = team_numbers
         self.battle_mode = battle_mode
@@ -44,25 +56,20 @@ class PokeTeam:
         self.criterion = criterion
         self.criterion_value = criterion_value
 
-        # Initialise team_size to 0
         team_size = 0
-        # Iterate through self.team_numbers and add total number of pokemon to team_size
         for number in range(len(self.team_numbers)):
             team_size += self.team_numbers.__getitem__(number)
         
-        # If self.battle_mode == 0, create an ArrayStack
         if self.battle_mode == 0:
             self.pokemon_team = ArrayStack(team_size)
             i = 0
             pokemon_total = 0
-            # Iterate through self.team_numbers and add pokemon to self.pokemon_team using stack adt
             for index in range(-1, -(len(self.team_numbers)+1), -1):
                 if index > -7 and self.team_numbers[index] != 0:
                     pokemon_total += self.team_numbers[index]
                     number = 0
                     while number < self.team_numbers[index]:
                         while i < pokemon_total:
-                            # Use push to add pokemon following pokedex order
                             if index == -1:
                                 self.pokemon_team.push(Eevee())
                             elif index == -2:
@@ -75,19 +82,16 @@ class PokeTeam:
                                 self.pokemon_team.push(Charmander())
                             i += 1
                         number += 1
-        # If self.battle_mode == 0, create a CircularQueue
         elif self.battle_mode == 1:
             self.pokemon_team = CircularQueue(team_size)
             i = 0
             pokemon_total = 0
-            # Iterate through self.team_numbers and add pokemon to self.pokemon_team using queue adt
             for index in range(len(self.team_numbers)):
                 if self.team_numbers[index] != 0:
                     pokemon_total += self.team_numbers[index]
                     number = 0
                     while number < self.team_numbers[index]: # 0 < 1
                         while i < pokemon_total: # 0 < 1
-                            # Use append to add pokemon following pokedex order
                             if index == 0:
                                 self.pokemon_team.append(Charmander())
                             elif index == 1:
@@ -100,19 +104,16 @@ class PokeTeam:
                                 self.pokemon_team.append(Eevee())
                             i += 1
                         number += 1
-        # If self.battle_mode == 0, create an ArraySortedList
         elif self.battle_mode == 2:
             self.pokemon_team = ArraySortedList(team_size)
             i = 0
             pokemon_total = 0
-            # Iterate through self.team_numbers and add pokemon to self.pokemon_team using array sorted list adt
             for index in range(len(self.team_numbers)):
                 if self.team_numbers[index] != 0:
                     pokemon_total += self.team_numbers[index]
                     number = 0
                     while number < self.team_numbers[index]:
                         while i < pokemon_total:
-                            # Use add to add pokemon following pokedex order
                             if index == 0:
                                 self.pokemon_class = Charmander()
                                 pokemon = ListItem(self.pokemon_class, self.pokemon_criterion(self.pokemon_class))
@@ -137,29 +138,44 @@ class PokeTeam:
                         number += 1
 
     def pokemon_criterion(self, pokemon: PokemonBase):
-        # If self.criterion is SPD, then return speed
+        """ Method that determines criterion of pokemon
+        
+            Parameter: 
+                self - refers to this instance of the class
+                pokemon - pokemon from pokemon base
+            
+            Returns:
+                getter method according to the criterion
+        """
         if self.criterion == Criterion.SPD:
             return pokemon.get_speed()
-        # If self.criterion is HP, then return hp
         elif self.criterion == Criterion.HP:
             return pokemon.get_hp()
-        # If self.criterion is LV, then return level
         elif self.criterion == Criterion.LV:
             return pokemon.get_level()
-        # If self.criterion is DEF, then return defence
         elif self.criterion == Criterion.DEF:
             return pokemon.get_defence()
 
     @classmethod
     def random_team(cls, team_name: str, battle_mode: int, team_size=None, ai_mode=None, **kwargs):
-        # If kwargs is empty, then set criterion to None
+        """ Method that creates a random team according to the rules
+        
+            Parameter: 
+                cls - refers to this class
+                team_name - name of pokemon team
+                battle_mode - battle mode number
+                team_size - None value
+                ai_mode - None value
+                **kwargs - takes a not predefined argument in the form of a dictionary
+            
+            Returns:
+                a random PokeTeam
+        """
         if kwargs == {}:
             criterion = None
-        # If kwargs is not empty, then set criterion to kwargs value
         elif kwargs != None:
             criterion = kwargs["criterion"]
 
-        # If team_size is None, random generate a number between 3 and 6 for team_size
         if team_size == None:
             team_size = RandomGen.randint(3,6)
         
@@ -167,56 +183,64 @@ class PokeTeam:
         team.append(0)
         team.append(team_size)
         num = 0
-        # Append pokemon to team using a random number generator
         while num < 4:
             team.append(RandomGen.randint(0,team_size))
             num += 1
 
         team.sort()
         team_count = []
-        # Calculate the team_count using formula in specification
         for pokemon in range(len(team)-1):
             number = team[pokemon+1] - team[pokemon]
             team_count.append(number)
         team_count = team_count[len(team_count)-5:]
 
-        # Call PokeTeam and pass team_name, team_count, battle_mode, ai_mode and criterion as 
-        # team_name, team_numbers, battle_mode, ai_type and criterion respectively
         return PokeTeam(team_name, team_count, battle_mode, ai_mode, criterion)
     
     def return_pokemon(self, poke: PokemonBase) -> None:
-        # If battle mode 0, push pokemon back to top of self.pokemon_team
+        """ Method that returns a pokemon to a team
+        
+            Parameter: 
+                self - refers to this instance of the class
+                poke - PokemonBase class
+        """
+        poke.status_effect = ""
         if self.battle_mode == 0:
             if poke.is_fainted() == False:
                 self.pokemon_team.push(poke)
-        # If battle mode 1, append pokemon back to end of queue
         elif self.battle_mode == 1:
             if poke.is_fainted() == False:
                 self.pokemon_team.append(poke)
-        # If battle mode 2, add pokemon back to array sorted list and rearrange following criterion
         elif self.battle_mode == 2:
             if poke.is_fainted() == False:
                 pokemon = ListItem(poke, self.pokemon_criterion(poke))
                 self.pokemon_team.add(pokemon)
 
     def retrieve_pokemon(self) -> PokemonBase | None:
-        # If self.pokemon_base is empty, return None
+        """ Method that  retrieves a pokemon from the team.
+            If the team is empty, return None
+        
+            Parameter: 
+                self - refers to this instance of the class
+
+            Returns:
+                retrieved pokemon
+        """
         if self.is_empty():
             return None
         else:
-            # If battle mode 0, pop the top of the stack to retrieve pokemon
             if self.battle_mode == 0:
                 retrieved_pokemon = self.pokemon_team.pop()
-            # If battle mode 1, serve the front of the queue to retrieve pokemon
             elif self.battle_mode == 1:
                 retrieved_pokemon = self.pokemon_team.serve()
-            # If battle mode 2, get the first pokemon in the array following criterion
             elif self.battle_mode == 2:
                 retrieved_pokemon = self.pokemon_team.delete_at_index(0).value
             
             return retrieved_pokemon
 
     def special(self):
+        """
+            Complete the special operation on the team depending on battle mode
+        """
         # If battle mode 0, swap the first and the last pokemon by using a temporary_stack
         if self.battle_mode == 0:
             # Assign the pokemon at the top of stack to top
@@ -256,6 +280,12 @@ class PokeTeam:
                 self.pokemon_team.append(temporary_pokemon)
 
     def regenerate_team(self):
+        """
+            Regenerate the team from the same battle numbers. Used to make a team ready for another battle.
+
+            Returns:
+                regenerated PokeTeam
+        """
         # Initialise team_size to 0
         team_size = 0
         # Iterate through self.team_numbers and add total number of pokemon to team_size
@@ -349,6 +379,9 @@ class PokeTeam:
                         number += 1
 
     def __str__(self):
+        """
+            String representation of PokeTeam based on battle mode
+        """
         # Initialise empty poke_team_string
         poke_team_string = ""
         # Add self.team_name and self.battle_mode
@@ -375,10 +408,28 @@ class PokeTeam:
         return poke_team_string
 
     def is_empty(self):
+        """
+            Checks whether the team is currently empty.
+
+            Returns:
+                boolean based on whether the team is empty
+        """
         # Return True if self.pokemon_team is empty
         return self.pokemon_team.__len__() == 0
 
     def choose_battle_option(self, my_pokemon: PokemonBase, their_pokemon: PokemonBase) -> Action:
+        """
+            Decides on an action depending on the pokemon currently in the field.
+
+            Parameters:
+                my_pokemon - pokemon of my team
+                their_pokemon - pokemon of opposing team
+
+            Returns:
+                Action based on the ai_type and pokemon
+
+        """
+
         counter = 0
         # if self.ai_type is None, set self.ai_type to RANDOM
         if self.ai_type == None:
@@ -434,6 +485,7 @@ class PokeTeam:
     @classmethod
     def leaderboard_team(cls):
         raise NotImplementedError()
+
 
 if __name__ == "__main__":
     RandomGen.set_seed(123456789)

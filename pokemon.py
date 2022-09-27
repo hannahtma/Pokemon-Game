@@ -9,6 +9,7 @@ class Charmander(PokemonBase):
     def __init__(self):
         """
             Charmander class definition which initializes features of Charmander
+            runtime complexity: O(1)
             
             Parameters:
                 self - refers to this instance of the class
@@ -26,24 +27,29 @@ class Charmander(PokemonBase):
         super().__init__(self.hp, self.poke_type)
 
     def set_hp(self) -> None:
+        # runtime complexity: O(1)
         holder = self.base_hp - self.hp
         self.hp = 8 + 1 * self.level
         self.base_hp = self.hp
         self.hp -= holder
 
     def set_attack(self) -> None:
+        # runtime complexity: O(1)
         self.attack_damage = 6 + 1 * self.level
 
     def set_speed(self) -> None:
+        # runtime complexity: O(1)
         self.speed = 7 + 1 * self.level
 
     def set_defence(self) -> None:
+        # runtime complexity: O(1)
         return None
 
     def defend(self, damage: int) -> None:
         """
             Method to determine the hp of the pokemon according to defence and damage.
             Damage reduces by half if defence is larger than damage
+            runtime complexity: O(c)
 
             Parameters:
                 self - refers to this instance of the class
@@ -57,6 +63,7 @@ class Charmander(PokemonBase):
     def attack(self, other: PokemonBase):
         """
             Method to determine the attack of the pokemon according to the pokemon type
+            runtime complexity: O(c)
 
             Parameters:
                 self - refers to this instance of the class
@@ -94,6 +101,7 @@ class Charmander(PokemonBase):
         """
             Method to determine if the pokemon is able to evolve.
             Return true if level of pokemon is 3, otherwise false.
+            runtime complexity: O(c)
 
             Parameters:
                 self - refers to this instance of the class
@@ -107,6 +115,7 @@ class Charmander(PokemonBase):
         """
             Method to get evolved version of pokemon.
             Modify features of pokemon accordingly.
+            runtime complexity: O(1)
 
             Parameters:
                 self - refers to this instance of the class
