@@ -39,7 +39,8 @@ class PokeTeam:
     def __init__(self, team_name: str, team_numbers: list[int], battle_mode: int, ai_type: PokeTeam.AI, criterion=None, criterion_value=None) -> None:
         """
             PokeTeam class definition which initializes the features of the pokemon team
-            
+            runtime complexity: O(n^3)+O(log2 n)
+
             Parameters: 
                 self - refers to this instance of the class
                 team_name - name of pokemon team
@@ -139,6 +140,7 @@ class PokeTeam:
 
     def pokemon_criterion(self, pokemon: PokemonBase):
         """ Method that determines criterion of pokemon
+            runtime complexity: O(c)
         
             Parameter: 
                 self - refers to this instance of the class
@@ -159,7 +161,8 @@ class PokeTeam:
     @classmethod
     def random_team(cls, team_name: str, battle_mode: int, team_size=None, ai_mode=None, **kwargs):
         """ Method that creates a random team according to the rules
-        
+            runtime complexity: O(c)
+
             Parameter: 
                 cls - refers to this class
                 team_name - name of pokemon team
@@ -198,7 +201,8 @@ class PokeTeam:
     
     def return_pokemon(self, poke: PokemonBase) -> None:
         """ Method that returns a pokemon to a team
-        
+            runtime complexity: O(c)
+
             Parameter: 
                 self - refers to this instance of the class
                 poke - PokemonBase class
@@ -218,7 +222,8 @@ class PokeTeam:
     def retrieve_pokemon(self) -> PokemonBase | None:
         """ Method that  retrieves a pokemon from the team.
             If the team is empty, return None
-        
+            runtime complexity: O(c)
+
             Parameter: 
                 self - refers to this instance of the class
 
@@ -240,6 +245,7 @@ class PokeTeam:
     def special(self):
         """
             Complete the special operation on the team depending on battle mode
+            runtime complexity: O(n)
         """
         # If battle mode 0, swap the first and the last pokemon by using a temporary_stack
         if self.battle_mode == 0:
@@ -282,6 +288,7 @@ class PokeTeam:
     def regenerate_team(self):
         """
             Regenerate the team from the same battle numbers. Used to make a team ready for another battle.
+            runtime complexity: O(n^3)+O(log2 n)
 
             Returns:
                 regenerated PokeTeam
@@ -381,6 +388,7 @@ class PokeTeam:
     def __str__(self):
         """
             String representation of PokeTeam based on battle mode
+            runtime complexity: O(n^3)+O(log2 n)
         """
         # Initialise empty poke_team_string
         poke_team_string = ""
