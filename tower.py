@@ -12,49 +12,44 @@ class BattleTower:
 
     def __init__(self, battle: Battle|None=None) -> None:
         self.battle = battle
-        self.index = 0
+        self.teams = LinkedList()
+        self.lives = LinkedList()
     
     def set_my_team(self, team: PokeTeam) -> None:
         self.team = team
     
     def generate_teams(self, n: int) -> None:
         i = 1
-        self.teams = LinkedList(n+1)
         #print(self.tower.__len__())
         # self.teams.append(self.team)
         #print(self.tower)
         while i < n:
             battle_mode = RandomGen.randint(0,1)
-            lives = RandomGen.randint(2,10)
-            print(lives)
+            live = RandomGen.randint(2,10)
             other_team = PokeTeam.random_team(str(i), battle_mode)
             self.teams.append(other_team)
+            self.lives.append(live)
             i += 1
         
-        print(str(self.teams))
-
     def __iter__(self):
-        return BattleTowerIterator(self.battle, self.team, self.teams)
+        return BattleTowerIterator(self.team)
 
 class BattleTowerIterator:
 
-    def __init__(self, b, my_team, tower):
-        self.b = b
-        self.tower = tower
-        self.my_team = my_team
-        self.current_index = 0
+    def __init__(self, node: Node[T]):
+        self.index = node
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        self.b.battle(self.my_team, self.tower[self.current_index])
+        item = self.index.item
+        self.index = self.index.link
 
-        if self.current_index < self.tower.__len__():
-            return self.tower[self.current_index+1]
-
-        else:
+        if self.index is None:
             raise StopIteration
+        
+        return item
 
     def avoid_duplicates(self):
         pass
