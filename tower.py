@@ -16,7 +16,7 @@ class BattleTower:
         self.lives = LinkedList()
     
     def set_my_team(self, team: PokeTeam) -> None:
-        self.team = team
+        self.team = Node(team)
     
     def generate_teams(self, n: int) -> None:
         i = 1
@@ -25,10 +25,10 @@ class BattleTower:
         #print(self.tower)
         while i < n:
             battle_mode = RandomGen.randint(0,1)
-            live = RandomGen.randint(2,10)
+            life = RandomGen.randint(2,10)
             other_team = PokeTeam.random_team(str(i), battle_mode)
             self.teams.append(other_team)
-            self.lives.append(live)
+            self.lives.append(life)
             i += 1
         
     def __iter__(self):
@@ -37,16 +37,19 @@ class BattleTower:
 class BattleTowerIterator:
 
     def __init__(self, node: Node[T]):
-        self.index = node
+        self.current = node
+        self.index = 0
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        item = self.index.item
-        self.index = self.index.link
+        BattleTower(self.current, self.current.next())
 
-        if self.index is None:
+        item = self.current.item
+        self.current = self.current
+
+        if self.current is None:
             raise StopIteration
         
         return item
@@ -71,8 +74,7 @@ if __name__ == "__main__":
         (2, 10)
     ]
     it = iter(bt)
-    print(type(bt))
-    print(zip(it))
+    print(it)
     for (expected_res, expected_lives), (res, me, tower, lives) in zip(results, it):
         print("expected res: ",expected_res, ", res: ",res)
         print("(expected_res, expected_lives): ", (expected_res, expected_lives))
