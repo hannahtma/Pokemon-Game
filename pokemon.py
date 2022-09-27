@@ -3,6 +3,8 @@
 from pokemon_base import PokemonBase, PokeType
 from random_gen import RandomGen
 
+__author__ = "Scaffold by Jackson Goerner, Code by everyone"
+
 class Charmander(PokemonBase):
     def __init__(self):
         """

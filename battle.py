@@ -1,6 +1,6 @@
 """
 """
-__author__ = "Scaffold by Jackson Goerner, Code by ______________"
+__author__ = "Scaffold by Jackson Goerner, Code by everyone"
 
 from random_gen import RandomGen
 from pokemon_base import PokemonBase

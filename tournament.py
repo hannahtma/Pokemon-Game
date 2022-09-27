@@ -2,7 +2,7 @@ from __future__ import annotations
 
 """
 """
-__author__ = "Scaffold by Jackson Goerner, Code by ______________"
+__author__ = "Scaffold by Jackson Goerner, Code by everyone"
 
 from poke_team import PokeTeam
 from battle import Battle

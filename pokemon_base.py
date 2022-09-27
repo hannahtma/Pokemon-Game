@@ -2,7 +2,7 @@ from __future__ import annotations
 
 """
 """
-__author__ = "Scaffold by Jackson Goerner, Code by ______________"
+__author__ = "Scaffold by Jackson Goerner, Code by everyone"
 
 from abc import abstractmethod
 from enum import Enum, auto
